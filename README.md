@@ -12,5 +12,5 @@ Original code by Carsten Flensburg. https://spaces.hightail.com/space/00SJA
 
 <p dir="auto">##Contributors</p>
 <ul dir="auto">
-<li>Original code by Carsten Flensburg. <a href="https://spaces.hightail.com/space/00SJA" rel="nofollow">Website</a></li>
+<li>Original code by Carsten Flensburg. <a href="https://spaces.hightail.com/space/00SJA" rel="nofollow">https://spaces.hightail.com/space/00SJA</a></li>
 </ul>
