@@ -1,0 +1,451 @@
+.*-----------------------------------------------------------------------**
+.*
+.*  Compile options:
+.*
+.*    CrtPnlGrp PnlGrp( CBX213H )
+.*              SrcFile( QPNLSRC )
+.*              SrcMbr( *PNLGRP )
+.*
+.*-----------------------------------------------------------------------**
+:PNLGRP.
+
+.* Command help section:
+:HELP NAME='WRKCMDEXIT'.
+Work with Command Exit Programs - Help
+:P.
+The Work with Command Exit Programs (WRKCMDEXIT) command lists all exit
+programs registered to either the Change Command Exit Point or the
+Retrieve Command Exit Point being defined by the QIBM_QCA_CHG_COMMAND
+and the QIBM_QCA_RTV_COMMAND exit point, respectively.
+:P.
+:EHELP.
+
+:HELP NAME='WRKCMDEXIT/CMDEXIT'.
+Command exit type (CMDEXIT) - Help
+
+:XH3.Command exit type (CMDEXIT)
+:P.
+Specifies whether the listed exit programs are associated with the
+Change Command Exit Point or the Retrieve Command Exit Point.
+:PARML.
+:PT.:PK DEF.*CHG:EPK.
+:PD.
+The Change Command exit programs are listed.
+:PT.:PK.*RTV:EPK.
+:PD.
+The Retrieve Command exit programs are listed.
+:EPARML.
+:EHELP.
+
+:HELP NAME='WRKCMDEXIT/SELECT'.
+Select (SELECT) - Help
+
+:XH3.Select (SELECT)
+:P.
+Specifies the selection criteria to be applied when the command exit
+program list is created.
+:P.
+:HP2.Element 1: Command:EHP2.
+:PARML.
+:PT.:PD.
+The command name and library identifying the command exit program list
+entries to be selected.
+:P.
+:HP2.Qualifier 1: Command:EHP2.
+:PARML.
+:PT.:PK DEF.*ANY:EPK.
+:PD.
+Any command name will qualify and no selection is performed based on
+the command name registered.
+:PT.:PV.name:EPV.
+:PD.
+Specify the name of the command that will qualify the command exit
+program to be included in the list.
+:EPARML.
+:PT.:PD.
+:HP2.Qualifier 2: Library:EHP2.
+:PARML.
+:PT.:PK DEF.*ANY:EPK.
+:PD.
+Any library name will qualify and no selection is performed based on
+the command library name registered.
+:PT.:PV.name:EPV.
+:PD.
+Specify the name of the library that will qualify the command exit
+program to be included in the list.
+:EPARML.
+:EPARML.
+:P.
+:HP2.Element 2: Exit program:EHP2.
+:PARML.
+:PT.:PD.
+The exit program name and library identifying the command exit program
+list entries to be selected.
+:P.
+:HP2.Qualifier 1: Exit program:EHP2.
+:PARML.
+:PT.:PK DEF.*ANY:EPK.
+:PD.
+Any exit program name will qualify and no selection is performed based
+on the exit program name.
+:PT.:PV.name:EPV.
+:PD.
+Specify the name of the exit program that will qualify the command exit
+program to be included in the list.
+:EPARML.
+:PT.:PD.
+:HP2.Qualifier 2: Library:EHP2.
+:PARML.
+:PT.:PK DEF.*ANY:EPK.
+:PD.
+Any library name will qualify and no selection is performed based on
+the exit program library name.
+:PT.:PV.name:EPV.
+:PD.
+Specify the name of the library that will qualify the command exit
+program to be included in the list.
+:EPARML.
+:EPARML.
+:EHELP.
+
+.* Panel help section:
+:HELP NAME=HLPFKEYS.
+Function Keys - Help
+:XH3.Function keys
+:EHELP.
+
+:HELP NAME=HLPENT.
+:PARML.
+:PT.Enter
+:PD.Submits information on the display for processing.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF1.
+:PARML.
+:PT.F1=Help
+:PD.Provides additional information about using the display.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF3.
+:PARML.
+:PT.F3=Exit
+:PD.Ends the current task and returns you to the display from which
+the task was started.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF4.
+:PARML.
+:PT.F4=Prompt
+:PD.Provides assistance in entering or selecting a command.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF5.
+:PARML.
+:PT.F5=Refresh
+:PD.Shows the display you are viewing with updated information.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF6.
+:PARML.
+:PT.F6=Add command exit program
+:PD.Executes the Add Command Exit Program (ADDCMDEXIT) command.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF9.
+:PARML.
+:PT.F9=Retrieve
+:PD.Displays the last command you entered on the command line and any
+parameters you included.  Pressing this key once, shows the last
+command you ran.  Pressing this key twice, shows the command you ran
+before that and so on.
+:EPARML.
+:EHELP.
+
+:HELP NAME='HLPF11/VIEW1'.
+:PARML.
+:PT.F11=View 2
+:PD.Shows the list again displaying the exit program information.
+:EPARML.
+:EHELP.
+
+:HELP NAME='HLPF11/VIEW2'.
+:PARML.
+:PT.F11=View 1
+:PD.Shows the list again displaying the command registration details.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF12.
+:PARML.
+:PT.F12=Cancel
+:PD.Cancels processing of any options or changes you have made to the
+current display and returns you to the previous menu or display.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF16.
+:PARML.
+:PT.F16=Work with registration information
+:PD.Executes the Work with Registration Information (WRKREGINF) command
+for the selected exit point.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF17.
+:PARML.
+:PT.F17=Top
+:PD.Brings you back to the top of the list.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF18.
+:PARML.
+:PT.F18=Bottom
+:PD.Brings you to the bottom of the list.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF21.
+:PARML.
+:PT.F21=Print list
+:PD.Prints the current list, including information from both views.
+The spooled file is sent to the output queue and can be viewed using
+the WRKJOB or WRKSPLF command.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF22.
+:PARML.
+:PT.F22=Display entire field value
+:PD.Displays the entire value for the text description field selected
+by the cursor location.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF24.
+:PARML.
+:PT.F24=More keys
+:PD.Changes the keys shown at the bottom of the display.  When you
+press this key, additional function keys are displayed at the bottom
+of the display.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPHLP.
+:PARML.
+:PT.Help
+:PD.Provides additional information about using the display.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPPGD.
+:PARML.
+:PT.Page Down (Roll Up)
+:PD.Moves the information displayed forward to show additional
+information.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPPGU.
+:PARML.
+:PT.Page Up (Roll Down)
+:PD.Moves the information displayed backward to show additional
+information.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPPRT.
+:PARML.
+:PT.Print
+:PD.Prints information currently shown on the display.
+:EPARML.
+:EHELP.
+
+:HELP NAME='WRKCMDEXIT/'.Work with Command Exit Programs - Help
+:P.
+The Work with Command Exit Programs display shows a list of commands
+and exit programs registered for the selected command exit point.
+:P.
+You can type an option next to one or more commands.  Then, when the
+Enter key is pressed, the function associated with the number you typed
+is performed for that command or associated exit program.
+:P.
+If you press the Enter key without typing any other data, you are
+returned to the previous menu or display.
+:P.
+You can type parameters on the command line if you want to override the
+defaults for the option(s) you typed.  Typing parameters is valid only
+if you used one of the options.
+:P.
+To run a command, type the command and press the Enter key.  For
+assistance in typing the command, type the command and press F4.  For
+assistance in selecting a command, press F4 without typing anything.
+:P.
+If you see More ... on the lower right side of your display, there is
+more information to view.  Press Page Down (Roll Up) to move toward the
+end of the information.  Press Page Up (Roll Down) to move toward the
+beginning of the information.
+:P.
+If you see Bottom instead of More ..., you are at the end of the list.
+:P.
+:EHELP.
+
+:HELP NAME='WRKCMDEXIT/OPTRPL'.
+:PARML.
+:PT.2=Replace
+:PD.Use this option to run the Add Exit Program (ADDEXITPGM) command
+specifying REPLACE(*YES) for the selected exit program.
+:P.
+If a successfull change is performed against a message file, the list
+panel will not reflect the change until a refresh of the panel occurs,
+the command name will however be substituted by the special value
+*REPLACED.
+:EPARML.
+:EHELP.
+
+:HELP NAME='WRKCMDEXIT/OPTRMV'.
+:PARML.
+:PT.4=Remove
+:PD.Use this option to run the Remove Command Exit Program (RMVCMDEXIT)
+command for the selected exit program.
+:P.
+The list entry is removed from the list if the command runs
+successfully.
+:EPARML.
+:EHELP.
+
+:HELP NAME='WRKCMDEXIT/OPTWPG'.
+:PARML.
+:PT.5=Work with program
+:PD.This option runs the Work with Program (WRKPGM) command for the
+selected exit program.
+:EPARML.
+:EHELP.
+
+:HELP NAME='WRKCMDEXIT/OPTWCM'.
+:PARML.
+:PT.8=Work with command
+:PD.This option runs the Work with Command (WRKCMD) command for the
+selected command.
+:EPARML.
+:EHELP.
+
+:HELP name='WRKCMDEXIT/EXPNAM'.
+Command exit - Help
+:XH3.Command exit
+:P.
+The name of the exit point whose exit programs are displayed in the
+command exit list.
+:EHELP.
+
+:HELP name='WRKCMDEXIT/EXPDSC'.
+Text - Help
+:XH3.Text
+:P.
+The textual descripton of the exit point.
+:EHELP.
+
+:HELP NAME='WRKCMDEXIT/OPTION'.
+Option - Help
+:XH3.Opt
+:P.
+Type the number of the option you want to specify.
+:EHELP.
+
+:HELP name='WRKCMDEXIT/PGMNBR'.
+Program number - Help
+:XH3.Program number
+:P.
+The exit program sequence number specifying the order in which exit
+programs are run when multiple exit point programs are defined for the
+exit point.
+:EHELP.
+
+:HELP name='WRKCMDEXIT/PGMNAM'.
+Program - Help
+:XH3.Program
+:P.
+The name of the program being run when the registered command is
+executed.
+:EHELP.
+
+:HELP name='WRKCMDEXIT/PGMLIB'.
+Library - Help
+:XH3.Library
+:P.
+The name of the library where the exit program is located.
+:EHELP.
+
+:HELP name='WRKCMDEXIT/PGMDSC'.
+Text - Help
+:XH3.Text
+:P.
+The descriptive text of the exit point or the exit program.
+:EHELP.
+
+:HELP name='WRKCMDEXIT/CMDNAM'.
+Command - Help
+:XH3.Command
+:P.
+The name of the command registered for the exit program.
+:EHELP.
+
+:HELP name='WRKCMDEXIT/CMDLIB'.
+Library - Help
+:XH3.Library
+:P.
+The name of the library where the command is located.
+:EHELP.
+
+:HELP name='WRKCMDEXIT/CMDDSC'.
+Text - Help
+:XH3.Text
+:P.
+The descriptive text of the command.
+:EHELP.
+
+:HELP name='WRKCMDEXIT/EXPFMT'.
+Exit format - Help
+:XH3.Exit format
+:P.
+The exit point format name.
+:EHELP.
+
+:HELP NAME='CNFPNL/'.
+Confirm Remove of Command Exit Program - Help
+:P.
+The Confirm Remove of Command Exit Program display shows all of the
+exit programs that you have chosen to delete by selecting option
+4=Remove on the Work with Command Exit Programs display.  The purpose
+of this display is to allow you to confirm your delete request(s)
+before the exit program is removed.
+:P.
+Pressing the Enter key confirms the items on the display that you have
+chosen to remove.  Pressing F12 (Cancel) allows you to return to the
+previous display to change your choices.
+:P.
+If you see More ... on the lower right side of your display, there is
+more information to view. Press Page Down (Roll Up) to move toward the
+end of the information. Press Page Up (Roll Down) to move toward the
+beginning of the information.
+:P.
+If you see Bottom instead of More ..., you are at the end of the list.
+:P.
+:EHELP.
+
+:HELP name='CNFPNL/OPTION'.
+Opt - Help
+:XH3.Opt
+:P.
+This is the option field showing the remove command exit option which
+causes the confirmation panel to be displayed.  For this panel, the
+option number will always be 4.
+:EHELP.
+
+:EPNLGRP.
