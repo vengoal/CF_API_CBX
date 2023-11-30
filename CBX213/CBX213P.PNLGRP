@@ -1,0 +1,585 @@
+.*-----------------------------------------------------------------------**
+.*
+.*  Compile options:
+.*
+.*    CrtPnlGrp PnlGrp( CBX213P )
+.*              SrcFile( QPNLSRC )
+.*              SrcMbr( *PNLGRP )
+.*
+.*-----------------------------------------------------------------------**
+:PNLGRP.
+
+:COPYR.
+(C) System iNetwork Programming Tips 2010.
+
+.*-- Import help panel group:
+:IMPORT   NAME='*'        PNLGRP=CBX213H.
+.*-- Class definitions:
+:CLASS    NAME=CLACTION   BASETYPE=ACTION      WIDTH=1.
+:ECLASS.
+:CLASS    NAME=CLEXITPG   BASETYPE='CHAR 20'.
+:ECLASS.
+:CLASS    NAME=CLCSREID   BASETYPE='CHAR 4'.
+:ECLASS.
+:CLASS    NAME=CLCSRVAL   BASETYPE='CHAR 10'.
+:ECLASS.
+:CLASS    NAME=CLALTVIEW  BASETYPE='BIN 15'.
+:ECLASS.
+:CLASS    NAME=CLCMDPRM   BASETYPE='CHAR 255'.
+:ECLASS.
+:CLASS    NAME=CLTIMZON   BASETYPE='TIME ZONE'.
+:ECLASS.
+:CLASS    NAME=CLDATE     BASETYPE='DATE 2'.
+:ECLASS.
+:CLASS    NAME=CLTIME     BASETYPE='TIME'.
+:ECLASS.
+:CLASS    NAME=CLOBJNAM   BASETYPE='CHAR 10'.
+:ECLASS.
+:CLASS    NAME=CLEXPNAM   BASETYPE='CHAR 20'.
+:ECLASS.
+:CLASS    NAME=CLEXPFMT   BASETYPE='CHAR 8'.
+:ECLASS.
+:CLASS    NAME=CLTXTDSC   BASETYPE='CHAR 50'.
+:ECLASS.
+:CLASS    NAME=CLPGMNBR   BASETYPE='BIN 32'.
+:ECLASS.
+:CLASS    NAME=CLPGMDTA   BASETYPE='CHAR 22'.
+:ECLASS.
+:CLASS    NAME=CLCMDXIT   BASETYPE='CHAR 10'.
+:ECLASS.
+
+.*-- Variable definitions:
+:VAR      NAME=OPTION    CLASS=CLACTION.
+:VAR      NAME=CSREID    CLASS=CLCSREID.
+:VAR      NAME=CSRVAR    CLASS=CLCSRVAL.
+:VAR      NAME=EXITPG    CLASS=CLEXITPG.
+:VAR      NAME=LISTPG    CLASS=CLEXITPG.
+:VAR      NAME=DATE      CLASS=CLDATE.
+:VAR      NAME=TIMZON    CLASS=CLTIMZON.
+:VAR      NAME=CMDPRM    CLASS=CLCMDPRM.
+:VAR      NAME=ALTVIEW   CLASS=CLALTVIEW.
+
+:VAR      NAME=EXPNAM    CLASS=CLEXPNAM.
+:VAR      NAME=EXPDSC    CLASS=CLTXTDSC.
+:VAR      NAME=CMDXIT    CLASS=CLCMDXIT.
+
+:VAR      NAME=PGMNBR    CLASS=CLPGMNBR.
+:VAR      NAME=PGMNAM    CLASS=CLOBJNAM.
+:VAR      NAME=PGMLIB    CLASS=CLOBJNAM.
+:VAR      NAME=PGMDSC    CLASS=CLTXTDSC.
+:VAR      NAME=CMDNAM    CLASS=CLOBJNAM.
+:VAR      NAME=CMDLIB    CLASS=CLOBJNAM.
+:VAR      NAME=CMDDSC    CLASS=CLTXTDSC.
+:VAR      NAME=EXPFMT    CLASS=CLEXPFMT.
+:VAR      NAME=PGMDTA    CLASS=CLPGMDTA.
+
+.*-- Variable record definitions:
+:VARRCD   NAME=EXPRCD
+          VARS='EXITPG'.
+
+:VARRCD   NAME=CSRRCD
+          VARS='CSREID CSRVAR'.
+
+:VARRCD   NAME=HDRRCD
+          VARS='DATE TIMZON EXPNAM EXPDSC CMDXIT'.
+
+:VARRCD   NAME=DTLRCD
+          VARS='OPTION PGMNBR PGMNAM PGMLIB PGMDSC CMDNAM CMDLIB'
+          VARS='CMDDSC EXPFMT PGMDTA'.
+
+.*-- List definition:
+:LISTDEF  NAME=DTLLST
+          VARS='OPTION PGMNBR PGMNAM PGMLIB PGMDSC CMDNAM CMDLIB'
+          VARS='CMDDSC EXPFMT PGMDTA'
+          MSGID=CPF3CED
+          MSGF='QCPFMSG'.
+
+:LISTDEF  NAME=CNFLST
+          VARS='OPTION PGMNBR PGMNAM PGMLIB PGMDSC CMDNAM CMDLIB'
+          VARS='CMDDSC EXPFMT PGMDTA'.
+
+.*-- Conditions:
+:COND     NAME=VIEW1      EXPR='ALTVIEW = 0'.
+:COND     NAME=VIEW2      EXPR='ALTVIEW = 1'.
+
+:TT       NAME=PNLTT
+          CONDS= 'VIEW1   VIEW2'.
+:TTROW    VALUES='  1       0  '.
+:TTROW    VALUES='  0       1  '.
+:ETT.
+
+.*-- Key definitions - main panel:
+:KEYL     NAME=FKEYS
+          HELP=HLPFKEYS.
+
+:KEYI     KEY=ENTER
+          HELP=HLPENT
+          ACTION=ENTER.
+
+:KEYI     KEY=F1
+          HELP=HLPF1
+          ACTION=HELP.
+
+:KEYI     KEY=F3
+          HELP=HLPF3
+          ACTION='EXIT SET'
+          VARUPD=NO
+          .F3=Exit
+
+:KEYI     KEY=F4
+          HELP=HLPF4
+          PRIORITY=30
+          ACTION=PROMPT
+          .F4=Prompt
+
+:KEYI     KEY=F5
+          HELP=HLPF5
+          PRIORITY=20
+          ACTION='RETURN 5'
+          .F5=Refresh
+
+:KEYI     KEY=F6
+          HELP=HLPF6
+          ACTION='CMD ?ADDCMDEXIT ?*CMDEXIT(&CMDXIT)'
+          PRIORITY=40
+          .F6=Add command exit program
+
+:KEYI     KEY=F9
+          HELP=HLPF9
+          PRIORITY=30
+          ACTION=RETRIEVE
+          .F9=Retrieve
+
+:KEYI     KEY=F11
+          HELP='HLPF11/VIEW1'
+          ACTION=CHGVIEW
+          COND=VIEW1
+          PRIORITY=20
+          .F11=View 2
+
+:KEYI     KEY=F11
+          HELP='HLPF11/VIEW2'
+          ACTION=CHGVIEW
+          COND=VIEW2
+          PRIORITY=20
+          .F11=View 1
+
+:KEYI     KEY=F12
+          HELP=HLPF12
+          ACTION='CANCEL SET'
+          VARUPD=NO
+          .F12=Cancel
+
+:KEYI     KEY=F16
+          HELP=HLPF16
+          PRIORITY=30
+          ACTION='CMD WRKREGINF EXITPNT(&EXPNAM)'
+          .F16=Work with registration information
+
+:KEYI     KEY=F17
+          HELP=HLPF17
+          PRIORITY=40
+          ACTION='RETURN 17'
+          VARUPD=NO
+          .F17=Top
+
+:KEYI     KEY=F18
+          HELP=HLPF18
+          PRIORITY=40
+          ACTION='RETURN 18'
+          VARUPD=NO
+          .F18=Bottom
+
+:KEYI     KEY=F21
+          HELP=HLPF21
+          ACTION='CALL EXITPG'
+          PRIORITY=20
+          .F21=Print list
+
+:KEYI     KEY=F22
+          HELP=HLPF22
+          PRIORITY=20
+          ACTION='CALL EXITPG'
+          .F22=Display entire field
+
+:KEYI     KEY=F24
+          HELP=HLPF24
+          ACTION=MOREKEYS
+          .F24=More keys
+
+:KEYI     KEY=HELP
+          HELP=HLPHLP
+          ACTION=HELP.
+
+:KEYI     KEY=PAGEDOWN
+          HELP=HLPPGD
+          ACTION=PAGEDOWN.
+
+:KEYI     KEY=PAGEUP
+          HELP=HLPPGU
+          ACTION=PAGEUP.
+
+:KEYI     KEY=PRINT
+          HELP=HLPPRT
+          ACTION=PRINT.
+:EKEYL.
+
+.*-- Key definitions - confirmation panel:
+:KEYL     NAME=CNFKEYS
+          HELP=HLPFKEYS.
+
+:KEYI     KEY=ENTER
+          HELP=HLPENT
+          ACTION=ENTER.
+
+:KEYI     KEY=F1
+          HELP=HLPF1
+          ACTION=HELP.
+
+:KEYI     KEY=F11
+          HELP='F11/VIEW1'
+          ACTION=CHGVIEW
+          COND=VIEW1
+          PRIORITY=30
+          .F11=View 2
+
+:KEYI     KEY=F11
+          HELP='F11/VIEW2'
+          ACTION=CHGVIEW
+          COND=VIEW2
+          PRIORITY=30
+          .F11=View 1
+
+:KEYI     KEY=F12
+          HELP=HLPF12
+          ACTION='CANCEL SET'
+          VARUPD=NO
+          .F12=Cancel
+
+:KEYI     KEY=F24
+          HELP=HLPF24
+          ACTION=MOREKEYS
+          .F24=More keys
+
+:KEYI     KEY=HELP
+          HELP=HLPHLP
+          ACTION=HELP.
+
+:KEYI     KEY=PAGEDOWN
+          HELP=HLPPGD
+          ACTION=PAGEDOWN.
+
+:KEYI     KEY=PAGEUP
+          HELP=HLPPGU
+          ACTION=PAGEUP.
+
+:KEYI     KEY=PRINT
+          HELP=HLPPRT
+          ACTION=PRINT.
+:EKEYL.
+
+.*-- Panel definition:
+:PANEL    NAME=CBX213P
+          KEYL=FKEYS
+          CSREID=CSREID
+          CSRVAR=CSRVAR
+          ENTER='RETURN 500'
+          HELP='WRKCMDEXIT/'
+          TT=PNLTT
+          TOPSEP=DATETIME
+          DATE=DATE
+          TIME=TIMZON
+          .Work with Command Exit Programs
+
+:DATA     DEPTH=3
+          LAYOUT=1
+          BOTSEP=SPACE.
+
+:DATACOL  WIDTH=20.
+:DATACOL  WIDTH='*'.
+
+:DATAGRP  GRPSEP=NONE
+          COMPACT.
+
+:DATAI    VAR=EXPNAM
+          USAGE=OUT
+          HELP='WRKCMDEXIT/EXPNAM'
+          .Command exit
+
+:DATAI    VAR=EXPDSC
+          USAGE=OUT
+          HELP='WRKCMDEXIT/EXPDSC'
+          .Text
+:EDATAGRP.
+:EDATA.
+
+.*-- List presentation area:
+:LIST     DEPTH='*'
+          LISTDEF=DTLLST
+          MAXHEAD=2
+          VIEW=ALTVIEW
+          ACTOR=UIM
+          SCROLL=YES
+          PARMS=CMDPRM.
+
+:TOPINST .Type options, press Enter.
+
+:LISTACT  ENTER='CMD ADDEXITPGM EXITPNT(&EXPNAM) FORMAT(&EXPFMT)'
+          ENTER='PGMNBR(&PGMNBR) PGM(&PGMLIB/&PGMNAM) REPLACE(*YES)'
+          ENTER='PGMDTA(*JOB 20 &PGMDTA) &CMDPRM'
+          PROMPT='CMD ?ADDEXITPGM ?*EXITPNT(&EXPNAM) ?*FORMAT(&EXPFMT) '
+          PROMPT='?*PGMNBR(&PGMNBR) ?*PGM(&PGMLIB/&PGMNAM)'
+          PROMPT='?*REPLACE(*YES) ??PGMDTA(*JOB 20 &PGMDTA) &CMDPRM'
+          HELP='WRKCMDEXIT/OPTRPL'
+          OPTION=2
+          NOCMD=PROMPT
+          USREXIT='CALL EXITPG'
+          .2=Replace
+
+:LISTACT  ENTER='CMD RMVCMDEXIT CMDEXIT(&CMDXIT) PGMNBR(&PGMNBR)'
+          ENTER='&CMDPRM'
+          PROMPT='CMD ?RMVCMDEXIT ?*CMDEXIT(&CMDXIT) ?*PGMNBR(&PGMNBR)'
+          PROMPT='&CMDPRM'
+          HELP='WRKCMDEXIT/OPTRMV'
+          OPTION=4
+          CONFIRM=CNFPNL
+          USREXIT='CALL EXITPG'
+          .4=Remove
+
+:LISTACT  ENTER='CMD WRKPGM PGM(&PGMLIB/&PGMNAM) &CMDPRM'
+          PROMPT='CMD ?WRKPGM ?*PGM(&PGMLIB/&PGMNAM) &CMDPRM'
+          HELP='WRKCMDEXIT/OPTWPG'
+          OPTION=5
+          .5=Work with program
+
+:LISTACT  ENTER='CMD WRKCMD CMD(&CMDLIB/&CMDNAM) &CMDPRM'
+          PROMPT='CMD ?WRKCMD ?*CMD(&CMDLIB/&CMDNAM) '
+          HELP='WRKCMDEXIT/OPTWCM'
+          OPTION=8
+          .8=Work with command
+
+:LISTCOL  VAR=OPTION
+          USAGE=INOUT
+          MAXWIDTH=3
+          HELP='WRKCMDEXIT/OPTION'
+          .Opt
+
+:LISTCOL  VAR=PGMNBR
+          USAGE=OUT
+          MAXWIDTH=10
+          HELP='WRKCMDEXIT/PGMNBR'
+          .'Program' 'Number '
+
+:LISTCOL  VAR=PGMNAM
+          USAGE=OUT
+          MAXWIDTH=10
+          HELP='WRKCMDEXIT/PGMNAM'
+          .Program
+
+:LISTCOL  VAR=PGMLIB
+          USAGE=OUT
+          MAXWIDTH=10
+          HELP='WRKCMDEXIT/PGMLIB'
+          .Library
+
+:LISTCOL  VAR=PGMDSC
+          USAGE=OUT
+          MAXWIDTH='*'
+          HELP='WRKCMDEXIT/PGMDSC'
+          .Text
+
+:LISTCOL  VAR=CMDNAM
+          USAGE=OUT
+          MAXWIDTH=10
+          HELP='WRKCMDEXIT/CMDNAM'
+          .Command
+
+:LISTCOL  VAR=CMDLIB
+          USAGE=OUT
+          MAXWIDTH=10
+          HELP='WRKCMDEXIT/CMDLIB'
+          .Library
+
+:LISTCOL  VAR=CMDDSC
+          USAGE=OUT
+          MAXWIDTH='*'
+          HELP='WRKCMDEXIT/CMDDSC'
+          .Text
+
+:LISTCOL  VAR=EXPFMT
+          USAGE=OUT
+          MAXWIDTH=8
+          HELP='WRKCMDEXIT/EXPFMT'
+          .'Exit  ' 'Format'
+
+:LISTVIEW COLS='OPTION CMDNAM CMDLIB CMDDSC EXPFMT'.
+:LISTVIEW COLS='OPTION PGMNAM PGMLIB PGMNBR PGMDSC'.
+:ELIST.
+
+:CMDLINE  SIZE=SHORT
+          .Parameters or command
+:EPANEL.
+
+.*-- Panel definition:
+:PANEL    NAME=CNFPNL
+          KEYL=CNFKEYS
+          ENTER='RETURN 100'
+          HELP='CNFPNL/'
+          TOPSEP=DATETIME
+          DATE=DATE
+          TIME=TIMZON
+          .Confirm Remove of Command Exit Program
+
+.*-- List presentation area:
+:LIST     DEPTH='*'
+          LISTDEF=CNFLST
+          MAXHEAD=2
+          VIEW=ALTVIEW
+          SCROLL=YES.
+
+:TOPINST.Press Enter to confirm your choices of 4=Remove.
+:TOPINST.Press F12 to return to change your choices.
+
+:LISTCOL  VAR=OPTION
+          USAGE=OUT
+          MAXWIDTH=3
+          HELP='CNFPNL/OPTION'
+          .Opt
+
+:LISTCOL  VAR=PGMNBR
+          USAGE=OUT
+          MAXWIDTH=10
+          HELP='WRKCMDEXIT/PGMNBR'
+          .'Program' 'Number '
+
+:LISTCOL  VAR=PGMNAM
+          USAGE=OUT
+          MAXWIDTH=10
+          HELP='WRKCMDEXIT/PGMNAM'
+          .Program
+
+:LISTCOL  VAR=PGMLIB
+          USAGE=OUT
+          MAXWIDTH=10
+          HELP='WRKCMDEXIT/PGMLIB'
+          .Library
+
+:LISTCOL  VAR=PGMDSC
+          USAGE=OUT
+          MAXWIDTH='*'
+          HELP='WRKCMDEXIT/PGMDSC'
+          .Text
+
+:LISTCOL  VAR=CMDNAM
+          USAGE=OUT
+          MAXWIDTH=10
+          HELP='WRKCMDEXIT/CMDNAM'
+          .Command
+
+:LISTCOL  VAR=CMDLIB
+          USAGE=OUT
+          MAXWIDTH=10
+          HELP='WRKCMDEXIT/CMDLIB'
+          .Library
+
+:LISTCOL  VAR=CMDDSC
+          USAGE=OUT
+          MAXWIDTH='*'
+          HELP='WRKCMDEXIT/CMDDSC'
+          .Text
+
+:LISTCOL  VAR=EXPFMT
+          USAGE=OUT
+          MAXWIDTH=8
+          HELP='WRKCMDEXIT/EXPFMT'
+          .'Exit  ' 'Format'
+
+:LISTVIEW COLS='OPTION CMDNAM CMDLIB CMDDSC EXPFMT'.
+:LISTVIEW COLS='OPTION PGMNAM PGMLIB PGMNBR PGMDSC'.
+:ELIST.
+:EPANEL.
+
+.*-- Print panel header definition:
+:PRTHEAD  NAME=PRTHDR
+          WIDTH=132
+          .Command Exit Programs
+
+:PRTTRAIL .E N D   O F   L I S T I N G
+
+:EPRTHEAD.
+
+.*-- Print panel detail definition:
+
+:PRTPNL   NAME=PRTLST
+          WIDTH=132.
+
+:DATA     LAYOUT=1
+          BOTSEP=SPACE.
+
+:DATACOL  WIDTH=26.
+:DATACOL  WIDTH='*'.
+
+:DATAGRP  GRPSEP=NONE
+          COMPACT.
+
+:DATAI    VAR=EXPNAM
+          USAGE=OUT
+          .Command exit
+
+:DATAI    VAR=EXPDSC
+          USAGE=OUT
+          .Text
+:EDATAGRP.
+:EDATA.
+
+.*-- Print panel list definition:
+
+:LIST     LISTDEF=DTLLST
+          MAXHEAD=3
+          BOTSEP=NONE.
+
+:LISTCOL  VAR=PGMNBR
+          USAGE=OUT
+          MAXWIDTH=10
+          .'Program' 'Number '
+
+:LISTCOL  VAR=PGMNAM
+          USAGE=OUT
+          MAXWIDTH=10
+          .Program
+
+:LISTCOL  VAR=PGMLIB
+          USAGE=OUT
+          MAXWIDTH=10
+          .Library
+
+:LISTCOL  VAR=PGMDSC
+          USAGE=OUT
+          MAXWIDTH=30
+          .Text
+
+:LISTCOL  VAR=CMDNAM
+          USAGE=OUT
+          MAXWIDTH=10
+          .Command
+
+:LISTCOL  VAR=CMDLIB
+          USAGE=OUT
+          MAXWIDTH=10
+          .Library
+
+:LISTCOL  VAR=CMDDSC
+          USAGE=OUT
+          MAXWIDTH='*'
+          .Text
+
+:LISTCOL  VAR=EXPFMT
+          USAGE=OUT
+          MAXWIDTH=8
+          .'Exit  ' 'Format'
+
+:LISTVIEW COLS='CMDNAM CMDLIB CMDDSC EXPFMT PGMNAM PGMLIB PGMNBR PGMDSC'.
+:ELIST.
+
+:EPRTPNL.
+:EPNLGRP.
