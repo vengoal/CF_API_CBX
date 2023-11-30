@@ -1,0 +1,80 @@
+.*-----------------------------------------------------------------------**
+.*
+.*  Compile options:
+.*
+.*    CrtPnlGrp PnlGrp( CBX107P )
+.*              SrcFile( QPNLSRC )
+.*              SrcMbr( *PNLGRP )
+.*
+.*-----------------------------------------------------------------------**
+:PNLGRP.
+:HELP NAME='SETPRFEXIT'.
+Set Profile Exit Program - Help
+:P.
+The Set Profile Exit command (SETPRFEXIT) activates or deactivates for
+the specified user profile, the exit program(s) registered for the exit
+point defined by the format parameter.
+:P.
+The current setting is retrieved for the specified user profile if the
+command is prompted prior to execution.
+:EHELP.
+:HELP NAME='SETPRFEXIT/USRPRF'.
+User profile (USRPRF) - Help
+:XH3.User profile (USRPRF)
+:P.
+Specifies the name of the user profile whose exit program setting you
+want to change.
+:P.
+The possible values are:
+:PARML.
+:PT.:PV.user-name:EPV.
+:PD.
+The name of the user profile that you want to change the profile exit
+program setting for.
+:PT.:PK.*CURRENT:EPK.
+:PD.
+The user profile that is currently running is used.
+:EPARML.
+:EHELP.
+:HELP NAME='SETPRFEXIT/FORMAT'.
+Exit program format (FORMAT) - Help
+:XH3.Exit program format (FORMAT)
+:P.
+The format name defines the specific exit program setting to change.
+:P.
+The possible values are:
+:PARML.
+:PT.:PK DEF.*SYSRQS:EPK.
+:PD.
+The presystem request program exit point setting is changed for the
+specified user profile.
+:PT.:PK.*ATTN:EPK.
+:PD.
+The preattention program exit point setting is changed for the
+specified user profile.
+:EPARML.
+:EHELP.
+:HELP NAME='SETPRFEXIT/EXITPGM'.
+Exit program option (EXITPGM) - Help
+:XH3.Exit program option (EXITPGM)
+:P.
+Specifies for the registered exit point programs in the order 1 to 8
+if the corresponding exit program should be activated, deactivated or
+have it's current setting remain unchanged.
+:P.
+The possible values are:
+:PARML.
+:PT.:PK.*SAME:EPK.
+:PD.
+The current setting remains unchanged for corresponding exit program.
+:PT.:PK.*ON:EPK.
+:PD.
+The corresponding exit program is activated for the specified user
+profile.
+:PT.:PK.*OFF:EPK.
+:PD.
+The corresponding exit program is deactivated for the specified user
+profile.
+:EPARML.
+:EHELP.
+:EPNLGRP.
