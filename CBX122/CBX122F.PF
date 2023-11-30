@@ -1,0 +1,19 @@
+     **
+     **  Compile options:
+     **
+     **    CrtPf   File( CBX122F)
+     **            SrcFile( QDDSSRC )
+     **            SrcMbr( CBX122F )
+     **            Text( 'Subsystem job monitor control file' )
+     **
+     **
+     **------------------------------------------------------------------**
+     A          R CBX122R
+     **
+     A            CXJOBN        10A         COLHDG('Job name')
+     A            CXJOBU        10A         COLHDG('Job user profile')
+     A                                      TEXT('*ANY=Any job user profile')
+     A            CXNMSQ        10A         COLHDG('Notif. message queue')
+     **
+     A          K CXJOBN
+     A          K CXJOBU
