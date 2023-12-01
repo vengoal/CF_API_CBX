@@ -1,0 +1,111 @@
+.*-----------------------------------------------------------------------**
+.*
+.*  Compile options:
+.*
+.*    CrtPnlGrp PnlGrp( CBX249H )
+.*              SrcFile( QPNLSRC )
+.*              SrcMbr( *PNLGRP )
+.*
+.*-----------------------------------------------------------------------**
+:PNLGRP.
+
+:IMPORT  PNLGRP='CBX247H'  NAME=ADDWCHDFN.
+
+:HELP NAME='STRWCHDFN'.
+Start Watch Definition - Help
+:P.
+The Start Watch Definition (STRWCHDFN) command starts the selected
+range of watch definitions using the Start Watch (QSCSWCH) API.
+:P.
+You can use the
+:LINK PERFORM='DSPHELP ADDWCHDFN'.
+Add Watch Definition (ADDWCHDFN)
+:ELINK.
+command to add a watch definition to the watch definition table on the
+system, and then use this command to reactivate the watch following an
+IPL or an End Watch (ENDWCH) command being issued against the watch.
+:P.
+:HP2.Restrictions::EHP2.
+:UL.
+:LI.
+You must have *ALLOBJ, *JOBCTL and *SERVICE special authority to run
+this command.
+:LI.
+You must have *SECADM special authority to specify USRPRF(*WCHDFN)
+for this command.
+:EUL.
+:EHELP.
+
+:HELP NAME='STRWCHDFN/SSNID'.
+Session ID (SSNID) - Help
+
+:XH3.Session ID (SSNID)
+:P.
+Specifies the range of watch definition to process and start.
+:P.
+This is a required parameter.
+:PARML.
+:PT.:PK.*ALL:EPK.
+:PD.
+All watch definitions stored in the watch definition table on the
+system are started.
+:PT.:PV.generic-name:EPV.
+:PD.
+Specify the generic name of the watch definition to be started.
+:P.
+A generic name is a character string of one or more characters followed
+by an asterisk (*). A generic name specifies all items that have names
+with the same prefix as the generic name.
+:PT.:PV.name:EPV.
+:PD.
+Specify the name of the watch definition to be started.
+:EPARML.
+:EHELP.
+
+:HELP NAME='STRWCHDFN/USRPRF'.
+User profile (USRPRF) - Help
+
+:XH3.User profile (USRPRF)
+:P.
+Specifies the user profile used to start the watch.
+:PARML.
+:PT.:PK DEF.*CURRENT:EPK.
+:PD.
+The user profile running this command is used to start the watch.
+:PT.:PK.*WCHDFN:EPK.
+:PD.
+The user profile that entered the watch definition is used to start the
+watch. Special authority *SECADM is required to specify this value.
+:EPARML.
+:EHELP.
+
+:HELP NAME='STRWCHDFN/VFYPGMOWN'.
+Verify watch program owner (VFYPGMOWN) - Help
+
+:XH3.Verify watch program owner (VFYPGMOWN)
+:P.
+If *WCHDFN was defined for the :HP2.USRPRF:EHP2. parameter, this
+parameter allows you to specify whether the owner of the watch program
+must be the same as the user profile that entered the watch
+definition, in order for the watch to start.
+:P.
+The watch program is run under the user profile that submitted the
+watch, and an unauthorized change of the watch definition table's user
+profile and watch program columns could therefore potentially cause
+an unauthorized program to run under a priviliged user profile. This
+is prevented by enforcing integrity between the watch user profile and
+the watch program owner.
+:PARML.
+:PT.:PK DEF.*YES:EPK.
+:PD.
+The watch will only start if the watch program is owned by the user
+profile that entered the the watch definition, otherwise a diagnostic
+message is issued.
+:PT.:PK.*NO:EPK.
+:PD.
+The watch will start irrespective of whether the watch program is owned
+by the watch user profile.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.
