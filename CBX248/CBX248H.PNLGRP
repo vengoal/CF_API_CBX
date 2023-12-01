@@ -1,0 +1,69 @@
+.*-----------------------------------------------------------------------**
+.*
+.*  Compile options:
+.*
+.*    CrtPnlGrp PnlGrp( CBX248H )
+.*              SrcFile( QPNLSRC )
+.*              SrcMbr( *PNLGRP )
+.*
+.*-----------------------------------------------------------------------**
+:PNLGRP.
+
+:IMPORT  PNLGRP='QHSCCMD'  NAME='*'.
+
+:HELP NAME='RMVWCHDFN'.
+Remove Watch Definition - Help
+:P.
+The Remove Watch Definition (RMVWCHDFN) command removes the specified
+watch definition from the watch definition table on the system. If the
+wacth is currently active it will not be ended.
+:P.
+:HP2.Restrictions::EHP2.
+:UL.
+:LI.
+You must have *ALLOBJ and *SERVICE special authority to run the command.
+:LI.
+If specifying :HP2.RMVWCHDFN ENDWCH(*YES):EHP2., all restrictions
+applying to the
+:LINK PERFORM='DSPHELP ENDWCH'.
+End Watch (ENDWCH)
+:ELINK.
+command also apply to this command. Please refer to the ENDWCH
+command's help text for all the details.
+:EUL.
+:EHELP.
+
+:HELP NAME='RMVWCHDFN/SSNID'.
+Session ID (SSNID) - Help
+
+:XH3.Session ID (SSNID)
+:P.
+Specifies the session identifier of the watch definition being removed.
+:P.
+This is a required parameter.
+:PARML.
+:PT.:PV.name:EPV.
+:PD.
+Specify the session identifier of the watch definition to be removed.
+:EPARML.
+:EHELP.
+
+:HELP NAME='RMVWCHDFN/ENDWCH'.
+End watch (ENDWCH) - Help
+:XH3.End watch (ENDWCH)
+:P.
+Specifies for an active watch having its definition removed whether
+the active watch session should be ended.
+:PARML.
+:PT.:PK.*YES:EPK.
+:PD.
+The active watch session will be ended when the watch definition is
+removed.
+:PT.:PK DEF.*NO:EPK.
+:PD.
+The active watch session will not be ended when the watch definition is
+removed.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.
