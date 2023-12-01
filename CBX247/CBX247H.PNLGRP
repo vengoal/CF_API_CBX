@@ -1,0 +1,317 @@
+.*-----------------------------------------------------------------------**
+.*
+.*  Compile options:
+.*
+.*    CrtPnlGrp PnlGrp( CBX247H )
+.*              SrcFile( QPNLSRC )
+.*              SrcMbr( *PNLGRP )
+.*
+.*-----------------------------------------------------------------------**
+:PNLGRP.
+
+:IMPORT  PNLGRP='QHSCCMD'  NAME='*'.
+:IMPORT  PNLGRP='CBX249H'  NAME=STRWCHDFN.
+
+:HELP NAME='ADDWCHDFN'.
+Add Watch Definition - Help
+:P.
+The Add Watch Definition (ADDWCHDFN) command adds a new watch
+definition to the watch definition table on the system and starts the
+defined watch for event function, which notifies the user by calling a
+user specified program when the specified event (a message, a LIC log
+or a PAL) occurs. PAL stands for Product Activity Log which shows
+errors that have occurred (such as in disk and tape units,
+communications, and work stations).
+:P.
+You can use the
+:LINK PERFORM='DSPHELP STRWCHDFN'.
+Start Watch Definition (STRWCHDFN)
+:ELINK.
+command to start some or all of the watches defined in the watch
+definition table. Doing this as part of your system startup program, or
+as an autostart job associated with a subsystem description that is
+started by the system startup program, ensures that the watch defined
+in the watch definition table are automatically started when the system
+resumes activity following an IPL (Initial Program Load).
+:P.
+:HP2.Restrictions::EHP2.
+:UL.
+:LI.
+To use this command, you must have service (*SERVICE) special authority
+or must be authorized to the Service watch function of the IBM i
+through System i Navigator's Application Administration support. The
+Change Function Usage (CHGFCNUSG) command, with a function ID of
+QIBM_SERVICE_WATCH, can also be used to change the list of users that
+are allowed to start and end watch operations.
+:LI.
+You must have operational (*OBJOPR) and execute (*EXECUTE) authorities
+to the watch program to be called, and execute (*EXECUTE) authority to
+the library where the program is located.
+:LI.
+You must have use (*USE) authority to the message queue specified in
+watched message queue name field, and use (*USE) authority to the
+library where the message queue is located.
+:LI.
+When a message is being watched within a job, the issuer of the command
+must be running under a user profile which is the same as the job user
+identity of the job being watched, or the issuer of the command must be
+running under a user profile which has job control (*JOBCTL) special
+authority. Job control (*JOBCTL) special authority is also required if
+a generic user name is specified in the watched job user name field.
+:P.
+If you specify *ALL for the watched job name, or a generic user name,
+you must have all object (*ALLOBJ) special authority or must be
+authorized to the Watch Any Job function of the IBM i through System i
+Navigator's Application Administration support. The Change Function
+Usage (CHGFCNUSG) command, with a function ID of QIBM_WATCH_ANY_JOB,
+can also be used to change the list of users that are allowed to start
+and end watch operations.
+:LI.
+If you specify the special value *LIBL for the library part of the
+:HP2.Watch program (WCHPGM):EHP2. parameter, the actual library name is
+resolved immediately and stored with the watch definition.
+:EUL.
+:EHELP.
+
+:HELP NAME='ADDWCHDFN/SSNID'.
+Session ID (SSNID) - Help
+
+:XH3.Session ID (SSNID)
+:P.
+The session identifier for this watch definition. This watch session
+identifier must be unique across all active watch sessions on the
+system.
+:P.
+You cannot specify a session identifier that starts with "QSC".
+:P.
+This is a required parameter.
+:PARML.
+:PT.:PV.name:EPV.
+:PD.
+Specify the session identifier for this watch definition. You cannot
+specify a session identifier that starts with "QSC".
+:EPARML.
+:EHELP.
+
+:HELP NAME='ADDWCHDFN/WCHPGM'.
+Watch program (WCHPGM) - Help
+
+:IMHELP  NAME='STRWCH/WCHPGM'.
+:EHELP.
+
+:HELP NAME='ADDWCHDFN/CALLWCHPGM'.
+Call watch program (CALLWCHPGM) - Help
+
+:IMHELP  NAME='STRWCH/CALLWCHPGM'.
+:EHELP.
+
+:HELP NAME='ADDWCHDFN/WCHMSG'.
+Watch for message (WCHMSG) - Help
+
+:XH3.Watch for message (WCHMSG)
+:P.
+Specifies up to 100 messages which are to be watched. If a value other
+than *NONE is specified, you must specify where to watch for the
+message on the :HP2.Watched message queue (WCHMSGQ):EHP2. parameter.
+on the Watched message queue (WCHMSGQ) parameter.  When the watched for
+message is added to the specified message queue or log, the watch exit
+program is called.
+:P.
+:NT.
+Moved and resent messages will not be watched. Only the original
+instance of the message can be watched.
+:ENT.
+:P.
+:HP2.Single values:EHP2.
+:PARML.
+:PT.:PK DEF.*NONE:EPK.
+:PD.
+No messages will be watched.
+:EPARML.
+:P.
+:HP2.Other values (up to 100 repetitions):EHP2.
+:P.
+:HP2.Element 1: Message to watch:EHP2.
+:PARML.
+:PT.:PK.*ALL:EPK.
+:PD.
+All messages are to be watched. This includes stored messages and
+immediate messages. Be aware that watching for all messages might cause
+performance degradation on your system. Use it cautiously.
+:PT.:PK.*IMMED:EPK.
+:PD.
+All immediate or impromptu messages will be watched. No messages stored
+in a message file are watched.
+:PT.:PV.generic-name:EPV.
+:PD.
+Specify the generic message identifier to be watched. A generic name is
+a character string of one or more characters followed by an asterisk
+(*); for example, ABC*. The asterisk substitutes for any valid
+characters. A generic message name specifies all messages with message
+identifiers that begin with the generic prefix.
+:PT.:PV.name:EPV.
+:PD.
+Specify the 7-character message identifier to be watched.
+:EPARML.
+:P.
+:HP2.Element 2: Comparison data:EHP2.
+:P.
+Specify comparison data to be used if a message matching the specified
+message is added to the specified message queue or log. If the message
+data, the "From program" or the "To program" includes the specified
+text, the watched for condition is true. If the message data, the "From
+program" or the "To program" does not contain the specified text, the
+watch function just continues.
+:PARML.
+:PT.:PK DEF.*NONE:EPK.
+:PD.
+No comparison data is specified. If a message matching the specified
+message is added to the specified message queue or log, the watched for
+condition is true.
+:PT.:PV.character-value:EPV.
+:PD.
+Specify the text string used to compare against the message data, the
+"From program" or the "To program" of the watched for message. This
+text is case sensitive and can be quoted in order to specify imbedded
+or trailing blanks.
+:EPARML.
+:P.
+:HP2.Element 3: Compare against:EHP2.
+:P.
+Specify which part of the message the comparison data specified for
+element 2 is to be compared against.
+:PARML.
+:PT.:PK DEF.*MSGDTA:EPK.
+:PD.
+The comparison data will be compared against the message replacement
+data.
+:PT.:PK.*FROMPGM:EPK.
+:PD.
+The comparison data will be compared against the name of the program
+sending the message, or the name of the ILE program that contains the
+procedure sending the message.
+:PT.:PK.*TOPGM:EPK.
+:PD.
+The comparison data will be compared against the name of the program
+the message was sent to, or the name of the ILE program that contains
+the procedure the message was sent to.
+:EPARML.
+:P.
+:HP2.Element 4: Message type:EHP2.
+:P.
+Specify the message type assigned to the message to be watched.
+:PARML.
+:PT.:PK DEF.*ALL:EPK.
+:PD.
+All the message types are to be watched. This includes completion,
+command, diagnostic, escape, informational, inquiry, notify, reply,
+request, sender's copy, scope and status message types.
+:PT.:PK.*COMP:EPK.
+:PD.
+A completion message is to be watched.
+:PT.:PK.*DIAG:EPK.
+:PD.
+A diagnostic message is to be watched.
+:PT.:PK.*ESCAPE:EPK.
+:PD.
+An escape message is to be watched.
+:PT.:PK.*INFO:EPK.
+:PD.
+An informational message is to be watched.
+:PT.:PK.*INQ:EPK.
+:PD.
+An inquiry message is to be watched.
+:PT.:PK.*NOTIFY:EPK.
+:PD.
+A notify message is to be watched.
+:PT.:PK.*SCOPE:EPK.
+:PD.
+A scope message is to be watched.
+:PT.:PK.*STATUS:EPK.
+:PD.
+A status message is to be watched.
+:EPARML.
+:P.
+:HP2.Element 5: Relational operator:EHP2.
+:P.
+Specify one relational operator against which the message severity code
+is compared.
+:PARML.
+:PT.:PK DEF.*GE:EPK.
+:PD.
+Greater than or equal.
+:PT.:PK.*EQ:EPK.
+:PD.
+Equal.
+:PT.:PK.*GT:EPK.
+:PD.
+Greater than.
+:PT.:PK.*LT:EPK.
+:PD.
+Less than.
+.* Describe the function provided by the pre-defined parameter value.
+:PT.:PK.*LE:EPK.
+:PD.
+Less than or equal.
+:EPARML.
+:P.
+:HP2.Element 6: Severity code:EHP2.
+:P.
+Specifies the severity code of the message to be watched.
+:PARML.
+:PT.:PK DEF.00:EPK.
+:PD.
+The severity code assigned to the message to be watched for is 00.
+:PT.:PV.Severity-code:EPV.
+:PD.
+Specify a value, ranging from 00 through 99, as the severity level
+associated with the message to be watched.
+:EPARML.
+:EHELP.
+
+:HELP NAME='ADDWCHDFN/WCHMSGQ'.
+Watched message queue (WCHMSGQ) - Help
+
+:IMHELP  NAME='STRWCH/WCHMSGQ'.
+:EHELP.
+
+:HELP NAME='ADDWCHDFN/WCHJOB'.
+Watched job (WCHJOB) - Help
+
+:IMHELP  NAME='STRWCH/WCHJOB'.
+:EHELP.
+
+:HELP NAME='ADDWCHDFN/WCHLICLOG'.
+
+:IMHELP  NAME='STRWCH/WCHLICLOG'.
+:EHELP.
+
+:HELP NAME='ADDWCHDFN/WCHPAL'.
+Watch for PAL entry (WCHPAL) - Help
+
+:IMHELP  NAME='STRWCH/WCHPAL'.
+:EHELP.
+
+:HELP NAME='ADDWCHDFN/RUNPTY'.
+Run priority (RUNPTY) - Help
+
+:IMHELP  NAME='STRWCH/RUNPTY'.
+:EHELP.
+
+:HELP NAME='ADDWCHDFN/TEXT'.
+Text 'description' (TEXT) - Help
+
+:XH3.Text 'description' (TEXT)
+:P.
+Specifies the text that briefly describes the Watch definition.
+:PARML.
+:PT.:PK DEF.*BLANK:EPK.
+:PD.
+Text is not specified.
+:PT.:PV.'description':EPV.
+:PD.
+Specify no more than 72 characters of text, enclosed in apostrophes.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.
