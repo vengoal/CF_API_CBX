@@ -5,7 +5,7 @@ TIPSRC Member List at https://vengoal.blogspot.com/2023/11/carsten-flensburg-art
 
 The code examples demonstrates the use of a number of IBM i API's. <a href="https://www.ibm.com/docs/en/i/7.5?topic=interfaces-api-finder" rel="nofollow">https://www.ibm.com/docs/en/i/7.5?topic=interfaces-api-finder</a>
 
-Please reference <a href="https://vengoal.blogspot.com/p/ibm-i-exit-point-and-exit-program.html" target="_blank">https://vengoal.blogspot.com/p/ibm-i-exit-point-and-exit-program.html</a>
+Please reference <a href="https://vengoal.blogspot.com/p/ibm-i-exit-point-and-exit-program.html" rel="nofollow">https://vengoal.blogspot.com/p/ibm-i-exit-point-and-exit-program.html</a>
 
 <p dir="auto">##Contributors</p>
 <ul dir="auto">
