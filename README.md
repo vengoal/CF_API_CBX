@@ -20,6 +20,7 @@ Please reference <a href="https://vengoal.blogspot.com/p/ibm-i-exit-point-and-ex
   <li>250 - Watch event exit program - sample program</li>
   <li>256 - DSPJOBSCN</li>
   <li>261 - QIBM_QMH_HDL_INQEXT , QIBM_QMH_REPLY_INQ Exit programs - Build and Configure</li>
+  <li>707 - QIBM_QSY_VLD_PASSWRD Password validation exit program</li>
   <li>708 - QIBM_QSY_CHK_PASSWRD Password check exit program</li>
 </ul>
 
