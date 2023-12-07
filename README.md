@@ -15,6 +15,9 @@ Please reference <a href="https://vengoal.blogspot.com/p/ibm-i-exit-point-and-ex
   <li>213 - WRKCMDEXIT</li>
   <li>232 - WRKCMDEXIT</li>
   <li>247 - ADDWCHDFN</li>
+  <li>248 - RMVWCHDFN</li>
+  <li>249 - STRWCHDFN</li>
+  <li>250 - Watch event exit program - sample program</li>
 </ul>
 
 <p dir="auto">##Contributors</p>
