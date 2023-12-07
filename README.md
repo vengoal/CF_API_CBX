@@ -10,8 +10,9 @@ Please reference <a href="https://vengoal.blogspot.com/p/ibm-i-exit-point-and-ex
 
 <h2>Utilities</h2>
 <ul dir="auto">
-<li>107 - SETPRFEXIT</li>
+  <li>107 - SETPRFEXIT</li>
   <li>122 - Subsystem job monitor</li>
+  <li>213 - WRKCMDEXIT</li>
 </ul>
 
 <p dir="auto">##Contributors</p>
