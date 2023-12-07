@@ -13,6 +13,8 @@ Please reference <a href="https://vengoal.blogspot.com/p/ibm-i-exit-point-and-ex
   <li>107 - SETPRFEXIT</li>
   <li>122 - Subsystem job monitor</li>
   <li>213 - WRKCMDEXIT</li>
+  <li>232 - WRKCMDEXIT</li>
+  <li>247 - ADDWCHDFN</li>
 </ul>
 
 <p dir="auto">##Contributors</p>
