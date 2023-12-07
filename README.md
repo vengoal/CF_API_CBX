@@ -8,6 +8,11 @@ The code examples demonstrates the use of a number of IBM i API's. <br />
 
 Please reference <a href="https://vengoal.blogspot.com/p/ibm-i-exit-point-and-exit-program.html" rel="nofollow">https://vengoal.blogspot.com/p/ibm-i-exit-point-and-exit-program.html</a>
 
+<h2>Utilities</h2>
+<ul dir="auto">
+<li>100 - Sample of QDBRTVFD</li>
+</ul>
+
 <p dir="auto">##Contributors</p>
 <ul dir="auto">
   <li>Carsten Flensburg's APIs by Example. https://apimymymy.wordpress.com/</li>
