@@ -1,0 +1,165 @@
+.*-----------------------------------------------------------------------**
+.*
+.*  Compile options:
+.*
+.*    CrtPnlGrp PnlGrp( CBX255H )
+.*              SrcFile( QPNLSRC )
+.*              SrcMbr( *PNLGRP )
+.*
+.*-----------------------------------------------------------------------**
+:PNLGRP.
+
+:HELP NAME='DSPJOBSCN'.
+Display Job Screen - Help
+:P.
+The Display Job Screen (DSPJOBSCN) command allows you to display the
+screen currently displayed in the specified interactive job, including
+the cursor position, display attributes and user input.
+:P.
+Display modes 24x80 and 27x132 are both supported. The original screen
+is restored when the DSPJOBSCN command ends.
+:P.
+The retrieved screen image is displayed in the current job, and the
+following function keys are available to control the screen dialoge:
+:P.
+:DL.
+:DT.F2:DD.Toggles the display of valid function keys on and off,
+respectively.
+:DT.F3:DD.Ends the DSPJOBSCN command and returns control to the
+caller of the command.
+:DT.F5:DD.Refreshes the screen displayed to reflect the remote screen's
+current state and image.
+:EDL.
+:P.
+:HP2.Restrictions::EHP2.
+:UL.
+:LI.
+This command can only be run in an interactive job.
+:LI.
+This command requires *JOBCTL special authority to run.
+:LI.
+This command requires release V5R4 or later to run.
+:LI.
+A job capable only of displaying a 24x80 screen will receive an error
+message trying display another job's 27x132 screen.
+:LI.
+The command is not run if any of the following conditions are true:
+:UL.
+:LI.
+The target job is a not an interactive job.
+:LI.
+The target job is in initiation or termination phase.
+:LI.
+The prerequisite exit program has not been added to the registration
+facility QIBM_QWC_JOBITPPGM exit point.
+:LI.
+The Allow jobs to be interrupted (QALWJOBITP) system value is set to '0'.
+:LI.
+The target job has been set to an uninterruptible status when becoming
+active or via the Change Job Interrupt Status (QWCCJITP) API or the
+Change Job Interrupt Status (CHGJOBITPS) command.
+:EUL.
+:EUL.
+:P.
+:HP2.Notes::EHP2.
+:OL.
+:LI.
+The diagnostic message CPD1690 will be sent to the joblog of the target
+job prior to retrieving the job's current screen.
+:LI.
+The diagnostic message CPD1691 will be sent to the joblog of the target
+job immediately following the retrieval of the job's current screen.
+:EOL.
+:EHELP.
+
+:HELP NAME='DSPJOBSCN/JOB'.
+Job name (JOB) - Help
+
+:XH3.Job name (JOB)
+:P.
+Specifies the qualified name of the interactive job for which to
+display the current screen.
+:P.
+This is a required parameter.
+:P.
+:HP2.Qualifier 1: Job name:EHP2.
+:PARML.
+:PT.:PV.name:EPV.
+:PD.
+Specify the name of the job for which to display the current screen.
+:EPARML.
+:P.
+:HP2.Qualifier 2: User:EHP2.
+:PARML.
+:PT.:PV.name:EPV.
+:PD.
+Specify the name that identifies the user profile under which the job
+is run.
+:EPARML.
+:P.
+:HP2.Qualifier 3: Number:EHP2.
+:PARML.
+:PT.:PV.000000-999999:EPV.
+:PD.
+Specify the job number assigned by the system.
+:EPARML.
+:EHELP.
+
+:HELP NAME='DSPJOBSCN/TIMEOUT'.
+Request time-out (TIMEOUT) - Help
+
+:XH3.Request time-out (TIMEOUT)
+:P.
+The number of seconds allowed for the request to complete.
+:PARML.
+:PT.:PK DEF.25:EPK.
+:PD.
+The request should complete within 25 seconds.
+:PT.:PV.5-3600:EPV.
+:PD.
+Specify the number of seconds allowed for the request to complete.
+The valid range is between 5 and 3600 seconds.
+:EPARML.
+:EHELP.
+
+:HELP NAME='DSPJOBSCN/ERROR/MESSAGES'.
+&MSG(CPX0005,QCPFMSG). DSPJOBSCN - Help
+
+:XH3.&MSG(CPX0005,QCPFMSG). DSPJOBSCN
+:P.
+:HP3.*ESCAPE &MSG(CPX0006,QCPFMSG).:EHP3.
+
+:DL COMPACT.
+:DT.CPF1070
+:DD.&MSG(CPF1070,QCPFMSG,*LIBL,nosub).
+:DT.CPF1343
+:DD.&MSG(CPF1343,QCPFMSG,*LIBL,nosub).
+:DT.CPF1344
+:DD.&MSG(CPF1344,QCPFMSG,*LIBL,nosub).
+:DT.CPF136A
+:DD.&MSG(CPF136A,QCPFMSG,*LIBL,nosub).
+:DT.CPF180D
+:DD.&MSG(CPF180D,QCPFMSG,*LIBL,nosub).
+:DT.CPF18CF
+:DD.&MSG(CPF18CF,QCPFMSG,*LIBL,nosub).
+:DT.CPF3C80
+:DD.&MSG(CPF3C80,QCPFMSG,*LIBL,nosub).
+:DT.CPF3CDE
+:DD.&MSG(CPF3CDE,QCPFMSG,*LIBL,nosub).
+:DT.CPF3CF2
+:DD.&MSG(CPF3CF2,QCPFMSG,*LIBL,nosub).
+:DT.CPF9810
+:DD.&MSG(CPF9810,QCPFMSG,*LIBL,nosub).
+:DT.CPF9811
+:DD.&MSG(CPF9811,QCPFMSG,*LIBL,nosub).
+:DT.CPF9820
+:DD.&MSG(CPF9820,QCPFMSG,*LIBL,nosub).
+:DT.CPF9821
+:DD.&MSG(CPF9821,QCPFMSG,*LIBL,nosub).
+:DT.CPF9872
+:DD.&MSG(CPF9872,QCPFMSG,*LIBL,nosub).
+:DT.CPFB0CE
+:DD.&MSG(CPFB0CE,QCPFMSG,*LIBL,nosub).
+:EDL.
+:EHELP.
+:EPNLGRP.
