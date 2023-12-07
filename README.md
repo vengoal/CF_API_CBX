@@ -18,6 +18,8 @@ Please reference <a href="https://vengoal.blogspot.com/p/ibm-i-exit-point-and-ex
   <li>248 - RMVWCHDFN</li>
   <li>249 - STRWCHDFN</li>
   <li>250 - Watch event exit program - sample program</li>
+  <li>256 - DSPJOBSCN</li>
+  <li>261 - QIBM_QMH_HDL_INQEXT , QIBM_QMH_REPLY_INQ Exit programs - Build and Configure</li>
 </ul>
 
 <p dir="auto">##Contributors</p>
