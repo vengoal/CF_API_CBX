@@ -10,13 +10,13 @@ Please reference <a href="https://vengoal.blogspot.com/p/ibm-i-exit-point-and-ex
 
 <h2>Utilities</h2>
 <ul dir="auto">
-  <li>107 - SETPRFEXIT</li>
+  <li>107 - SETPRFEXIT Set Profile Exit</li>
   <li>122 - Subsystem job monitor</li>
-  <li>213 - WRKCMDEXIT</li>
-  <li>232 - WRKJOBS</li>
-  <li>247 - ADDWCHDFN</li>
-  <li>248 - RMVWCHDFN</li>
-  <li>249 - STRWCHDFN</li>
+  <li>213 - WRKCMDEXIT Work with Command Exit</li>
+  <li>232 - WRKJOBS    Work With Jobs</li>
+  <li>247 - ADDWCHDFN  Add     Definition</li>
+  <li>248 - RMVWCHDFN  Remove  Watch Definition</li>
+  <li>249 - STRWCHDFN  Start   Watch Definition</li>
   <li>250 - Watch event exit program - sample program</li>
   <li>256 - DSPJOBSCN  Display Job Screen</li>
   <li>261 - QIBM_QMH_HDL_INQEXT , QIBM_QMH_REPLY_INQ Exit programs - Build and Configure</li>
