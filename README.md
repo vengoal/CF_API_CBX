@@ -10,7 +10,7 @@ Please reference <a href="https://vengoal.blogspot.com/p/ibm-i-exit-point-and-ex
 
 <h2>Utilities</h2>
 <ul dir="auto">
-  <li>107 - SETPRFEXIT Set Profile Exit</li>
+  <li>107 - SETPRFEXIT Set Profile Exit Programs</li>
   <li>122 - Subsystem job monitor</li>
   <li>213 - WRKCMDEXIT Work with Command Exit Pgms</li>
   <li>232 - WRKJOBS    Work With Jobs</li>
