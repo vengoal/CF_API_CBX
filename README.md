@@ -25,7 +25,7 @@ Please reference <a href="https://vengoal.blogspot.com/p/ibm-i-exit-point-and-ex
   <li>902 - RCVJRNE Receive journal entry exit program</li>
 </ul>
 
-<p dir="auto">##Contributors</p>
+## Contributors
 <ul dir="auto">
   <li>Carsten Flensburg's APIs by Example. https://apimymymy.wordpress.com/</li>
   <li>Original code by Carsten Flensburg. <a href="https://spaces.hightail.com/space/00SJA" rel="nofollow">https://spaces.hightail.com/space/00SJA</a></li>
