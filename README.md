@@ -12,6 +12,7 @@ Please reference <a href="https://vengoal.blogspot.com/p/ibm-i-exit-point-and-ex
 <ul dir="auto">
   <li>107 - SETPRFEXIT Set Profile Exit Programs</li>
   <li>122 - Subsystem job monitor</li>
+  <li>135 - Change Object Attributes</li>
   <li>167 - DSPDTAQE Display Data Queue Entries</li>
   <li>213 - WRKCMDEXIT Work with Command Exit Pgms</li>
   <li>232 - WRKJOBS    Work With Jobs</li>
