@@ -1,0 +1,50 @@
+/*-------------------------------------------------------------------*/
+/*                                                                   */
+/*  Compile options:                                                 */
+/*                                                                   */
+/*    CrtCmd Cmd( RTVUSRSPC )                                        */
+/*           Pgm( QUSRTVUS )                                         */
+/*           SrcMbr( CBX312X )                                       */
+/*           VldCkr( CBX312V )                                       */
+/*           HlpPnlGrp( CBX312H )                                    */
+/*           HlpId( *CMD )                                           */
+/*                                                                   */
+/*-------------------------------------------------------------------*/
+        Cmd        Prompt( 'Retrieve User Space' )              +
+                   AlwLmtUsr( *YES )                            +
+                   Allow( *BPGM *IPGM *BREXX *IREXX )           +
+                   VldCkr( CBX312V )                            +
+                   HlpId( *CMD )                                +
+                   HlpPnlGrp( CBX312H )                         +
+                   Aut( *USE )
+
+        Parm       USRSPC     Q0001                             +
+                   Min( 1 )                                     +
+                   Prompt( 'User space' )
+
+        Parm       STRPOS     *Int4                             +
+                   Min( 1 )                                     +
+                   Rel( *GT 0 )                                 +
+                   SpcVal(( *START  1 ))                        +
+                   Prompt( 'Start position' )
+
+        Parm       DTALEN     *Int4                             +
+                   Min( 1 )                                     +
+                   Range( 1 5000 )                              +
+                   Prompt( 'Data length' )
+
+        Parm       RTNDTA     *Char      1                      +
+                   Min( 1 )                                     +
+                   Rtnval( *YES )                               +
+                   Prompt( 'CL variable for returned value' )
+
+        Parm       ERRORCODE  *Char      4                      +
+                   Constant( X'00000000' )
+
+Q0001:  Qual       *Name      10
+
+        Qual       *Name      10                                +
+                   Dft( *LIBL )                                 +
+                   SpcVal(( *LIBL ) ( *CURLIB *CURLIB ))        +
+                   Prompt( 'Library' )
+

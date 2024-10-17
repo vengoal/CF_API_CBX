@@ -1,0 +1,130 @@
+.*-----------------------------------------------------------------------**
+.*
+.*  Compile options:
+.*
+.*    CrtPnlGrp PnlGrp( CBX312H )
+.*              SrcFile( QPNLSRC )
+.*              SrcMbr( CBX312H )
+.*
+.*-----------------------------------------------------------------------**
+:PNLGRP.
+
+:HELP NAME='RTVUSRSPC'.
+Retrieve User Space - Help
+:P.
+The Retrieve User Space (RTVUSRSPC) command allows you to retrieve
+the contents of a user space.
+:EHELP.
+
+:HELP NAME='RTVUSRSPC/USRSPC'.
+User space (USRSPC) - Help
+
+:XH3.User space (USRSPC)
+:P.
+Specifies the name of the user space.
+.* Describe the function provided by the parameter.
+:P.
+This is a required parameter.
+:P.
+:HP2.Qualifier 1: User space:EHP2.
+:PARML.
+:PT.:PV.name:EPV.
+:PD.
+Specify the name of the user space.
+:EPARML.
+:P.
+:HP2.Qualifier 2: Library:EHP2.
+:PARML.
+:PT.:PK DEF.*LIBL:EPK.
+:PD.
+All libraries in the library list for the current thread are searched
+until the first match is found.
+:PT.:PK.*CURLIB:EPK.
+:PD.
+The current library for the job is used to locate the user space.  If
+no current library entry exists in the library list, QGPL is used.
+:PT.:PV.name:EPV.
+:PD.
+Specify the library where the user space is located.
+:EPARML.
+:EHELP.
+
+:HELP NAME='RTVUSRSPC/STRPOS'.
+Start position (STRPOS) - Help
+
+:XH3.Start position (STRPOS)
+:P.
+Specifies the first byte of the user space that is to be retrieved.
+:P.
+This is a required parameter.
+:PARML.
+:PT.:PK.*START:EPK.
+:PD.
+The user space data is retrieved starting from the first byte.
+:PT.:PV.integer:EPV.
+:PD.
+Specify the position in bytes indicating the first byte to be
+retrieved.
+:EPARML.
+:EHELP.
+
+:HELP NAME='RTVUSRSPC/DTALEN'.
+Data length (DTALEN) - Help
+
+:XH3.Data length (DTALEN)
+:P.
+Specifies the length of the user space substring to be retrieved.
+:P.
+This length must not be larger than the size of the variable that is
+to receive the data.
+:P.
+This is a required parameter.
+:PARML.
+:PT.:PV.1-5000:EPV.
+:PD.
+Specify the length of the user space substring being retrieved.
+:EPARML.
+:EHELP.
+
+:HELP NAME='RTVUSRSPC/RTNDTA'.
+CL variable for returned value (RTNDTA) - Help
+
+:XH3.CL variable for returned value (RTNDTA)
+:P.
+Specifies the name of the variable that receives the contents of the
+user space.
+:P.
+This size of the variable that is to receive the data must be large
+enough to hold the data length specified for the :HP2.DTALEN:EHP2.
+parameter.
+:P.
+This is a required parameter.
+:EHELP.
+
+:HELP NAME='RTVUSRSPC/ERROR/MESSAGES'.
+&MSG(CPX0005,QCPFMSG). RTVUSRSPC - Help
+:XH3.&MSG(CPX0005,QCPFMSG). RTVUSRSPC
+:P.
+:HP3.*ESCAPE &MSG(CPX0006,QCPFMSG).:EHP3.
+
+:DL COMPACT.
+:DT.CPF3C14
+:DD.&MSG(CPF3C14,QCPFMSG,*LIBL,nosub).
+:DT.CPF3C15
+:DD.&MSG(CPF3C15,QCPFMSG,*LIBL,nosub).
+:DT.CPF3C14
+:DD.&MSG(CPF3C17,QCPFMSG,*LIBL,nosub).
+:DT.CPF9801
+:DD.&MSG(CPF9801,QCPFMSG,*LIBL,nosub).
+:DT.CPF9802
+:DD.&MSG(CPF9802,QCPFMSG,*LIBL,nosub).
+:DT.CPF9803
+:DD.&MSG(CPF9803,QCPFMSG,*LIBL,nosub).
+:DT.CPF9810
+:DD.&MSG(CPF9810,QCPFMSG,*LIBL,nosub).
+:DT.CPF9820
+:DD.&MSG(CPF9820,QCPFMSG,*LIBL,nosub).
+:EDL.
+:EHELP.
+
+:EPNLGRP.
