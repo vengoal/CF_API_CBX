@@ -1,0 +1,355 @@
+.*-----------------------------------------------------------------------**
+.*
+.*  Compile options:
+.*
+.*    CrtPnlGrp PnlGrp( CBX135H )
+.*              SrcFile( QPNLSRC )
+.*              SrcMbr( *PNLGRP )
+.*
+.*-----------------------------------------------------------------------**
+:PNLGRP.
+:HELP NAME='CHGOBJATR'.Change Object Attributes - Help
+:P.
+The Change Object Attributes (CHGOBJATR) command changes one or more of
+the specified object's attributes.  The current attribute values are
+displayed when the command is prompted.
+:P.
+:EHELP.
+:HELP NAME='CHGOBJATR/OBJ'.Object (OBJ) - Help
+:XH3.Object (OBJ)
+:P.
+Specify the path name to the object whose attributes should be
+displayed and optionally changed.
+:P.
+This is a required parameter.
+:P.
+:XH3.Library
+:P.
+Specifies the library to search for the object specified.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK DEF.*LIBL:EPK.
+:PD.
+All libraries in the thread's library list are searched.
+:PT.:PK.*CURLIB:EPK.
+:PD.
+The current library for the thread is searched.  If no library is
+specified as the current library for the thread, the QGPL library is
+used.
+:PT.:PK.*ALL:EPK.
+:PD.
+All libraries on the system are searched.
+:PT.:PK.*ALLUSR:EPK.
+:PD.
+All user libraries are searched.  All libraries with names that do not
+begin with the letter Q are considered user libraries, except for some
+IBM product libraries.  Some of the libraries beginning with the letter
+Q typically contain user data and they are therefore also searched:
+:P.
+:LINES.
+    QDSNX       QRCL        QUSRBRM     QUSRPOSGS
+    QGPL        QRCLxxxxx   QUSRDIRCL   QUSRPOSSA
+    QGPL38      QSYS2       QUSRDIRDB   QUSRPYMSVR
+    QMPGDATA    QSYS2xxxxx  QUSRIJS     QUSRRDARS
+    QMQMDATA    QS36F       QUSRINFSKR  QUSRSYS
+    QMQMPROC    QUSER38     QUSRNOTES   QUSRVI
+    QPFRDATA    QUSRADSM    QUSROND     QUSRVxRxMx
+:ELINES.
+:PT.:PK.*USRLIBL:EPK.
+:PD.
+All the libraries listed in the user portion of the thread's library
+list are searched.
+:PT.:PV.library-name:EPV.
+:PD.
+Specify the name of the library to be searched.
+:EPARML.
+:EHELP.
+:HELP NAME='CHGOBJATR/OBJTYPE'.Object type (OBJTYPE) - Help
+:XH3.Object type (OBJTYPE)
+:P.
+The type of object for which you want to change the information.
+:P.
+This is a required parameter.
+:P.
+For a list of possible object types, positione the cursor on the field
+for the :HP2.Object type :EHP2.prompt (OBJTYPE parameter), and press
+the F4 key.
+:P.
+:EHELP.
+:HELP NAME='CHGOBJATR/SRCF'.Source file (SRCF) - Help
+:XH3.Source file (SRCF)
+:P.
+The source file used to create the object and the library name in which
+it is located.
+:P.
+The specified source file and library must exist.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK DEF.*SAME:EPK.
+:PD.
+The object's source file information is not changed.
+:PT.:PK.*BLANK:EPK.
+:PD.
+The object's source file information is set to blanks.
+:PT.:PV.source-file-name:EPV.
+:PD.
+Specify the name of an existing source file.
+:EPARML.
+:XH3.Library
+:P.
+The library where the specified source file is located.
+:P.
+:EHELP.
+:HELP NAME='CHGOBJATR/SRCMBR'.Source member (SRCMBR) - Help
+:XH3.Source member (SRCMBR)
+:P.
+The source member used to create the object.  The specified source
+member must exist in the specified source file.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK DEF.*SAME:EPK.
+:PD.
+The object's source member information is not changed.
+:PT.:PK.*BLANK:EPK.
+:PD.
+The object's source member information is set to blanks.
+:PT.:PV.source-member-name:EPV.
+:PD.
+Specify the name of an existing source member.
+:EPARML.
+:EHELP.
+:HELP NAME='CHGOBJATR/SRCCHGDTS'.Source file last changed (SRCCHGDTS) - Help
+:XH3.Source file last changed (SRCCHGDTS)
+:P.
+The date and time the member in the source file was last updated.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK DEF.*SAME:EPK.
+:PD.
+The object's source file change date and time is not changed.
+:PT.:PV.source-file-last-changed:EPV.
+:PD.
+The object's source file change date and time is changed to the
+specified date and time.
+:EPARML.
+:XH3.Date
+:P.
+Specifies the object's source change date.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK.*CURRENT:EPK.
+:PD.
+The object's source change date is set to the current system date.
+:PT.:PV.date:EPV.
+:PD.
+Specify the date that the object's source change date should be set to.
+:EPARML.
+:XH3.Time
+:P.
+Specifies the object's source change time.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK DEF.*CURRENT:EPK.
+:PD.
+The object's source change time is set to the current system date.
+:PT.:PV.time:EPV.
+:PD.
+Specify the time that the object's source change time should be set to.
+:EPARML.
+:EHELP.
+:HELP NAME='CHGOBJATR/ALWCHG'.Allow change by program (ALWCHG) - Help
+:XH3.Allow change by program (ALWCHG)
+:P.
+Whether to prevent users from changing an object's description with
+the QLICOBJD (Change Object Description) API.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK DEF.*SAME:EPK.
+:PD.
+The specified object's allow change attribute is not changed.
+:PT.:PK.*NO:EPK.
+:PD.
+Changes to the specified object are not allowed.  Once this value has
+been changed to *NO, no further changes to the objects attributes can
+be made by this command.
+:PT.:PK.*YES:EPK.
+:PD.
+Changes to the specified object are allowed.
+:EPARML.
+:EHELP.
+:HELP NAME='CHGOBJATR/USRDFNATR'.User-defined attribute (USRDFNATR) - Help
+:XH3.User-defined attribute (USRDFNATR)
+:P.
+An attribute you define.  This should not be confused with the extended
+attribute of the object.  The extended attribute is set by the system
+when an object is created.
+:P.
+The value of this attribute can be displayed using the DSPOBJD (Display
+Object Description) command and retrieved by the QUSROBJD (Retrieve
+Object Description) API.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK DEF.*SAME:EPK.
+:PD.
+The user-defined attribute of the specified object is not changed.
+:PT.:PK.*BLANK:EPK.
+:PD.
+The user-defined attribute of the specified object is set to blanks.
+:PT.:PV.user-defined-attribute:EPV.
+:PD.
+Specifies the value that the user-defined attribute is set to.
+:EPARML.
+:EHELP.
+:HELP NAME='CHGOBJATR/TEXT'.Text 'description' (TEXT) - Help
+:XH3.Text 'description' (TEXT)
+:P.
+Specifies the text that briefly describes the object.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK DEF.*SAME:EPK.
+:PD.
+The text does not change.
+:PT.:PK.*BLANK:EPK.
+:PD.
+No text is specified.
+:PT.:PV.text-'description':EPV.
+:PD.
+Specify no more than 50 characters, enclosed in apostrophes.
+:EPARML.
+:EHELP.
+:HELP NAME='CHGOBJATR/USECOUNT'.Days used count (USECOUNT) - Help
+:XH3.Days used count (USECOUNT)
+:P.
+This parameter is used to:
+:UL.
+:LI.Reset the number of days an object has been used on the system.
+:LI.Update the date the days used count was last reset to 0.
+:EUL.
+:P.
+:NT.
+This field cannot be specified for *DOC object types or when object
+usage information is not updated for this object type. Object usage
+information is not updated for all object types.
+:P.
+For more details on usage information, see the CL Programming book.
+:ENT.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK DEF.*SAME:EPK.
+:PD.
+The number of days used remains unchanged.
+:PT.:PK.*RESET:EPK.
+:PD.
+The number of days used is reset and the reset used count date is
+updated.
+:EPARML.
+:EHELP.
+:HELP NAME='CHGOBJATR/LASTUSED'.Last used date (LASTUSED) - Help
+:XH3.Last used date (LASTUSED)
+:P.
+This parameter is used to:
+:UL.
+:LI.Update the last used date to the current system date.
+:LI.Increase the days used count.
+:EUL.
+:NT.
+This field cannot be specified for *DOC object types or when object
+usage information is not updated for this object type. Object usage
+information is not updated for all object types.
+:P.
+For more details on usage information, see the CL Programming book.
+:ENT.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK DEF.*SAME:EPK.
+:PD.
+The last used date field is not updated.  The field is not increased.
+:PT.:PK.*UPDATE:EPK.
+:PD.
+The last used date field is updated to the current system date. If this
+is the first use of the object today (since midnight), the days used
+count field is increased.
+:EPARML.
+:EHELP.
+:HELP NAME='CHGOBJATR/CHGDTS'.Changed date and time stamp (CHGDTS) - Help
+:XH3.Changed date and time stamp (CHGDTS)
+:P.
+The date and time the object was last changed.  This is useful if you
+only want to update an object's change date/time stamp and do not want
+to update any other object attributes.
+:P.
+:NT.
+For database files, the last change date/time is updated for all
+members in the file and the file itself.
+:ENT.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK DEF.*SAME:EPK.
+:PD.
+The changed date and time stamp is not updated.
+:PT.:PK.*CURRENT:EPK.
+:PD.
+The changed date and time stamp is updated to the current system date
+and time.
+:EPARML.
+:EHELP.
+:HELP NAME='CHGOBJATR/MBRCOUNT'.Member''s days used count (MBRCOUNT) - Help
+:XH3.Member''s days used count (MBRCOUNT)
+:P.
+Specify a valid 10-character file-member name.  No special values are
+allowed.
+:P.
+This parameter is used to:
+:UL.
+:LI.Reset the number of days a database file member has been used on
+the system.
+:LI.Update the member's date that the days used count was last reset to
+0.
+:EUL.
+:P.
+This field can be specified only for an object type of *FILE. If the
+object is not a *FILE object, error message CPF2131 is issued.
+:P.
+:NT.
+This field updates the days used count for a single member only. To
+reset the days used count for all members in a database file, use the
+:HP2.Days used count:EHP2. (USECOUNT) parameter.
+:ENT.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK DEF.*NONE:EPK.
+:PD.
+No file member will have the number of days used reset.
+:PT.:PV.member-name:EPV.
+:PD.
+The number of days used is reset and the reset used count date is
+updated for the specified member.
+:EPARML.
+:EHELP.
+:EPNLGRP.
