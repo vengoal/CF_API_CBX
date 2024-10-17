@@ -1,0 +1,68 @@
+/*-------------------------------------------------------------------*/
+/*                                                                   */
+/*  Compile options:                                                 */
+/*                                                                   */
+/*    CrtCmd Cmd( CHGUSRSPCA )                                       */
+/*           Pgm( CBX313 )                                           */
+/*           SrcMbr( CBX313X )                                       */
+/*           VldCkr( CBX313V )                                       */
+/*           HlpPnlGrp( CBX313H )                                    */
+/*           HlpId( *CMD )                                           */
+/*           PmtOvrPgm( CBX313O )                                    */
+/*                                                                   */
+/*-------------------------------------------------------------------*/
+        Cmd        Prompt( 'Change User Space Attributes' ) +
+                   AlwLmtUsr( *YES )                        +
+                   VldCkr( CBX313V )                        +
+                   HlpId( *CMD )                            +
+                   HlpPnlGrp( CBX310H )                     +
+                   PmtOvrPgm( CBX313O )                     +
+                   Aut( *USE )
+
+
+        Parm       USRSPC      Q0001                  +
+                   Min( 1 )                           +
+                   Keyparm( *YES )                    +
+                   Prompt( 'User space' )
+
+        Parm       SIZE       *INT4                   +
+                   Dft( *SAME )                       +
+                   SpcVal(( *SAME  -1 ))              +
+                   Range( 1 16776704 )                +
+                   Expr( *YES )                       +
+                   Prompt( 'Space size' )
+
+        Parm       INZVAL     *Char     1             +
+                   Dft( *SAME )                       +
+                   SpcVal(( *SAME '*' )               +
+                          ( *DFT x'00' )              +
+                          ( *BLANK ' ' ))             +
+                   Case( *Mixed )                     +
+                   Expr( *YES )                       +
+                   Prompt( 'Initial value' )
+
+        Parm       AUTOEXT     *Char         1        +
+                   Rstd( *YES )                       +
+                   Dft( *SAME )                       +
+                   SpcVal(( *SAME  '*' )              +
+                          ( *NO    '0' )              +
+                          ( *YES   '1' ))             +
+                   Expr( *YES )                       +
+                   Prompt( 'Automatic extendibility' )
+
+        Parm       TFRSIZE    *Int2                   +
+                   Dft( *SAME )                       +
+                   SpcVal(( *SAME -1 ) ( *DFT 0 ))    +
+                   Range( 0 32 )                      +
+                   Expr( *YES )                       +
+                   Prompt( 'Transfer size request' )
+
+Q0001:  Qual                   *Name        10        +
+                   Expr( *YES )
+
+        Qual                   *Name        10        +
+                   Dft( *LIBL )                       +
+                   SpcVal(( *LIBL ) ( *CURLIB ))      +
+                   Expr( *YES )                       +
+                   Prompt( 'Library' )
+

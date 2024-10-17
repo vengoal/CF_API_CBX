@@ -1,0 +1,311 @@
+     **
+     **  Program . . : CBX313
+     **  Description : Change User Space Attributes - CPP
+     **  Author  . . : Carsten Flensburg
+     **
+     **
+     **
+     **  Compile options:
+     **    CrtRpgMod Module( CBX313 )
+     **              DbgView( *LIST )
+     **
+     **    CrtPgm    Pgm( CBX313 )
+     **              Module( CBX313 )
+     **              ActGrp( *NEW )
+     **
+     **
+     **-- Header specifications:  --------------------------------------------**
+     H Option( *SrcStmt )
+
+     **-- API error data structure:
+     D ERRC0100        Ds                  Qualified
+     D  BytPrv                       10i 0 Inz( %Size( ERRC0100 ))
+     D  BytAvl                       10i 0
+     D  MsgId                         7a
+     D                                1a
+     D  MsgDta                      256a
+
+     **-- Global constants:
+     D OFS_MSGDTA      c                   16
+     **
+     D PARM_SAME_C     c                   '*'
+     D PARM_SAME_I     c                   -1
+     **
+     D SPC_SIZ         c                   1
+     D INZ_VAL         c                   2
+     D AUT_EXT         c                   3
+     D TFR_SIZ         c                   4
+     **-- Global variables:
+     D RtnLibNam       s             10a
+
+     **-- API change request:
+     D RqsChg          Ds                  Qualified
+     D  NbrVarRcd                    10i 0 Inz( 0 )
+     D  VarLenRcd                          LikeDs( VarLenRcd )  Dim( 4 )  Inz
+     **
+     D VarLenRcd       Ds                  Qualified
+     D  ChgKey                       10i 0
+     D  ValLen                       10i 0
+     D  NewVal                        4a
+     D  NewVal_i                     10i 0 Overlay( NewVal: 1 )
+     D  NewVal_c                      1a   Overlay( NewVal: 1 )
+
+     **-- Change user space attributes:
+     D ChgUsrSpcAtr    Pr                  ExtPgm( 'QUSCUSAT' )
+     D  RtnLibNam                    10a
+     D  UsrSpc_q                     20a   Const
+     D  RqsChg                    32767a   Const
+     D  Error                     32767a          Options( *VarSize )
+     **-- Send program message:
+     D SndPgmMsg       Pr                  ExtPgm( 'QMHSNDPM' )
+     D  MsgId                         7a   Const
+     D  MsgFil_q                     20a   Const
+     D  MsgDta                      512a   Const  Options( *VarSize )
+     D  MsgDtaLen                    10i 0 Const
+     D  MsgTyp                       10a   Const
+     D  CalStkEnt                    10a   Const  Options( *VarSize )
+     D  CalStkCtr                    10i 0 Const
+     D  MsgKey                        4a
+     D  Error                       512a          Options( *VarSize )
+     D  CalStkEntLen                 10i 0 Const  Options( *NoPass )
+     D  CalStkEntQlf                 20a   Const  Options( *NoPass )
+     D  DspWait                      10i 0 Const  Options( *NoPass )
+     D  CalStkEntTyp                 20a   Const  Options( *NoPass )
+     D  CcsId                        10i 0 Const  Options( *NoPass )
+
+     **-- Change space transfer size:
+     D ChgSpcTfrSiz    Pr            10i 0
+     D  PxSpcNam_q                   20a   Const
+     D  PxTfrSiz                     10i 0 Const
+     **-- Send completion message:
+     D SndCmpMsg       Pr            10i 0
+     D  PxMsgDta                    512a   Const  Varying
+     **-- Send escape message:
+     D SndEscMsg       Pr            10i 0
+     D  PxMsgId                       7a   Const
+     D  PxMsgF                       10a   Const
+     D  PxMsgDta                    512a   Const  Varying
+
+     **-- Entry parameters:
+     D ObjNam_q        Ds                  Qualified
+     D  ObjNam                       10a
+     D  ObjLib                       10a
+     **
+     D CBX313          Pr
+     D  PxUsrSpc_q                         LikeDs( ObjNam_q )
+     D  PxSpcSiz                     10i 0
+     D  PxInzVal                      1a
+     D  PxAutExt                      1a
+     D  PxTfrSiz                      5i 0
+     **
+     D CBX313          Pi
+     D  PxUsrSpc_q                         LikeDs( ObjNam_q )
+     D  PxSpcSiz                     10i 0
+     D  PxInzVal                      1a
+     D  PxAutExt                      1a
+     D  PxTfrSiz                      5i 0
+
+      /Free
+
+        *InLr = *On;
+
+        If  PxSpcSiz = PARM_SAME_I  And
+            PxInzVal = PARM_SAME_C  And
+            PxAutExt = PARM_SAME_C  And
+            PxTfrSiz = PARM_SAME_I;
+
+          Return;
+        EndIf;
+
+        If  PxSpcSiz <> PARM_SAME_I;
+          RqsChg.NbrVarRcd += 1;
+          RqsChg.VarLenRcd(RqsChg.NbrVarRcd).ChgKey = SPC_SIZ;
+          RqsChg.VarLenRcd(RqsChg.NbrVarRcd).ValLen = %Size( VarLenRcd.NewVal );
+          RqsChg.VarLenRcd(RqsChg.NbrVarRcd).NewVal_i = PxSpcSiz;
+        EndIf;
+
+        If  PxInzVal <> PARM_SAME_C;
+          RqsChg.NbrVarRcd += 1;
+          RqsChg.VarLenRcd(RqsChg.NbrVarRcd).ChgKey = INZ_VAL;
+          RqsChg.VarLenRcd(RqsChg.NbrVarRcd).ValLen = %Size( VarLenRcd.NewVal );
+          RqsChg.VarLenRcd(RqsChg.NbrVarRcd).NewVal_c = PxInzVal;
+        EndIf;
+
+        If  PxAutExt <> PARM_SAME_C;
+          RqsChg.NbrVarRcd += 1;
+          RqsChg.VarLenRcd(RqsChg.NbrVarRcd).ChgKey = AUT_EXT;
+          RqsChg.VarLenRcd(RqsChg.NbrVarRcd).ValLen = %Size( VarLenRcd.NewVal );
+          RqsChg.VarLenRcd(RqsChg.NbrVarRcd).NewVal_c = PxAutExt;
+        EndIf;
+
+        If  PxTfrSiz <> PARM_SAME_I;
+          RqsChg.NbrVarRcd += 1;
+          RqsChg.VarLenRcd(RqsChg.NbrVarRcd).ChgKey = TFR_SIZ;
+          RqsChg.VarLenRcd(RqsChg.NbrVarRcd).ValLen = %Size( VarLenRcd.NewVal );
+          RqsChg.VarLenRcd(RqsChg.NbrVarRcd).NewVal_i = PxTfrSiz;
+        EndIf;
+
+        ChgUsrSpcAtr( RtnLibNam
+                    : PxUsrSpc_q
+                    : RqsChg
+                    : ERRC0100
+                    );
+
+        If  ERRC0100.BytAvl > *Zero;
+
+          If  ERRC0100.BytAvl < OFS_MSGDTA;
+            ERRC0100.BytAvl = OFS_MSGDTA;
+          EndIf;
+
+          SndEscMsg( ERRC0100.MsgId
+                   : 'QCPFMSG'
+                   : %Subst( ERRC0100.MsgDta
+                           : 1
+                           : ERRC0100.BytAvl - OFS_MSGDTA
+                           )
+                   );
+        Else;
+          If  PxTfrSiz <> PARM_SAME_I;
+            ChgSpcTfrSiz( PxUsrSpc_q: PxTfrSiz );
+          EndIf;
+
+          SndCmpMsg( 'User space ' + %Trim( PxUsrSpc_q.ObjNam ) + ' ' +
+                     'in library ' + %Trim( PxUsrSpc_q.ObjLib ) + ' changed.'
+                   );
+        EndIf;
+
+        Return;
+
+
+      /End-Free
+
+     **-- Change space transfer size:
+     P ChgSpcTfrSiz    B
+     D                 Pi            10i 0
+     D  PxSpcNam_q                   20a   Const
+     D  PxTfrSiz                     10i 0 Const
+
+     **-- Local declarations:
+     D pSysPtr         s               *   ProcPtr
+     D pUsrSpc         s               *
+     **
+     D EXP_TFR_SIZ     c                   10
+
+     **-- Space modification template:
+     D SPC_Templ_T     Ds                  Qualified
+     D  ModSel                        4a
+     D  IndAttr                       4a
+     D  MaxSizSas                    10i 0
+     D  SpcSiz                       10u 0
+     D  InzVal                        1a
+     D  PfrCls                        4a
+     D  ExpTfrSiz                     3i 0 Overlay( PfrCls: 4 )
+     D  Res1                          1a
+     D  SasSpcNbr                     5u 0
+     D  Res2                          4a
+
+     **-- Retrieve pointer to user space:
+     D RtvPtrSpc       Pr                  ExtPgm( 'QUSPTRUS' )
+     D  SpcNam_q                     20a   Const
+     D  Pointer                        *
+     D  Error                     32767a         Options( *NoPass: *VarSize )
+     **-- Set system pointer from pointer:
+     D setspfp         Pr              *   ProcPtr  ExtProc( 'setspfp' )
+     D  SpcPtr                         *   Value
+     **-- Modify space attributes:
+     D mods            Pr                  ExtProc( 'mods2' )
+     D  SpcPtr                         *   Value  ProcPtr
+     D  Template                           Const  Like( SPC_Templ_T )
+     **-- Set bit in string:
+     D setbts          Pr            10i 0 ExtProc( 'setbts' )
+     D  String                         *   Value
+     D  BitOfs                       10u 0 Value
+
+      /Free
+
+        RtvPtrSpc( PxSpcNam_q: pUsrSpc: ERRC0100 );
+
+        If  ERRC0100.BytAvl > *Zero;
+          Return  -1;
+        EndIf;
+
+        pSysPtr = setspfp( pUsrSpc );
+
+        If  pSysPtr = *Null;
+          Return  -1;
+        EndIf;
+
+        SPC_Templ_T = *Allx'00';
+
+        setbts( %Addr( SPC_Templ_T.ModSel ): EXP_TFR_SIZ );
+
+        SPC_Templ_T.ExpTfrSiz = PxTfrSiz;
+
+        mods( pSysPtr: SPC_Templ_T );
+
+        Return  *Zero;
+
+      /End-Free
+
+     P ChgSpcTfrSiz    E
+     **-- Send completion message:
+     P SndCmpMsg       B
+     D                 Pi            10i 0
+     D  PxMsgDta                    512a   Const  Varying
+     **
+     D MsgKey          s              4a
+
+      /Free
+
+        SndPgmMsg( 'CPF9897'
+                 : 'QCPFMSG   *LIBL'
+                 : PxMsgDta
+                 : %Len( PxMsgDta )
+                 : '*COMP'
+                 : '*PGMBDY'
+                 : 1
+                 : MsgKey
+                 : ERRC0100
+                 );
+
+        If  ERRC0100.BytAvl > *Zero;
+          Return  -1;
+        Else;
+          Return  0;
+        EndIf;
+
+      /End-Free
+
+     P SndCmpMsg       E
+     **-- Send escape message:
+     P SndEscMsg       B
+     D                 Pi            10i 0
+     D  PxMsgId                       7a   Const
+     D  PxMsgF                       10a   Const
+     D  PxMsgDta                    512a   Const  Varying
+     **
+     D MsgKey          s              4a
+
+      /Free
+
+        SndPgmMsg( PxMsgId
+                 : PxMsgF + '*LIBL'
+                 : PxMsgDta
+                 : %Len( PxMsgDta )
+                 : '*ESCAPE'
+                 : '*PGMBDY'
+                 : 1
+                 : MsgKey
+                 : ERRC0100
+                 );
+
+        If  ERRC0100.BytAvl > *Zero;
+          Return  -1;
+
+        Else;
+          Return   0;
+        EndIf;
+
+      /End-Free
+
+     P SndEscMsg       E
