@@ -21,6 +21,11 @@ Please reference <a href="https://vengoal.blogspot.com/p/ibm-i-exit-point-and-ex
   <li>250 - Watch event exit program - sample program</li>
   <li>256 - DSPJOBSCN  Display Job Screen</li>
   <li>261 - QIBM_QMH_HDL_INQEXT , QIBM_QMH_REPLY_INQ Exit programs - Build and Configure</li>
+  <li>310 - CRTUSRSPC Create User Space</li>
+  <li>311 - CHGUSRSPC Change User Space</li>
+  <li>312 - RTVUSRSPC Retrieve User Space</li>
+  <li>313 - CHGUSRSPCA Change User Space Attributes</li>
+  <li>314 - WRKUSRSPC Work with User Spaces</li>
   <li>707 - QIBM_QSY_VLD_PASSWRD Password validation exit program</li>
   <li>708 - QIBM_QSY_CHK_PASSWRD Password check exit program</li>
   <li>902 - RCVJRNE Receive journal entry exit program</li>
