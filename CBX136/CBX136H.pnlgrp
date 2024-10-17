@@ -1,0 +1,301 @@
+.*-----------------------------------------------------------------------**
+.*
+.*  Compile options:
+.*
+.*    CrtPnlGrp PnlGrp( CBX136H )
+.*              SrcFile( QPNLSRC )
+.*              SrcMbr( *PNLGRP )
+.*
+.*-----------------------------------------------------------------------**
+:PNLGRP.
+:HELP NAME='RTVASPINF'.Retrieve ASP Information - Help
+:P.
+The Retrieve ASP Information (RTVASPINF) command returns information
+about the specified ASP's basic attributes.
+:P.
+:XH3.&MSG(CPX0005,QCPFMSG). RTVASPINF
+:IMHELP NAME='RTVASPINF/ERROR/MESSAGES'.
+:EHELP.
+:HELP NAME='RTVASPINF/ERROR/MESSAGES'.&MSG(CPX0005,QCPFMSG).RTVASPINF - Help
+:P.
+:HP3.*ESCAPE &MSG(CPX0006,QCPFMSG).:EHP3.
+:DL COMPACT.
+:DT.CPFA0A9:DD.&MSG(CPFA0A9,QCPFMSG).
+.*-- V5R3 -> :DT.CPFA0A9:DD.&MSG(CPFA0A9,QCPFMSG,*LIBL,NOSUB).
+:EDL.
+:EHELP.
+:HELP NAME='RTVASPINF/ASP'.ASP number (ASP) - Help
+:XH3.ASP number (ASP)
+:P.
+Specify the ASP number for which to retrieve information.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK DEF.*SYSASP:EPK.
+:PD.
+Information is retrieved for the system ASP.
+:PT.:PV.asp-number:EPV.
+:PD.
+Specify an ASP number for which to retrieve information.
+:EPARML.
+:EHELP.
+:HELP NAME='RTVASPINF/RTNASP'.CL var for RTNASP      (3 0) (RTNASP) - Help
+:XH3.CL var for RTNASP      (3 0) (RTNASP)
+:P.
+Specifies the name of a variable used to retrieve the ASP number of the
+ASP whose information is being returned.
+:P.
+In CL programs, this should be a 3-position decimal variable.
+:EHELP.
+:HELP NAME='RTVASPINF/NBRUNIT'.CL var for NBRUNIT    (10 0) (NBRUNIT) - Help
+:XH3.CL var for NBRUNIT    (10 0) (NBRUNIT)
+:P.
+Specifies the name of a variable used to retrieve the number of disk
+units configured in the specified ASP number.
+:P.
+In CL programs, this should be a 10-position decimal variable.
+:EHELP.
+:HELP NAME='RTVASPINF/CAPTOT'.CL var for CAPTOT     (10 0) (CAPTOT) - Help
+:XH3.CL var for CAPTOT     (10 0) (CAPTOT)
+:P.
+Specifies the name of a variable used to retrieve the total number of
+used and unused megabytes in the ASP.  A special value of -2 is
+returned if the size of this field is exceeded.
+:P.
+In CL programs, this should be a 10-position decimal variable.
+:EHELP.
+:HELP NAME='RTVASPINF/CAPAVL'.CL var for CAPAVL     (10 0) (CAPAVL) - Help
+:XH3.CL var for CAPAVL     (10 0) (CAPAVL)
+:P.
+Specifies the name of a variable used to retrieve the total number of
+unused megabytes in the ASP.  A special value of -2 is returned if the
+size of this field is exceeded.
+:P.
+In CL programs, this should be a 10-position decimal variable.
+:EHELP.
+:HELP NAME='RTVASPINF/CAPTOTPTC'.CL var for CAPTOTPTC  (10 0) (CAPTOTPTC) - Help
+:XH3.CL var for CAPTOTPTC  (10 0) (CAPTOTPTC)
+:P.
+Specifies the name of a variable used to retrieve the total number of
+used and unused megabytes in the ASP that are protected by mirroring or
+device parity.  A special value of -2 is returned if the size of this
+field is exceeded.
+:P.
+In CL programs, this should be a 10-position decimal variable.
+:EHELP.
+:HELP NAME='RTVASPINF/CAPAVLPTC'.CL var for CAPAVLPTC  (10 0) (CAPAVLPTC) - Help
+:XH3.CL var for CAPAVLPTC  (10 0) (CAPAVLPTC)
+:P.
+Specifies the name of a variable used to retrieve the number of unused
+megabytes in the ASP that are protected by mirroring or device parity.
+A special value of -2 is returned if the size of this field is
+exceeded.
+:P.
+In CL programs, this should be a 10-position decimal variable.
+:EHELP.
+:HELP NAME='RTVASPINF/CAPTOTUNP'.CL var for CAPTOTUNP  (10 0) (CAPTOTUNP) - Help
+:XH3.CL var for CAPTOTUNP  (10 0) (CAPTOTUNP)
+:P.
+Specifies the name of a variable used to retrieve the total number of
+used and unused megabytes in the ASP that are not protected by
+mirroring or device parity.  A special value of -2 is returned if the
+size of this field is exceeded.
+:P.
+In CL programs, this should be a 10-position decimal variable.
+:EHELP.
+:HELP NAME='RTVASPINF/CAPAVLUNP'.CL var for CAPAVLUNP  (10 0) (CAPAVLUNP) - Help
+:XH3.CL var for CAPAVLUNP  (10 0) (CAPAVLUNP)
+:P.
+Specifies the name of a variable used to retrieve the number of unused
+megabytes in the ASP that are not protected by mirroring or device
+parity.  A special value of -2 is returned if the size of this field is
+exceeded.
+:P.
+In CL programs, this should be a 10-position decimal variable.
+:EHELP.
+:HELP NAME='RTVASPINF/SYSSTG'.CL var for SYSSTG     (10 0) (SYSSTG) - Help
+:XH3.CL var for SYSSTG     (10 0) (SYSSTG)
+:P.
+Specifies the name of a variable used to retrieve the amount of storage
+in megabytes currently allocated in the ASP for system use.
+:P.
+In CL programs, this should be a 10-position decimal variable.
+:EHELP.
+:HELP NAME='RTVASPINF/OFLSTG'.CL var for OFLSTG     (10 0) (OFLSTG) - Help
+:XH3.CL var for OFLSTG     (10 0) (OFLSTG)
+:P.
+Specifies the name of a variable used to retrieve the number of
+megabytes of storage that has overflowed from the user ASP into the
+system ASP.  A special value of -2 is returned if the size of this
+field is exceeded.
+:P.
+In CL programs, this should be a 10-position decimal variable.
+:EHELP.
+:HELP NAME='RTVASPINF/THRESHOLD'.CL var for THRESHOLD   (3 0) (THRESHOLD) - Help
+:XH3.CL var for THRESHOLD   (3 0) (THRESHOLD)
+:P.
+Specifies the name of a variable used to retrieve the ASP storage
+threshold percentage.
+:P.
+When the storage in the ASP reaches this percentage, a warning message
+is sent to the QSYSOPR message queue.  When this percentage is reached
+for the system ASP (ASP 1), message CPF0907 is sent.  When this
+percentage is reached for one of the user ASPs, message CPI0953 is
+sent.
+:P.
+In CL programs, this should be a 3-position decimal variable.
+:EHELP.
+:HELP NAME='RTVASPINF/ASPTYP'.CL var for ASPTYP        (2) (ASPTYP) - Help
+:XH3.CL var for ASPTYP        (2) (ASPTYP)
+:P.
+Specifies the name of a variable used to retrieve the type of ASP.
+:P.
+In CL programs, this should be a 2-character variable.
+:P.
+Possible return values:
+:DL.
+:DT.'00':DD.The ASP is the system ASP.
+:DT.'10':DD.The ASP is a user ASP that does not contain libraries.
+:DT.'11':DD.The ASP is a user ASP that does contain libraries.
+:EDL.
+:EHELP.
+:HELP NAME='RTVASPINF/BALSTS'.CL var for BALSTS        (1) (BALSTS) - Help
+:XH3.CL var for BALSTS        (1) (BALSTS)
+:P.
+Specifies the name of a variable used to retrieve the current status of
+the balance function for this ASP.
+:P.
+In CL programs, this should be a 1-character variable.
+:P.
+Possible return values:
+:DL.
+:DT.'0':DD.No balance activity has occurred for this ASP.
+:DT.'1':DD.The ASP balance function is currently running for this ASP.
+:DT.'2':DD.The ASP balance function is currently in the process of
+ending.  Either the time limit has run out or the End ASP Balance
+(ENDASPBAL) command was issued for this ASP.
+:DT.'3':DD.The ASP balance function has run, but was ended before the
+ASP was completely balanced.  The Start ASP Balance (STRASPBAL) command
+can be used to restart the balance function.
+:DT.'4':DD.The ASP balance function has completed running.  The ASP is
+completely balanced.
+:EDL.
+:EHELP.
+:HELP NAME='RTVASPINF/BALTYP'.CL var for BALTYP        (1) (BALTYP) - Help
+:XH3.CL var for BALTYP        (1) (BALTYP)
+:P.
+Specifies the name of a variable used to retrieve the type of balance
+activity that is currently running or was done last.
+:P.
+In CL programs, this should be a 1-character variable.
+:P.
+Possible return values:
+:DL.
+:DT.'0':DD.No ASP balance activity was requested for the ASP.
+:DT.'1':DD.Capacity balancing to redistribute data so that the
+percentage of disk space used is the same on all disk units within the
+ASP.
+:DT.'2':DD.Usage balancing to redistribute data so that the percentage
+of disk activity is the same on all disk units within the ASP.
+High-use and low-use data is identified by running the Trace ASP
+Balance (TRCASPBAL) command.  Usage balancing moves data among the disk
+units, guided by the trace results, in an attempt to equalize the
+utilizations.
+:DT.'3':DD.The Heirarchical Storage Management (HSM) balance can be run
+only on an ASP that contains a mixture of high-performance and
+low-performance disk units.  An example of low-performance disk units.
+The HSM balance function moves high-use data to high-performance units
+and moves low-use data to low-performance units.  The high-use and
+low-use data is identified by running the Trace ASP Balance (TRCASPBAL)
+command.
+:EDL.
+:EHELP.
+:HELP NAME='RTVASPINF/BALDATTIM'.CL var for BALDATTIM    (13) (BALDATTIM) - Help
+:XH3.CL var for BALDATTIM    (13) (BALDATTIM)
+:P.
+Specifies the name of a variable used to retrieve the date and time of
+the last status change for the balance function.
+:P.
+In CL programs, this should be a 13-character variable.
+:P.
+The 13 characters are:
+:DL.
+:DT.1   :DD.Century, where 0 indicates years 19xx and 1 indicates years
+20xx.
+:DT.2-7 :DD.The date, in YYMMDD (year, month, day) format.
+:DT.8-13:DD.The time of day, in HHMMSS (hours, minutes, seconds)
+format.
+:EDL.
+:EHELP.
+:HELP NAME='RTVASPINF/BALDTAMOV'.CL var for BALDTAMOV  (10 0) (BALDTAMOV) - Help
+:XH3.CL var for BALDTAMOV  (10 0) (BALDTAMOV)
+:P.
+Specifies the name of a variable used to retrieve the number of
+megabytes that have been moved by the balance function.  A special
+value of -2 is returned if the size of this field is exceeded.
+:P.
+In CL programs, this should be a 10-position decimal variable.
+:EHELP.
+:HELP NAME='RTVASPINF/BALDTAREM'.CL var for BALDTAREM  (10 0) (BALDTAREM) - Help
+:XH3.CL var for BALDTAREM  (10 0) (BALDTAREM)
+:P.
+Specifies the name of a variable used to retrieve the number of
+megabytes that remain to be moved by the balance function before the
+move is considered complete.  A special value of -2 is returned if the
+size of this field is exceeded.
+:P.
+In CL programs, this should be a 10-position decimal variable.
+:EHELP.
+:HELP NAME='RTVASPINF/TRCSTS'.CL var for TRCSTS        (1) (TRCSTS) - Help
+:XH3.CL var for TRCSTS        (1) (TRCSTS)
+:P.
+Specifies the name of a variable used to retrieve the current status of
+the trace function. The trace gathers statistics about the data on the
+disk units within the ASP.  This data is used by the balance functions.
+:P.
+In CL programs, this should be a 1-character variable.
+:P.
+Possible return values:
+:DL.
+:DT.'0':DD.There is no current trace data for this ASP.
+:DT.'1':DD.The trace function is currently running for this ASP.
+:DT.'2':DD.The trace function is currently in the process of ending.
+Either the time limit has run out or the trace was stopped through use
+of the Trace ASP Balance (TRCASPBAL) command.
+:DT.'3':DD.The trace function has completed running. The statistics for
+the ASP have been gathered and are ready for the balance function to
+start.
+:DT.'4':DD.The trace data for this ASP is being cleared.
+:DT.'5':DD.The trace function has completed and the statistics for the
+ASP have been gathered. The ASP is ready for further collection or for
+the balance function to start.
+:EDL.
+:EHELP.
+:HELP NAME='RTVASPINF/TRCDUR'.CL var for TRCDUR     (10 0) (TRCDUR) - Help
+:XH3.CL var for TRCDUR     (10 0) (TRCDUR)
+:P.
+Specifies the name of a variable used to retrieve the number of minutes
+that the trace function has run collecting data for this ASP.  The
+trace can be run multiple times for an ASP.
+:P.
+In CL programs, this should be a 10-position decimal variable.
+:EHELP.
+:HELP NAME='RTVASPINF/TRCDATTIM'.CL var for TRCDATTIM    (13) (TRCDATTIM) - Help
+:XH3.CL var for TRCDATTIM    (13) (TRCDATTIM)
+:P.
+Specifies the name of a variable used to retrieve the date and time of
+the last status change for the trace function.
+:P.
+In CL programs, this should be a 13-character variable.
+:P.
+The 13 characters are:
+:DL.
+:DT.1   :DD.Century, where 0 indicates years 19xx and 1 indicates years
+20xx.
+:DT.2-7 :DD.The date, in YYMMDD (year, month, day) format.
+:DT.8-13:DD.The time of day, in HHMMSS (hours, minutes, seconds)
+format.
+:EDL.
+:EHELP.
+:EPNLGRP.
