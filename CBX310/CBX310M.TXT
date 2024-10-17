@@ -1,0 +1,153 @@
+/*-------------------------------------------------------------------*/
+/*                                                                   */
+/*  Program . . : CBX310M                                            */
+/*  Description : User Space Commands - Create commands              */
+/*  Author  . . : Carsten Flensburg                                  */
+/*                                                                   */
+/*                                                                   */
+/*  Program function:  Compiles, creates and configures all the      */
+/*                     Change Data Queue command objects.            */
+/*                                                                   */
+/*                     This program expects a single parameter       */
+/*                     specifying the library to contain the         */
+/*                     command objects.                              */
+/*                                                                   */
+/*                     Object sources must exist in the respective   */
+/*                     source type default source files in the       */
+/*                     command object library.                       */
+/*                                                                   */
+/*                                                                   */
+/*  Compile options:                                                 */
+/*    CrtClPgm    Pgm( CBX310M )                                     */
+/*                SrcFile( QCLSRC )                                  */
+/*                SrcMbr( *PGM )                                     */
+/*                                                                   */
+/*-------------------------------------------------------------------*/
+     Pgm    &UtlLib
+
+     Dcl    &UtlLib         *Char     10
+
+     MonMsg      CPF0000    *N        GoTo Error
+
+
+     CrtCmd      Cmd( &UtlLib/CRTUSRSPC )        +
+                 Pgm( QUSCRTUS )                 +
+                 SrcMbr( CBX310X )               +
+                 VldCkr( CBX310V )               +
+                 AlwLmtUsr( *YES )               +
+                 HlpPnlGrp( CBX310H )            +
+                 HlpId( *CMD )
+
+     CrtPnlGrp   &UtlLib/CBX310H                 +
+                 SrcFile( &UtlLib/QPNLSRC )      +
+                 SrcMbr( *PNLGRP )
+
+     CrtCmd      Cmd( &UtlLib/CHGUSRSPC )        +
+                 Pgm( QUSCHGUS )                 +
+                 SrcMbr( CBX311X )               +
+                 VldCkr( CBX311V )               +
+                 AlwLmtUsr( *YES )               +
+                 HlpPnlGrp( CBX311H )            +
+                 HlpId( *CMD )
+
+     CrtPnlGrp   &UtlLib/CBX311H                 +
+                 SrcFile( &UtlLib/QPNLSRC )      +
+                 SrcMbr( *PNLGRP )
+
+     CrtCmd      Cmd( &UtlLib/RTVUSRSPC )             +
+                 Pgm( QUSRTVUS )                      +
+                 AlwLmtUsr( *YES )                    +
+                 Allow( *BPGM *IPGM *BREXX *IREXX )   +
+                 SrcMbr( CBX312X )                    +
+                 VldCkr( CBX312V )                    +
+                 HlpPnlGrp( CBX312H )                 +
+                 HlpId( *CMD )
+
+     CrtPnlGrp   &UtlLib/CBX312H                 +
+                 SrcFile( &UtlLib/QPNLSRC )      +
+                 SrcMbr( *PNLGRP )
+
+
+     CrtRpgMod   &UtlLib/CBX313                  +
+                 SrcFile( &UtlLib/QRPGLESRC )    +
+                 SrcMbr( *Module )               +
+                 DbgView( *LIST )
+
+     CrtPgm      &UtlLib/CBX313                  +
+                 Module( &UtlLib/CBX313 )        +
+                 ActGrp( *NEW )
+
+     CrtRpgMod   &UtlLib/CBX313O                 +
+                 SrcFile( &UtlLib/QRPGLESRC )    +
+                 SrcMbr( *Module )               +
+                 DbgView( *LIST )
+
+     CrtPgm      &UtlLib/CBX313O                 +
+                 Module( &UtlLib/CBX313O )       +
+                 ActGrp( *NEW )
+
+     CrtRpgMod   &UtlLib/CBX313V                 +
+                 SrcFile( &UtlLib/QRPGLESRC )    +
+                 SrcMbr( *Module )               +
+                 DbgView( *LIST )
+
+     CrtPgm      &UtlLib/CBX313V                 +
+                 Module( &UtlLib/CBX313V )       +
+                 ActGrp( *NEW )
+
+     CrtPnlGrp   &UtlLib/CBX313H                 +
+                 SrcFile( &UtlLib/QPNLSRC )      +
+                 SrcMbr( *PNLGRP )
+
+     CrtCmd      Cmd( &UtlLib/CHGUSRSPCA )       +
+                 Pgm( CBX313 )                   +
+                 SrcFile( &UtlLib/QCMDSRC )      +
+                 SrcMbr( CBX313X )               +
+                 VldCkr( CBX313V )               +
+                 AlwLmtUsr( *NO )                +
+                 HlpPnlGrp( CBX313H )            +
+                 HlpId( *CMD )                   +
+                 PmtOvrPgm( CBX313O )
+
+     CrtMnu      Menu( &UtlLib/CMDUSRSPC2 )      +
+                 Type( *UIM )                    +
+                 SrcFile( &UtlLib/QMNUSRC )      +
+                 SrcMbr( CBX310U )               +
+                 Aut( *USE )
+
+
+     SndPgmMsg   Msg( 'User Space commands'               *Bcat +
+                      'successfully created in library'   *Bcat +
+                      &UtlLib                             *Tcat +
+                      '.' )                                     +
+                 MsgType( *COMP )
+
+
+     Call        QMHMOVPM    ( '    '                 +
+                               '*COMP'                +
+                               x'00000001'            +
+                               '*PGMBDY'              +
+                               x'00000001'            +
+                               x'0000000800000000'    +
+                             )
+
+     RmvMsg      Clear( *ALL )
+
+     Return
+
+/*-- Error handling:  -----------------------------------------------*/
+ Error:
+     Call        QMHMOVPM    ( '    '                 +
+                               '*DIAG'                +
+                               x'00000001'            +
+                               '*PGMBDY'              +
+                               x'00000001'            +
+                               x'0000000800000000'    +
+                             )
+
+     Call        QMHRSNEM    ( '    '                 +
+                               x'0000000800000000'    +
+                             )
+
+ EndPgm:
+     EndPgm

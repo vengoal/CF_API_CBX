@@ -1,0 +1,368 @@
+.*-----------------------------------------------------------------------**
+.*
+.*  Compile options:
+.*
+.*    CrtPnlGrp PnlGrp( CBX310H )
+.*              SrcFile( QPNLSRC )
+.*              SrcMbr( CBX310H )
+.*
+.*-----------------------------------------------------------------------**
+:PNLGRP.
+
+:HELP NAME='CRTUSRSPC'.Create User Space - Help
+:P.
+The Create User Space (CRTUSRSPC) command creates a user space in either
+the user domain or the system domain and stores it in the specified
+library.
+:P.
+The user space object you create is larger than or equal to the size
+specified. It has a fixed length and can be extended or truncated using
+the Change User Space Attributes (QUSCUSAT) API or the Modify Space (MODS)
+MI instruction (for user-domain user spaces). The MODS instruction will
+not work on system-domain user spaces if the security level of the
+system is 40 or greater.
+:P.
+:NT.
+A system-domain user space cannot be saved to a release prior to
+Version 2 Release 3 Modification 0. A user-domain user space can be
+directly manipulated with machine interface (MI) instructions or can be
+accessed using system APIs. On
+:ENT.
+:P.
+:NT.
+On systems with a QSECURITY system value of 40 or greater, applications
+can only access system-domain user spaces using APIs.
+:ENT.
+:P.
+:NT.
+For performance reasons, the *USRSPC object is created before checking to
+see if it exists in the library specified for the qualified user space
+name.  If you have an application using this command repeatedly, even if
+you are using *NO for the replace parameter, permanent system addresses
+will be used.
+:ENT.
+:EHELP.
+
+:HELP NAME='CRTUSRSPC/USRSPCX'.User Space (USRSPC) - Help
+:XH3.User Space (USRSPC)
+:P.
+Specifies the name and library of the user space being created.
+:P.
+This is a required parameter.
+:P.
+:XH3.Library
+:P.
+Defines the location of the usesr queue.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK DEF.*CURLIB:EPK.
+:PD.
+The current library for the job is used to locate the user space.  If
+no current library entry exists in the library list, QGPL is used.
+:PT.:PV.library-name:EPV.
+:PD.
+Specify the library where the user space is located.
+:EPARML.
+:EHELP.
+
+:HELP NAME='CRTUSRSPC/USRSPC'.User space (USRSPC) - Help
+:XH3.User space (USRSPC)
+:P.
+Specifies the name and library of the user space being created.
+:P.
+This is a required parameter.
+:P.
+:HP2.Qualifier 1: User space:EHP2.
+:PARML.
+:PT.:PV.name:EPV.
+:PD.
+Specify the name of the user space being created.
+:EPARML.
+:P.:HP2.Qualifier 2: Library:EHP2.
+:PARML.
+:PT.:PK DEF.*CURLIB:EPK.
+:PD.
+The current library for the job is used to locate the user space.  If
+no current library entry exists in the library list, QGPL is used.
+:PT.:PV.name:EPV.
+:PD.
+Specify the library where the user space is located.
+:EPARML.
+:EHELP.
+
+:HELP NAME='CRTUSRSPC/EXTATR'.Extended attribute (EXTATR) - Help
+:XH3.Extended attribute (EXTATR)
+:P.
+The extended attribute of the user space.  For example, an object type
+of *FILE has an extended attribute of PF (physical file), LF (logical
+file), DSPF (display file), SAVF (save file), and so on.
+:P.
+The extended attribute must be a valid *NAME.  You can enter this
+parameter in uppercase, lowercase, or mixed case.  The command
+automatically converts it to uppercase.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK DEF.*NONE:EPK.
+:PD.
+No extended attribute is assigned to the user space.
+:PT.:PV.extended-attribute-name:EPV.
+:PD.
+Specify a name to be used as the extended attribute for the user space
+object.
+:EPARML.
+:EHELP.
+
+:HELP NAME='CRTUSRSPC/INZSIZ'.Initial size (INZSIZ) - Help
+:XH3.Initial size (INZSIZ)
+:P.
+Specifies the initial size of the user space being created.
+:P.
+This value must be from 1 byte to 16776704 bytes.
+:PARML.
+:PT.:PV.1-16776704:EPV.
+:PD.
+Specify a value in the range from 1 to 16776704 bytes.
+:EPARML.
+:EHELP.
+
+:HELP NAME='CRTUSRSPC/INZVAL'.Initial value (INZVAL) - Help
+:XH3.Initial value (INZVAL)
+:P.
+Specifies the initial value of all bytes in the user space. You will
+achieve the best performance if you set this byte to X'00'.
+:PARML.
+:PT.:PK DEF.*DFT:EPK.
+:PD.
+Set the initial value of all bytes to X'00'.
+:PT.:PK.*BLANK:EPK.
+:PD.
+Set the initial value of all bytes to X'40'.
+:PT.:PV.character-value:EPV.
+:PD.
+Specify the value to use as the initial value of all bytes in the user
+space.
+:EPARML.
+:EHELP.
+
+:HELP NAME='CRTUSRSPC/AUT'.Authority (AUT) - Help
+:XH3.Authority (AUT)
+:P.
+The authority you give to the users who do not have specific private or
+group authority to the user space.  Once the User Space has been
+created, its public authority stays the same when it is moved to
+another library or restored from backup media.
+:NT.
+If the replace parameter is used and a user space exists to be replaced,
+this parameter is ignored.  All authorities are transferred from the
+replaced user space to the new one.
+:ENT.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK DEF.*LIBCRTAUT:EPK.
+:PD.
+The public authority for the user space is taken from the CRTAUT value
+for the target library when the object is created.  If the CRTAUT value
+for the library changes later, that change does not affect user spaces
+already created.  If the CRTAUT value contains an authorization list
+name and that authorization list secures an object, do not delete the
+list.  If you do, the next time you run this command with the *LIBCRTAUT
+parameter, it will fail.
+:PT.:PK.*CHANGE:EPK.
+:PD.
+The user has read, add, update, and delete authority to the user space
+and can read the object description.
+:PT.:PK.*ALL:EPK.
+:PD.
+The user can perform all authorized operations on the user space.
+:PT.:PK.*USE:EPK.
+:PD.
+The user can read the object description and the user space's contents
+but cannot change them.
+:PT.:PK.*EXCLUDE:EPK.
+:PD.
+The user cannot access the user space in any way.
+:PT.:PV.authorization-list-name:EPV.
+:PD.
+The user space is secured by the specified authorization list, and its
+public authority is set to *AUTL.  The specified authorization list must
+exist on the system when this command is issued.  If it does not exist,
+the create process fails, and an error message is returned to the
+caller.
+:EPARML.
+:EHELP.
+
+:HELP NAME='CRTUSRSPC/TEXT'.Text 'description' (TEXT) - Help
+:XH3.Text 'description' (TEXT)
+:P.
+Specifies text that briefly describes the user space.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK DEF.*BLANK:EPK.
+:PD.
+No text is specified.
+:PT.:PV.text-'description':EPV.
+:PD.
+Specify no more than 50 characters, enclosed in apostrophes.
+:EPARML.
+:EHELP.
+
+:HELP NAME='CRTUSRSPC/REPLACE'.Replace (REPLACE) - Help
+:XH3.Replace (REPLACE)
+:P.
+Specifies whether to replace an existing user space.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK DEF.*NO:EPK.
+:PD.
+Do not replace an existing user space of the same name and library.
+:PT.:PK.*YES:EPK.
+:PD.
+Replace an existing user space of the same name and library.
+:EPARML.
+:EHELP.
+
+:HELP NAME='CRTUSRSPC/DOMAIN'.Domain (DOMAIN) - Help
+:XH3.Domain (DOMAIN)
+:P.
+The domain into which the user space should be created.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK DEF.*DEFAULT:EPK.
+:PD.
+Allows the system to decide into which domain the object should be
+created.
+:PT.:PK.*SYSTEM:EPK.
+:PD.
+Creates the user space object into the system domain.  The command can
+always create a user space into the system domain regardless of the
+security level you are running at. However, you must use APIs to access
+system-domain user spaces if you are running at security level 40 or
+greater.
+:PT.:PK.*USER:EPK.
+:PD.
+Attempts to create the user space object into the user domain. This is
+not always possible.  If the library you are creating the user space
+into does not appear in the QALWUSRDMN system value, the command cannot
+create the user space into the user domain.  An error message will be
+returned.
+:EPARML.
+:EHELP.
+
+:HELP NAME='CRTUSRSPC/TFRSIZE'.Transfer size request (TFRSIZE) - Help
+:XH3.Transfer size request (TFRSIZE)
+:P.
+Specifies the number of pages to be transferred between main storage
+and auxiliary storage This is only a request, as the machine may use a
+value of its choice in some circumstances. Allowable values range
+between 0 and 32 pages. A value of 0 is an indication that the machine
+should use the default transfer size for the user space.
+:PARML.
+:PT.:PK DEF.*DFT:EPK.
+:PD.
+The value 0 (zero) is specified as the transfer size request number of
+pages parameter.
+:PT.:PV.0-32:EPV.
+:PD.
+Specify a value in the range of 0 to 32 as the transfer size request
+number of pages parameter.
+:EPARML.
+:EHELP.
+
+:HELP NAME='CRTUSRSPC/OPTSPACE'.Optimum space alignment (OPTSPACE) - Help
+:XH3.Optimum space alignment (OPTSPACE)
+:P.
+Allows the machine to choose optimum alignment for the user space.
+Choosing optimum alignment is highly recommended. Applications that
+manipulate optimally aligned user spaces may perform significantly
+better.
+:PARML.
+:PT.:PK DEF.*YES:EPK.
+:PD.
+Choose optimum space alignment.
+:PT.:PK.*NO:EPK.
+:PD.
+Do not allow the machine to choose optimum space alignment.
+:EPARML.
+:EHELP.
+
+:HELP NAME='CRTUSRSPC/ERROR/MESSAGES'.
+&MSG(CPX0005,QCPFMSG). CRTUSRSPC - Help
+:XH3.&MSG(CPX0005,QCPFMSG). CRTUSRSPC
+:P.
+:HP3.*ESCAPE &MSG(CPX0006,QCPFMSG).:EHP3.
+
+:DL COMPACT.
+:DT.CPF2143
+:DD.&MSG(CPF2143,QCPFMSG,*LIBL,nosub).
+:DT.CPF2144
+:DD.&MSG(CPF2144,QCPFMSG,*LIBL,nosub).
+:DT.CPF2283
+:DD.&MSG(CPF2283,QCPFMSG,*LIBL,nosub).
+:DT.CPF24B4
+:DD.&MSG(CPF24B4,QCPFMSG,*LIBL,nosub).
+:DT.CPF3CF1
+:DD.&MSG(CPF3CF1,QCPFMSG,*LIBL,nosub).
+:DT.CPF3CF2
+:DD.&MSG(CPF3CF2,QCPFMSG,*LIBL,nosub).
+:DT.CPF3C01
+:DD.&MSG(CPF3C01,QCPFMSG,*LIBL,nosub).
+:DT.CPD3C01
+:DD.&MSG(CPD3C01,QCPFMSG,*LIBL,nosub).
+:DT.CPD3C03
+:DD.&MSG(CPD3C03,QCPFMSG,*LIBL,nosub).
+:DT.CPD3C04
+:DD.&MSG(CPD3C04,QCPFMSG,*LIBL,nosub).
+:DT.CPD3C05
+:DD.&MSG(CPD3C05,QCPFMSG,*LIBL,nosub).
+:DT.CPF3C2B
+:DD.&MSG(CPF3C2B,QCPFMSG,*LIBL,nosub).
+:DT.CPF3C2C
+:DD.&MSG(CPF3C2C,QCPFMSG,*LIBL,nosub).
+:DT.CPF3C2D
+:DD.&MSG(CPF3C2D,QCPFMSG,*LIBL,nosub).
+:DT.CPF3C29
+:DD.&MSG(CPF3C29,QCPFMSG,*LIBL,nosub).
+:DT.CPF3C34
+:DD.&MSG(CPF3C34,QCPFMSG,*LIBL,nosub).
+:DT.CPF3C36
+:DD.&MSG(CPF3C36,QCPFMSG,*LIBL,nosub).
+:DT.CPF3C45
+:DD.&MSG(CPF3C45,QCPFMSG,*LIBL,nosub).
+:DT.CPF3C49
+:DD.&MSG(CPF3C49,QCPFMSG,*LIBL,nosub).
+:DT.CPF3C90
+:DD.&MSG(CPF3C90,QCPFMSG,*LIBL,nosub).
+:DT.CPF3C91
+:DD.&MSG(CPF3C91,QCPFMSG,*LIBL,nosub).
+:DT.CPF3C92
+:DD.&MSG(CPF3C92,QCPFMSG,*LIBL,nosub).
+:DT.CPF8100
+:DD.All CPF81xx messages could be returned. xx is from 01 to FF.
+:DT.CPF9810
+:DD.&MSG(CPF9810,QCPFMSG,*LIBL,nosub).
+:DT.CPF9820
+:DD.&MSG(CPF9820,QCPFMSG,*LIBL,nosub).
+:DT.CPF9830
+:DD.&MSG(CPF9830,QCPFMSG,*LIBL,nosub).
+:DT.CPF9838
+:DD.&MSG(CPF9838,QCPFMSG,*LIBL,nosub).
+:DT.CPF9870
+:DD.&MSG(CPF9870,QCPFMSG,*LIBL,nosub).
+:DT.CPF9872
+:DD.&MSG(CPF9872,QCPFMSG,*LIBL,nosub).
+:EDL.
+:EHELP.
+
+:EPNLGRP.

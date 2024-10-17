@@ -1,0 +1,101 @@
+/*-------------------------------------------------------------------*/
+/*                                                                   */
+/*  Compile options:                                                 */
+/*                                                                   */
+/*    CrtCmd Cmd( CRTUSRSPC )                                        */
+/*           Pgm( QUSCRTUS )                                         */
+/*           SrcMbr( CBX310X )                                       */
+/*           VldCkr( CBX310V )                                       */
+/*           HlpPnlGrp( CBX310H )                                    */
+/*           HlpId( *CMD )                                           */
+/*                                                                   */
+/*-------------------------------------------------------------------*/
+        Cmd        Prompt( 'Create User Space' )           +
+                   AlwLmtUsr( *YES )                       +
+                   VldCkr( CBX310V )                       +
+                   HlpId( *CMD )                           +
+                   HlpPnlGrp( CBX310H )                    +
+                   Aut( *USE )
+
+        Parm       USRSPC      Qual                        +
+                   Min( 1 )                                +
+                   Choice( *NONE )                         +
+                   Prompt( 'User space' 1 )
+
+        Parm       EXTATR      *Name    10                 +
+                   Dft( *NONE )                            +
+                   SpcVal(( *NONE ' ' ))                   +
+                   Expr( *YES )                            +
+                   Prompt( 'Extended attribute'  2 )
+
+        Parm       INZSIZ     *Int4                        +
+                   Range( 1 16776704 )                     +
+                   Expr( *YES )                            +
+                   Prompt( 'Initial size' 3 )
+
+        Parm       INZVAL     *Char     1                  +
+                   Dft( *DFT )                             +
+                   SpcVal(( *DFT x'00' ) ( *BLANK ' ' ))   +
+                   Expr( *YES )                            +
+                   Prompt( 'Initial value' 4 )
+
+        Parm       AUT        *Name     10                 +
+                   Dft( *LIBCRTAUT )                       +
+                   SpcVal(( *LIBCRTAUT )                   +
+                          ( *CHANGE )                      +
+                          ( *ALL )                         +
+                          ( *USE )                         +
+                          ( *EXCLUDE ))                    +
+                   Expr( *YES )                            +
+                   Prompt( 'Authority' 6 )
+
+        Parm       TEXT       *Char     50                 +
+                   Dft( *BLANK )                           +
+                   SpcVal(( *BLANK '' ))                   +
+                   Expr( *YES )                            +
+                   Prompt( 'Text ''description''' 5 )
+
+        Parm       REPLACE    *Char     10                 +
+                   Rstd( *YES )                            +
+                   Dft( *YES )                             +
+                   SpcVal(( *YES ) ( *NO ))                +
+                   Expr( *YES )                            +
+                   PmtCtl( *PMTRQS )                       +
+                   Prompt( 'Replace' 7 )
+
+        Parm       ERRORCODE  *Char     4                  +
+                   Constant( x'00000000' )
+
+        Parm       DOMAIN     *Char     10                 +
+                   Rstd( *YES )                            +
+                   Dft( *DEFAULT )                         +
+                   SpcVal(( *DEFAULT ) ( *SYSTEM ) ( *USER ))   +
+                   Expr( *YES )                            +
+                   PmtCtl( *PMTRQS )                       +
+                   Prompt( 'Domain' 8 )
+
+        Parm       TFRSIZE    *Int4                        +
+                   Dft( *DFT )                             +
+                   SpcVal(( *DFT 0 ))                      +
+                   RANGE( 0 32 )                           +
+                   Expr( *YES )                            +
+                   PmtCtl( *PMTRQS )                       +
+                   Prompt( 'Transfer size request' 9 )
+
+        Parm       OPTSPACE   *Char      1                 +
+                   Rstd( *YES )                            +
+                   Dft( *YES )                             +
+                   SpcVal(( *YES '1' ) ( *NO '0' ))        +
+                   Expr( *YES )                            +
+                   PmtCtl( *PMTRQS )                       +
+                   Prompt( 'Optimum space alignment' 10 )
+
+Qual:   Qual                  *Name     10                 +
+                   MIN(1) +
+                   Expr(*YES)
+        Qual                  *Name     10                 +
+                   Dft(*CURLIB)                            +
+                   SpcVal((*CURLIB *CURLIB))               +
+                   Expr(*YES)                              +
+                   Prompt('Library')
+

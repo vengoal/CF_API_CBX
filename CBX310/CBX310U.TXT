@@ -1,0 +1,227 @@
+.*-----------------------------------------------------------------------**
+.*
+.*  Compile options:
+.*
+.*    CrtMnu Menu( CMDUSRSPC2 )
+.*           Type( *UIM )
+.*           SrcFile( QMNUSRC )
+.*           SrcMbr( CBX310U )
+.*           Aut( *USE )
+.*
+.*-----------------------------------------------------------------------**
+:PNLGRP.
+
+:IMPORT PNLGRP='QHUSCMD'   NAME='DLTUSRSPC'.
+:IMPORT PNLGRP='CBX310H'   NAME='CRTUSRSPC'.
+:IMPORT PNLGRP='CBX311H'   NAME='CHGUSRSPC'.
+:IMPORT PNLGRP='CBX312H'   NAME='RTVUSRSPC'.
+:IMPORT PNLGRP='CBX313H'   NAME='CHGUSRSPCA'.
+:IMPORT PNLGRP='CBX314H'   NAME='WRKUSRSPC'.
+:IMPORT PNLGRP='QHWCCMD'   NAME='SIGNOFF'.
+
+:VAR   NAME=ZMENU.
+:COND  NAME=DLTSPCOK  EXPR='CHKOBJ("DLTUSRSPC",  "*CMD", "*USE")'.
+:COND  NAME=CRTSPCOK  EXPR='CHKOBJ("CRTUSRSPC",  "*CMD", "*USE")'.
+:COND  NAME=CHGSPCOK  EXPR='CHKOBJ("CHGUSRSPC",  "*CMD", "*USE")'.
+:COND  NAME=RTVSPCOK  EXPR='CHKOBJ("RTVUSRSPC",  "*CMD", "*USE")'.
+:COND  NAME=CHGATROK  EXPR='CHKOBJ("CHGUSRSPCA", "*CMD", "*USE")'.
+:COND  NAME=WRKSPCOK  EXPR='CHKOBJ("WRKUSRSPC",  "*CMD", "*USE")'.
+
+:KEYL  NAME=SMALL    HELP=FKHLP.
+:KEYI  KEY=F1        HELP=F1HLP  ACTION='HELP'.
+:KEYI  KEY=F3        HELP=F3HLP  ACTION='EXIT SET'   VARUPD=NO  .F3=Exit
+:KEYI  KEY=F4        HELP=F4HLP  ACTION='PROMPT'                .F4=Prompt
+:KEYI  KEY=F9        HELP=F9HLP  ACTION='RETRIEVE'              .F9=Retrieve
+:KEYI  KEY=F12       HELP=F12HLP ACTION='CANCEL SET' VARUPD=NO  .F12=Cancel
+:KEYI  KEY=ENTER     HELP=ENHLP  ACTION='ENTER'.
+:KEYI  KEY=HELP      HELP=HPHLP  ACTION='HELP'.
+:KEYI  KEY=PAGEUP    HELP=PUHLP  ACTION='PAGEUP'.
+:KEYI  KEY=PAGEDOWN  HELP=PDHLP  ACTION='PAGEDOWN'.
+:KEYI  KEY=PRINT     HELP=PRHLP  ACTION='PRINT'.
+:EKEYL.
+
+:PANEL   NAME=MAIN
+         HELP=MAINHLP
+         KEYL=SMALL
+         PANELID=ZMENU
+         TOPSEP=SYSNAM
+         ENTER='MSG CPD9817 QCPFMSG'
+         .User Space Commands
+
+:MENU    DEPTH='*'
+         SCROLL=YES.
+:TOPINST .Select one of the following:
+
+:MENUGRP .User Space commands
+:MENUI   OPTION=1
+         HELP=OP01HLP
+         ACTION='CMD ?CRTUSRSPC'
+         COND=CRTSPCOK
+         .Create User Space                                           CRTUSRSPC
+
+:MENUI   OPTION=2
+         HELP=OP02HLP
+         ACTION='CMD ?CHGUSRSPC'
+         COND=CHGSPCOK
+         .Change User Space                                           CHGUSRSPC
+
+:MENUI   OPTION=3
+         HELP=OP03HLP
+         ACTION='CMD ?RTVUSRSPC'
+         COND=RTVSPCOK
+         .Retrieve User Space                                         RTVUSRSPC
+
+:MENUI   OPTION=4
+         HELP=OP04HLP
+         ACTION='CMD ?CHGUSRSPCA'
+         COND=CHGATROK
+         .Change User Space Attributes                                CHGUSRSPCA
+
+:MENUI   OPTION=5
+         HELP=OP05HLP
+         ACTION='CMD ?DLTUSRSPC'
+         COND=DLTSPCOK
+         .Delete User Space                                           DLTUSRSPC
+
+:MENUI   OPTION=6
+         HELP=OP06HLP
+         ACTION='CMD ?WRKUSRSPC'
+         COND=WRKSPCOK
+         .Work with User Spaces                                       WRKUSRSPC
+:EMENUGRP.
+
+:MENUGRP .Service options
+:MENUI   OPTION=90
+         HELP=OP90HLP
+         ACTION='CMD SIGNOFF'
+         .Sign off                                                    SIGNOFF
+:EMENUGRP.
+:EMENU.
+
+:CMDLINE SIZE=SHORT   .Selection or command
+:EPANEL.
+
+:HELP    NAME=MAINHLP .Main help
+:P.
+
+The User Space Commands (CMDUSRPSC2) menu allows you to work with
+all user space related commands. Only commands to which you have
+*USE authority to are displayed. Contact your security officer to
+obtain any missing authorization to the Use Space Commands.
+:EHELP.
+
+:HELP    NAME=FKHLP   .Function keys
+:EHELP.
+
+:HELP    NAME=F1HLP.
+:PARML.
+:PT.F1=Help
+:PD.Shows additional information about the display or option you
+selected.
+:EPARML.
+:EHELP.
+
+:HELP    NAME=F3HLP.
+:PARML.
+:PT.F3=Exit
+:PD.Ends the current task and returns you to the display from which the
+task was started.
+:EPARML.
+:EHELP.
+
+:HELP    NAME=F4HLP.
+:PARML.
+:PT.F4=Prompt
+:PD.Provides assistance in entering or selecting a command.
+:EPARML.
+:EHELP.
+
+:HELP    NAME=F9HLP.
+:PARML.
+:PT.F9=Retrieve
+:PD.Displays the last command you ran from the command line, and any
+parameters you selected.  By pressing this key once, you will see the
+last command you ran.  By pressing this key twice, you will see the
+next-to-last command that you ran, and so on.
+:EPARML.
+:EHELP.
+
+:HELP    NAME=F12HLP.
+:PARML.
+:PT.F12=Cancel
+:PD.Returns to the previous menu or display.
+:EPARML.
+:EHELP.
+
+:HELP    NAME=ENHLP.
+:PARML.
+:PT.Enter
+:PD.Submits information on the display for processing.
+:EPARML.
+:EHELP.
+
+:HELP    NAME=HPHLP.
+:PARML.
+:PT.Help
+:PD.Shows additional information about the display or option you
+selected.
+:EPARML.
+:EHELP.
+
+:HELP    NAME=PDHLP.
+:PARML.
+:PT.Page Down (Roll Up)
+:PD.Moves forward to show additional messages for this display.
+:EPARML.
+:EHELP.
+
+:HELP    NAME=PUHLP.
+:PARML.
+:PT.Page Up (Roll Down)
+:PD.Moves backward to show additional messages for this display.
+:EPARML.
+:EHELP.
+
+:HELP    NAME=PRHLP.
+:PARML.
+:PT.Print
+:PD.Prints information currently shown on the display
+:EPARML.
+:EHELP.
+
+:HELP    NAME=OP01HLP .Create User Space
+:XH3.Option 1 - Help
+:IMHELP  NAME='DLTUSRSPC'.
+:EHELP.
+
+:HELP    NAME=OP02HLP .Change User Space
+:XH3.Option 2 - Help
+:IMHELP  NAME='CHGUSRSPC'.
+:EHELP.
+
+:HELP    NAME=OP03HLP .Retrieve User Space
+:XH3.Option 3 - Help
+:IMHELP  NAME='RTVUSRSPC'.
+:EHELP.
+
+:HELP    NAME=OP04HLP .Change User Space Attributes
+:XH3.Option 4 - Help
+:IMHELP  NAME='CHGUSRSPCA'.
+:EHELP.
+
+:HELP    NAME=OP05HLP .Delete User Space
+:XH3.Option 5 - Help
+:IMHELP  NAME='DLTUSRSPC'.
+:EHELP.
+
+:HELP    NAME=OP06HLP .Work with User Space
+:XH3.Option 6 - Help
+:IMHELP  NAME='WRKUSRSPC'.
+:EHELP.
+
+:HELP    NAME=OP90HLP .Sign off
+:XH3.Option 90 - Help
+:IMHELP  NAME='SIGNOFF'.
+:EHELP.
+
+:EPNLGRP.
