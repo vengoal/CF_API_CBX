@@ -1,0 +1,153 @@
+.*-----------------------------------------------------------------------**
+.*
+.*  Compile options:
+.*
+.*    CrtPnlGrp PnlGrp( CBX311H )
+.*              SrcFile( QPNLSRC )
+.*              SrcMbr( CBX311H )
+.*
+.*-----------------------------------------------------------------------**
+:PNLGRP.
+
+:HELP NAME='CHGUSRSPC'.
+Change User Space - Help
+:P.
+The Change User Space (CHGUSRSPC) command changes the contents of the
+user space (*USRSPC) object by moving a specified amount of data to the
+object.
+:EHELP.
+
+:HELP NAME='CHGUSRSPC/USRSPC'.
+User space (USRSPC) - Help
+
+:XH3.User space (USRSPC)
+:P.
+Specifies the name of the user space.
+:P.
+This is a required parameter.
+:P.
+:HP2.Qualifier 1: User space:EHP2.
+:PARML.
+:PT.:PV.name:EPV.
+:PD.
+Specify the name of the user space.
+.* Describe the function provided by the user-defined parameter value.
+:EPARML.
+:P.
+:HP2.Qualifier 2: Library:EHP2.
+:PARML.
+:PT.:PK DEF.*LIBL:EPK.
+:PD.
+All libraries in the library list for the current thread are searched
+until the first match is found.
+:PT.:PK.*CURLIB:EPK.
+:PD.
+The current library for the job is used to locate the user space.  If
+no current library entry exists in the library list, QGPL is used.
+:PT.:PV.name:EPV.
+:PD.
+Specify the library where the user space is located.
+:EPARML.
+:EHELP.
+
+:HELP NAME='CHGUSRSPC/STRPOS'.
+Start position (STRPOS) - Help
+
+:XH3.Start position (STRPOS)
+:P.
+Specifies the first byte of the user space that is to be changed.
+:PARML.
+:PT.:PK DEF.*START:EPK.
+:PD.
+The user space data is changed starting from the first byte.
+:PT.:PV.integer:EPV.
+:PD.
+Specify the position in bytes indicating the first byte to be changed.
+:EPARML.
+:EHELP.
+
+:HELP NAME='CHGUSRSPC/DTALEN'.
+Data length (DTALEN) - Help
+
+:XH3.Data length (DTALEN)
+:P.
+Specifies the length of the new data in the input data parameter.
+:PARML.
+:PT.:PK DEF.*CALC:EPK.
+:PD.
+The length of the specified data is calculated counting from the
+beginning of the data string up to and including the last non-blank
+character.
+:PT.:PV.1-5000:EPV.
+:PD.
+Specify the length of the user space substring being changed.
+:EPARML.
+:EHELP.
+
+:HELP NAME='CHGUSRSPC/DATA'.
+Data (DATA) - Help
+
+:XH3.Data (DATA)
+:P.
+Specifies the new data to be placed into the user space. The data must
+be at least as long as the data length :HP2.DTALEN:EHP2. parameter.
+.* Describe the function provided by the parameter.
+:PARML.
+:PT.:PV.character-value:EPV.
+:PD.
+Specify the new data to be placed into the user space.
+:EPARML.
+:EHELP.
+
+:HELP NAME='CHGUSRSPC/FORCE'.
+Force to auxillary storage (FORCE) - Help
+
+:XH3.Force to auxillary storage (FORCE)
+:P.
+Specifies the method of forcing changes made to the user space to
+auxiliary storage.
+:PARML.
+:PT.:PK DEF.*NO:EPK.
+:PD.
+Does not force changes. Normal system management writes the changes to
+auxiliary storage.
+:PT.:PK.*ASYNCH:EPK.
+:PD.
+Forces changes asynchronously. This interrupts the normal system
+management and ensures that the user space is written to auxiliary
+storage.
+:PT.:PK.*SYNCH:EPK.
+:PD.
+Forces changes synchronously. This interrupts the normal system
+management and ensures that the user space is written immediately to
+auxiliary storage.
+:EPARML.
+:EHELP.
+
+:HELP NAME='CHGUSRSPC/ERROR/MESSAGES'.
+&MSG(CPX0005,QCPFMSG). CHGUSRSPC - Help
+:XH3.&MSG(CPX0005,QCPFMSG). CHGUSRSPC
+:P.
+:HP3.*ESCAPE &MSG(CPX0006,QCPFMSG).:EHP3.
+
+:DL COMPACT.
+:DT.CPF3C14
+:DD.&MSG(CPF3C14,QCPFMSG,*LIBL,nosub).
+:DT.CPF3C15
+:DD.&MSG(CPF3C15,QCPFMSG,*LIBL,nosub).
+:DT.CPF3C14
+:DD.&MSG(CPF3C17,QCPFMSG,*LIBL,nosub).
+:DT.CPF9801
+:DD.&MSG(CPF9801,QCPFMSG,*LIBL,nosub).
+:DT.CPF9802
+:DD.&MSG(CPF9802,QCPFMSG,*LIBL,nosub).
+:DT.CPF9803
+:DD.&MSG(CPF9803,QCPFMSG,*LIBL,nosub).
+:DT.CPF9810
+:DD.&MSG(CPF9810,QCPFMSG,*LIBL,nosub).
+:DT.CPF9820
+:DD.&MSG(CPF9820,QCPFMSG,*LIBL,nosub).
+:EDL.
+:EHELP.
+
+:EPNLGRP.

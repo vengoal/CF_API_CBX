@@ -1,0 +1,55 @@
+/*-------------------------------------------------------------------*/
+/*                                                                   */
+/*  Compile options:                                                 */
+/*                                                                   */
+/*    CrtCmd Cmd( CHGUSRSPC )                                        */
+/*           Pgm( QUSCHGUS )                                         */
+/*           SrcMbr( CBX311X )                                       */
+/*           VldCkr( CBX311V )                                       */
+/*           HlpPnlGrp( CBX311H )                                    */
+/*           HlpId( *CMD )                                           */
+/*                                                                   */
+/*-------------------------------------------------------------------*/
+        Cmd        Prompt( 'Change User Space' )                +
+                   AlwLmtUsr( *YES )                            +
+                   VldCkr( CBX311V )                            +
+                   HlpId( *CMD )                                +
+                   HlpPnlGrp( CBX311H )                         +
+                   Aut( *USE )
+
+        Parm       USRSPC     Q0001                             +
+                   Min( 1 )                                     +
+                   Prompt( 'User space' )
+
+        Parm       STRPOS     *Int4                             +
+                   Dft( *START )                                +
+                   Rel( *GT 0 )                                 +
+                   SpcVal(( *START  1 ))                        +
+                   Prompt( 'Start position' )
+
+        Parm       DTALEN     *Int4                             +
+                   Dft( *CALC )                                 +
+                   Range( 1 5000 )                              +
+                   SpcVal(( *CALC   0 ))                        +
+                   Prompt( 'Data length' )
+
+        Parm       DATA       *Char   5000                      +
+                   Case( *MIXED )                               +
+                   Prompt( 'Data' )
+
+        Parm       FORCE      *Char      1                      +
+                   Rstd( *YES )                                 +
+                   Dft( *NO )                                   +
+                   SpcVal(( *NO 0 ) ( *ASYNCH 1 ) ( *SYNCH 2 )) +
+                   Prompt( 'Force to auxillary storage' )
+
+        Parm       ERRORCODE  *Char      4                      +
+                   Constant( X'00000000' )
+
+Q0001:  Qual       *Name      10
+
+        Qual       *Name      10                                +
+                   Dft( *LIBL )                                 +
+                   SpcVal(( *LIBL ) ( *CURLIB *CURLIB ))        +
+                   Prompt( 'Library' )
+
