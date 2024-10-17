@@ -1,0 +1,478 @@
+.*-----------------------------------------------------------------------**
+.*
+.*  Compile options:
+.*
+.*    CrtPnlGrp PnlGrp( CBX314H )
+.*              SrcFile( QPNLSRC )
+.*              SrcMbr( CBX314H )
+.*
+.*-----------------------------------------------------------------------**
+:PNLGRP.
+
+.* Command help section:
+:HELP NAME='WRKUSRSPC'.Work with User Spaces - Help
+:P.
+The Work with User Spaces (WRKUSRSPC) command allows you to list and
+manage the selected user spaces.
+:P.
+:EHELP.
+
+:HELP NAME='WRKUSRSPC/USRSPC'.User space (USRSPC) - Help
+:XH3.User space (USRSPC)
+:P.
+Specify the user space or user spaces to include in the list of user
+spaces to work with.
+:P.
+This is a required parameter.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK.*ALL:EPK.
+:PD.
+All user spaces in the specified library are listed.
+:PT.:PV.*generic-user-space-name:EPV.
+:PD.
+Specify the generic name of the user spaces to list.  A generic name
+is a character string that contains one or more characters followed by
+an asterisk (*).  For example, ABC*.
+:PT.:PV.user-space-name:EPV.
+:PD.
+Specify the name of a user space to work with.
+:EPARML.
+:XH3.Library
+:P.
+The library containing the specified user space or user spaces.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK DEF.*LIBL:EPK.
+:PD.
+All libraries in the library list for the current thread are searched.
+All objects in these libraries with the specified object name are
+shown.
+:PT.:PK.*CURLIB:EPK.
+:PD.
+The current library for the thread is searched.  If no library is
+specified as the current library for the thread, the QGPL library is
+is searched.
+:PT.:PK.*USRLIBL:EPK.
+:PD.
+If a current library entry exists in the library list for the current
+thread, the current library and the libraries in the user portion of
+the library list are searched.  If there is no current library entry,
+only the libraries in the user portion of the library list are
+searched.
+:PT.:PK.*ALLUSR:EPK.
+:PD.
+All user libraries are searched.  All libraries with names that do not
+begin with the letter Q are considered user libraries, except for some
+IBM product libraries.  Some of the libraries beginning with the letter
+Q typically contain user data and they are therefore also searched:
+:P.
+:LINES.
+    QDSNX       QRCL        QUSRBRM     QUSRPOSGS
+    QGPL        QRCLxxxxx   QUSRDIRCL   QUSRPOSSA
+    QGPL38      QSYS2       QUSRDIRDB   QUSRPYMSVR
+    QMPGDATA    QSYS2xxxxx  QUSRIJS     QUSRRDARS
+    QMQMDATA    QS36F       QUSRINFSKR  QUSRSYS
+    QMQMPROC    QUSER38     QUSRNOTES   QUSRVI
+    QPFRDATA    QUSRADSM    QUSROND     QUSRVxRxMx
+:ELINES.
+:PT.:PK.*ALL:EPK.
+:PD.
+All libraries in the system, including QSYS, are searched.
+:PT.:PV.library-name:EPV.
+:PD.
+Specify the name of the library to be searched.
+:EPARML.
+:EHELP.
+
+:HELP NAME='WRKUSRSPC/SPCATR'.Space attribute (SPCATR) - Help
+:XH3.Space attribute (SPCATR)
+:P.
+Specifies the user space object attribute value to be used as a
+selection criteria.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK DEF.*ALL:EPK.
+:PD.
+User spaces are included in the list, regardless of their object
+attribute.
+:PT.:PV.*generic-attribute-name:EPV.
+:PD.
+Specify the generic name of the user space object attributes to include
+in the list.  A generic name is a character string that contains one or
+more characters followed by an asterisk (*).  For example, ABC*.
+:PT.:PV.attribute-name:EPV.
+:PD.
+Specify the object attribute name identifying the user space(s) to work
+with.
+:EPARML.
+:EHELP.
+
+:HELP NAME='WRKUSRSPC/ORDER'.Sort order (ORDER) - Help
+:XH3.Sort order (ORDER)
+:P.
+Specifies the order in which the user spaces are presented in the list
+of user spaces to work with.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK DEF.*USRSPC:EPK.
+:PD.
+The list is sorted first by user space name, then by library name.
+:PT.:PK.*LIB:EPK.
+:PD.
+The list is sorted first by library name, then by user space name.
+:EPARML.
+:EHELP.
+
+.* Panel help section:
+:HELP NAME=HLPFKEYS.
+Function Keys - Help
+:XH3.Function keys
+:EHELP.
+
+:HELP NAME=HLPENT.
+:PARML.
+:PT.Enter
+:PD.Submits information on the display for processing.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF1.
+:PARML.
+:PT.F1=Help
+:PD.Provides additional information about using the display.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF3.
+:PARML.
+:PT.F3=Exit
+:PD.Ends the current task and returns you to the display from which
+the task was started.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF4.
+:PARML.
+:PT.F4=Prompt
+:PD.Provides assistance in entering or selecting a command.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF5.
+:PARML.
+:PT.F5=Refresh
+:PD.Shows the display you are viewing with updated information.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF6.
+:PARML.
+:PT.F6=Create user space
+:PD.Executes the Create User Space (CRTUSRSPC) command.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF9.
+:PARML.
+:PT.F9=Retrieve
+:PD.Displays the last command you entered on the command line and any
+parameters you included.  Pressing this key once, shows the last
+command you ran.  Pressing this key twice, shows the command you ran
+before that and so on.
+:EPARML.
+:EHELP.
+
+:HELP NAME='HLPF11/VIEW1'.
+:PARML.
+:PT.F11=Display full text
+:PD.Shows the list again displaying the full user space object
+description.
+:EPARML.
+:EHELP.
+
+:HELP NAME='HLPF11/VIEW2'.
+:PARML.
+:PT.F11=Display attributes
+:PD.Shows the list again displaying the user space attributes and a
+partial user space object description.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF12.
+:PARML.
+:PT.F12=Cancel
+:PD.Cancels processing of any options or changes you have made to the
+current display and returns you to the previous menu or display.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF17.
+:PARML.
+:PT.F17=Top
+:PD.Positions the display to the top of the list.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF21.
+:PARML.
+:PT.F21=Command menu
+:PD.Displays the User Space Commands menu.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF18.
+:PARML.
+:PT.F18=Bottom
+:PD.Positions the display to the bottom of the list.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF24.
+:PARML.
+:PT.F24=More keys
+:PD.Changes the keys shown at the bottom of the display.  When you
+press this key, additional function keys are displayed at the bottom
+of the display.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPHLP.
+:PARML.
+:PT.Help
+:PD.Provides additional information about using the display.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPPGD.
+:PARML.
+:PT.Page Down (Roll Up)
+:PD.Moves the information displayed forward to show additional
+information.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPPGU.
+:PARML.
+:PT.Page Up (Roll Down)
+:PD.Moves the information displayed backward to show additional
+information.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPPRT.
+:PARML.
+:PT.Print
+:PD.Prints information currently shown on the display.
+:EPARML.
+:EHELP.
+
+:HELP NAME='WRKUSRSPC/'.Work with User Space - Help
+:P.
+The Work with User Spaces display shows the names, attributes and
+descriptive text of the listed user spaces.
+:P.
+You can type an option next to one or more user spaces.  Then, when the
+Enter key is pressed, the function associated with the number you typed
+is performed for that user space.
+:P.
+If you press the Enter key without typing any other data, you are
+returned to the previous menu or display.
+:P.
+You can type parameters on the command line if you want to override the
+defaults for the option(s) you typed.  Typing parameters is valid only
+if you used one of the options.
+:P.
+To run a command, type the command and press the Enter key.  For
+assistance in typing the command, type the command and press F4.  For
+assistance in selecting a command, press F4 without typing anything.
+:P.
+If you see More ... on the lower right side of your display, there is
+more information to view.  Press Page Down (Roll Up) to move toward the
+end of the information.  Press Page Up (Roll Down) to move toward the
+beginning of the information.
+:P.
+If you see Bottom instead of More ..., you are at the end of the list.
+:P.
+:EHELP.
+
+:HELP NAME='WRKUSRSPC/OPTCHG'.
+:PARML.
+:PT.1=Change
+:PD.Use this option to run the Change User Space (CHGUSRPSC) command
+for the selected user space.
+:EPARML.
+:EHELP.
+
+:HELP NAME='WRKUSRSPC/OPTEDTF'.
+:PARML.
+:PT.2=Edit
+:PD.Use this option to run the Edit File (EDTF) command for the
+selected user space.
+:EPARML.
+:EHELP.
+
+:HELP NAME='WRKUSRSPC/OPTCPY'.
+:PARML.
+:PT.3=Copy
+:PD.Use this option to run the Create Duplicate Object (CRTDUPOBJ)
+command for the selected user space.
+:EPARML.
+:EHELP.
+
+:HELP NAME='WRKUSRSPC/OPTDLT'.
+:PARML.
+:PT.4=Delete
+:PD.Use this option to run the Delete User Space (DLTUSRSPC) command
+for the selected user space.
+:P.
+A confirmation panel is displayed prior to executing the DLTUSRSPC
+command.
+:P.
+The user space entry is removed from the user space list if the command
+runs successfully.
+:EPARML.
+:EHELP.
+
+:HELP NAME='WRKUSRSPC/OPTDSPF'.
+:PARML.
+:PT.5=Display
+:PD.This option runs the Display File (DSPF) command for the specified
+user space.
+:EPARML.
+:EHELP.
+
+:HELP NAME='WRKUSRSPC/OPTRNO'.
+:PARML.
+:PT.7=Rename/Move
+:PD.This option runs the Move and Rename Object (MOVRNMOBJ) command
+the specified user space.
+:EPARML.
+:EHELP.
+
+:HELP NAME='WRKUSRSPC/OPTDOD'.
+:PARML.
+:PT.8=Display object description
+:PD.This option runs the Display Object Description (DSPOBJD) command
+for the specified user space.
+:EPARML.
+:EHELP.
+
+:HELP NAME='WRKUSRSPC/OPTCHGA'.
+:PARML.
+:PT.9=Change attributes
+:PD.This option runs the Change User Space Attributes (CHGUSRSPCA)
+command for the specified user space.
+:P.
+The user space list entry is updated to reflect the change if the
+command runs successfully.
+:EPARML.
+:EHELP.
+
+:HELP NAME='WRKUSRSPC/OPTCOD'.
+:PARML.
+:PT.13=Change object description
+:PD.This option runs the Change Object Description (CHGOBJD) command
+for the specified user space.
+:P.
+The user space list entry is updated to reflect the change if the
+command runs successfully.
+:EPARML.
+:EHELP.
+
+:HELP NAME='WRKUSRSPC/OPTION'.
+Option - Help
+:XH3.Opt
+:P.
+Type the number of the option you want to specify.
+:EHELP.
+
+:HELP name='WRKUSRSPC/USPNAM'.
+User space - Help
+:XH3.User space
+:P.
+The name of each user space that you can work with.
+:EHELP.
+
+:HELP name='WRKUSRSPC/USPLIB'.
+Library - Help
+:XH3.Library
+:P.
+The name of the library where the user space is located.
+:EHELP.
+
+:HELP name='WRKUSRSPC/USPATR'.
+Attribute - Help
+:XH3.Attribute
+:P.
+The user space object attribute.
+:EHELP.
+
+:HELP name='WRKUSRSPC/AUTEXT'.
+Automatic extendibility - Help
+:XH3.Automatic extendibility
+:P.
+Whether the user space is automatically extended when the space size
+limit is reached.
+:P.
+Possible values are:
+:DL COMPACT.
+:DT.*YES:DD.The user space size is automatically extended.
+:DT.*NO :DD.The user space size is not automatically extended.
+:EDL.
+:EHELP.
+
+:HELP name='WRKUSRSPC/USPSIZ'.
+Size - Help
+:XH3.Size
+:P.
+The current user space size in bytes.
+:EHELP.
+
+:HELP name='WRKUSRSPC/USPTXT'.
+Text - Help
+:XH3.Text
+:P.
+The descriptive text of the user space.
+:EHELP.
+
+:HELP NAME='CNFPNL/'.
+Confirm Deletion of User Space - Help
+:P.
+The Confirm Deletion of User Space display shows all of the user
+spaces that you have chosen to delete by selecting option 4=Delete
+user space on the Work with User Spaces list panel.  The purpose
+of this display is to allow you to confirm your delete request(s)
+before the user space is deleted.
+:P.
+Pressing the Enter key confirms the items on the display that you have
+chosen to delete.  Pressing F12 (Cancel) allows you to return to the
+previous display to change your choices.
+:P.
+If you see More ... on the lower right side of your display, there is
+more information to view. Press Page Down (Roll Up) to move toward the
+end of the information. Press Page Up (Roll Down) to move toward the
+beginning of the information.
+:P.
+If you see Bottom instead of More ..., you are at the end of the list.
+:P.
+:EHELP.
+
+:HELP name='CNFPNL/OPTION'.
+Opt - Help
+:XH3.Opt
+:P.
+This is the option field showing the delete user space option, which
+causes the confirmation panel to be displayed.  For this panel, the
+option number will always be 4.
+:EHELP.
+
+:EPNLGRP.

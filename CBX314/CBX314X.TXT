@@ -1,0 +1,58 @@
+/*-------------------------------------------------------------------*/
+/*                                                                   */
+/*  Compile options:                                                 */
+/*                                                                   */
+/*    CrtCmd Cmd( WRKUSRSPC )                                        */
+/*           Pgm( CBX314 )                                           */
+/*           SrcMbr( CBX314X )                                       */
+/*           VldCkr( CBX314V )                                       */
+/*           Allow( *INTERACT *IPGM *IREXX *IMOD )                   */
+/*           AlwLmtUsr( *NO )                                        */
+/*           HlpPnlGrp( CBX314H )                                    */
+/*           HlpId( *CMD )                                           */
+/*                                                                   */
+/*-------------------------------------------------------------------*/
+          Cmd      Prompt( 'Work with User Spaces' )            +
+                   MaxPos( 2 )                                  +
+                   AlwLmtUsr( *NO )                             +
+                   VldCkr( CBX314V )                            +
+                   Allow( *INTERACT *IPGM *IREXX *IMOD )        +
+                   HlpId( *CMD )                                +
+                   HlpPnlGrp( CBX314H )                         +
+                   Text( 'Work with User Spaces' )
+
+
+          Parm     USRSPC      Q0001                            +
+                   Min( 1 )                                     +
+                   Choice( *NONE )                              +
+                   Prompt( 'User space' )
+
+          Parm     SPCATR      *Generic    10                   +
+                   Dft( *ALL )                                  +
+                   SpcVal(( *ALL ))                             +
+                   Prompt( 'Space attribute' )
+
+          Parm     ORDER       *Char       10                   +
+                   Dft( *USRSPC )                               +
+                   Rstd( *YES )                                 +
+                   SpcVal(( *USRSPC )                           +
+                          ( *LIB  ))                            +
+                   Expr( *YES )                                 +
+                   Prompt( 'Sort order' )
+
+
+ Q0001:   Qual                 *Generic    10                   +
+                   SpcVal(( *ALL ))                             +
+                   Min( 1 )                                     +
+                   Expr( *YES )
+
+          Qual                 *Name                            +
+                   Dft( *LIBL )                                 +
+                   SpcVal(( *LIBL    )                          +
+                          ( *CURLIB  )                          +
+                          ( *USRLIBL )                          +
+                          ( *ALLUSR  )                          +
+                          ( *ALL     ))                         +
+                   Expr( *YES )                                 +
+                   Prompt( 'Library' )
+
