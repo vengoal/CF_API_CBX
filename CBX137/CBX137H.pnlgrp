@@ -1,0 +1,333 @@
+.*-----------------------------------------------------------------------**
+.*
+.*  Compile options:
+.*
+.*    CrtPnlGrp PnlGrp( CBX137H )
+.*              SrcFile( QPNLSRC )
+.*              SrcMbr( *PNLGRP )
+.*
+.*-----------------------------------------------------------------------**
+:PNLGRP.
+:HELP NAME='RTVDSKATR'.Retrieve Disk Attributes - Help
+:P.
+The Retrieve Disk Attributes (RTVDSKATR) command returns information
+about all configured disk units on a system.
+:P.
+The disk units are retrieved one by one, in disk unit number order.  To
+retrieve the full array of configured disk units, execute this command
+once, specifying the special value :HP2.*FIRST:EHP2. for the
+:LINK PERFORM='DSPHELP RTVDSKATR/DISK'.
+DISK
+:ELINK.
+keyword, followed by a number of executions specifying the special
+value :HP2.*NEXT:EHP2.&PERIOD.
+:P.
+When all disk units have been retrieved, the end of list condition is
+signalled by returning the value -1 in the variable specified for the
+:LINK PERFORM='DSPHELP RTVDSKATR/RTNUNIT'.
+RTNUNIT
+:ELINK.
+parameter.
+:P.
+:EHELP.
+:HELP NAME='RTVDSKATR/DISK'.Disk unit (DISK) - Help
+:XH3.Disk unit (DISK)
+:P.
+Specifies which disk unit whose attributes should be returned.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK DEF.*FIRST:EPK.
+:PD.
+The first disk unit in a unit number ordered list is retrieved.
+:PT.:PK.*NEXT:EPK.
+:PD.
+The next disk unit in a unit number ordered list is retrieved.
+:P.
+The disk unit list must have been primed by specifying :HP2.*FIRST:EHP2.
+for this parameter in a previous execution of this command.
+:P.
+The end of list condition is signalled by returning the value -1 in
+the variable specified for the
+:LINK PERFORM='DSPHELP RTVDSKATR/RTNUNIT'.
+RTNUNIT
+:ELINK.
+parameter.
+:EPARML.
+:EHELP.
+:HELP NAME='RTVDSKATR/RTNUNIT'.CL var for RTNUNIT    (10 0) (RTNUNIT) - Help
+:XH3.CL var for RTNUNIT    (10 0) (RTNUNIT)
+:P.
+Specifies the name of a variable used to retrieve the disk unit number
+of the disk whose attributes are being returned.
+:P.
+In CL programs, this should be a 10-position decimal variable.
+:P.
+This field returns the value -1 when there are no more disk units to
+retrieve.
+:P.
+:EHELP.
+:HELP NAME='RTVDSKATR/ASPNBR'.CL var for ASPNBR     (10 0) (ASPNBR) - Help
+:XH3.CL var for ASPNBR      (3 0) (ASPNBR)
+:P.
+Specifies the name of a variable used to retrieve the ASP number of the
+disk unit.
+:P.
+In CL programs, this should be a 3-position decimal variable.
+:P.
+:EHELP.
+:HELP NAME='RTVDSKATR/TYPE'.CL var for TYPE          (4) (TYPE) - Help
+:XH3.CL var for TYPE          (4) (TYPE)
+:P.
+Specifies the name of a variable used to retrieve the disk unit type.
+:P.
+In CL programs, this should be a 4-character variable.
+:P.
+:EHELP.
+:HELP NAME='RTVDSKATR/MODEL'.CL var for MODEL         (4) (MODEL) - Help
+:XH3.CL var for MODEL         (4) (MODEL)
+:P.
+Specifies the name of a variable used to retrieve the disk unit model.
+:P.
+In CL programs, this should be a 4-character variable.
+:P.
+:EHELP.
+:HELP NAME='RTVDSKATR/SRLNBR'.CL var for SRLNBR       (10) (SRLNBR) - Help
+:XH3.CL var for SRLNBR       (10) (SRLNBR)
+:P.
+Specifies the name of a variable used to retrieve the disk unit serial
+number.
+:P.
+In CL programs, this should be a 10-character variable.
+:EHELP.
+:HELP NAME='RTVDSKATR/RSRCNAME'.CL var for RSRCNAME     (10) (RSRCNAME) - Help
+:XH3.CL var for RSRCNAME     (10) (RSRCNAME)
+:P.
+Specifies the name of a variable used to retrieve the unique
+system-assigned name of the disk unit.
+:P.
+In CL programs, this should be a 10-character variable.
+:P.
+:EHELP.
+:HELP NAME='RTVDSKATR/DISKCAP'.CL var for DISKCAP    (10 0) (DISKCAP) - Help
+:XH3.CL var for DISKCAP    (10 0) (DISKCAP)
+:P.
+Specifies the name of a variable used to retrieve the total size of the
+disk unit in megabytes.
+:P.
+In CL programs, this should be a 10-position decimal variable.
+:EHELP.
+:HELP NAME='RTVDSKATR/STGAVL'.CL var for STGAVL     (10 0) (STGAVL) - Help
+:XH3.CL var for STGAVL     (10 0) (STGAVL)
+:P.
+Specifies the name of a variable used to retrieve the number of
+megabytes of space not currently assigned.
+:P.
+In CL programs, this should be a 10-position decimal variable.
+:EHELP.
+:HELP NAME='RTVDSKATR/STGSYS'.CL var for STGSYS     (10 0) (STGSYS) - Help
+:XH3.CL var for STGSYS     (10 0) (STGSYS)
+:P.
+Specifies the name of a variable used to retrieve the amount of storage
+in megabytes currently allocated in the ASP for system use.
+:P.
+In CL programs, this should be a 10-position decimal variable.
+:P.
+:EHELP.
+:HELP NAME='RTVDSKATR/MIRUNITPTC'.CL var for MIRUNITPTC  (1) (MIRUNITPTC) - Help
+:XH3.CL var for MIRUNITPTC    (1) (MIRUNITPTC)
+:P.
+Specifies the name of a variable used to retrieve the mirrored status
+of the mirrored pair of which this unit is a member.
+:P.
+In CL programs, this should be a 1-character variable.
+:P.
+Possible return values:
+:DL.
+:DT.'0':DD.One mirrored unit of a mirrored pair is not active.
+:DT.'1':DD.Both mirrored units of a mirrored pair are active.
+:EDL.
+:EHELP.
+:HELP NAME='RTVDSKATR/MIRUNITRPT'.CL var for MIRUNITRPT  (1) (MIRUNITRPT) - Help
+:XH3.CL var for MIRUNITRPT    (1) (MIRUNITRPT)
+:P.
+Specifies the name of a variable used to retrieve information about
+this mirrored unit being reported present. Information concerning this
+unit may or may not be current.
+:P.
+In CL programs, this should be a 1-character variable.
+:P.
+Possible return values:
+:DL.
+:DT.'0':DD.The mirrored unit is missing. Information concerning the
+unit may not be current.
+:DT.'1':DD.The mirrored unit reported at the time this information was
+gathered. The information is current to that point in time.
+:EDL.
+:EHELP.
+:HELP NAME='RTVDSKATR/MIRUNITSTS'.CL var for MIRUNITSTS  (1) (MIRUNITSTS) - Help
+:XH3.CL var for MIRUNITSTS    (1) (MIRUNITSTS)
+:P.
+Specifies the name of a variable used to retrieve the mirrored status
+of the unit.
+:P.
+In CL programs, this should be a 1-character variable.
+:P.
+Possible return values:
+:DL.
+:DT.'0':DD.This mirrored unit of a mirrored pair is active (that is,
+online with current data).
+:DT.'1':DD.This mirrored unit is being synchronized.
+:DT.'2':DD.This mirrored unit is suspended.
+:EDL.
+:EHELP.
+:HELP NAME='RTVDSKATR/UNITCTL'.CL var for UNITCTL     (2 0) (UNITCTL) - Help
+:XH3.CL var for UNITCTL     (2 0) (UNITCTL)
+:P.
+Specifies the name of a variable used to retrieve the disk status for
+the disk unit.
+:P.
+In CL programs, this should be a 2-position decimal variable.
+:P.
+Possible return values:
+:DL.
+:DT. 0:DD.There is no unit control value.
+:DT. 1:DD.The disk unit is active.
+:DT. 2:DD.The disk unit has failed.
+:DT. 3:DD.Some other disk unit in the disk subsystem has failed.
+:DT. 4:DD.There is a hardware failure within the disk subsystem that
+affects performance, but does not affect the function of the disk unit.
+:DT. 5:DD.There is a hardware failure within the disk subsystem that
+does not affect the function or performance of the disk unit.
+:DT. 6:DD.The disk unit's parity protection is being rebuilt.
+:DT. 7:DD.The disk unit is not ready.
+:DT. 8:DD.The disk unit is write protected.
+:DT. 9:DD.The disk unit is busy.
+:DT.10:DD.The disk unit is not operational.
+:DT.11:DD.The disk unit has returned a status that is not recognizable
+by the system.
+:DT.12:DD.The disk unit cannot be accessed.
+:DT.13:DD.The disk unit is read/write protected.
+:EDL.
+:EHELP.
+:HELP NAME='RTVDSKATR/BLKTFRTO'.CL var for BLKTFRTO   (10 0) (BLKTFRTO) - Help
+:XH3.CL var for BLKTFRTO   (10 0) (BLKTFRTO)
+:P.
+Specifies the name of a variable used to retrieve the number of
+512-byte blocks transferred from the disk unit since the last IPL.
+This value wraps around to zero and continues counting in the case of
+an overflow of the field with no indication of the overflow having
+occurred.
+:P.
+In CL programs, this should be a 10-position decimal variable.
+:EHELP.
+:HELP NAME='RTVDSKATR/BLKTFRFRM'.CL var for BLKTFRFRM  (10 0) (BLKTFRFRM) - Help
+:XH3.CL var for BLKTFRFRM  (10 0) (BLKTFRFRM)
+:P.
+Specifies the name of a variable used to retrieve the number of
+512-byte blocks transferred to the disk unit since the last IPL.  This
+value wraps around to zero and continues counting in the case of an
+overflow of the field with no indication of the overflow having
+occurred.
+:P.
+In CL programs, this should be a 10-position decimal variable.
+:EHELP.
+:HELP NAME='RTVDSKATR/RQSDTATO'.CL var for RQSDTATO   (10 0) (RQSDTATO) - Help
+:XH3.CL var for RQSDTATO   (10 0) (RQSDTATO)
+:P.
+Specifies the name of a variable used to retrieve the number of input
+data transfer requests processed for the disk unit since the last IPL.
+If the field overflows, this value wraps around to zero and continues
+counting, with no indication that the overflow occurred.  This value is
+not directly related to the number of blocks transferred for the disk
+unit because the number of blocks to be transferred for a given
+transfer request can vary greatly.
+:P.
+In CL programs, this should be a 10-position decimal variable.
+:EHELP.
+:HELP NAME='RTVDSKATR/RQSDTAFRM'.CL var for RQSDTAFRM  (10 0) (RQSDTAFRM) - Help
+:XH3.CL var for RQSDTAFRM  (10 0) (RQSDTAFRM)
+:P.
+Specifies the name of a variable used to retrieve the number of output
+data transfer requests processed for the disk unit since the last IPL.
+If the field overflows, this value wraps around to zero and continues
+counting, with no indication that the overflow occurred.  This value is
+not directly related to the number of blocks transferred for the disk
+unit because the number of blocks to be transferred for a given
+transfer request can vary greatly.
+:P.
+In CL programs, this should be a 10-position decimal variable.
+:EHELP.
+:HELP NAME='RTVDSKATR/PERMBLKFRM'.CL var for PERMBLKFRM (10 0) (PERMBLKFRM) - Help
+:XH3.CL var for PERMBLKFRM (10 0) (PERMBLKFRM)
+:P.
+Specifies the name of a variable used to retrieve the number of
+512-byte blocks of permanent storage transferred to the disk unit since
+the last IPL.  If the field overflows, this value wraps around to zero
+and continues counting, with no indication that the overflow condition
+occurred.
+:P.
+In CL programs, this should be a 10-position decimal variable.
+:EHELP.
+:HELP NAME='RTVDSKATR/RQSPERMFRM'.CL var for RQSPERMFRM (10 0) (RQSPERMFRM) - Help
+:XH3.CL var for RQSPERMFRM (10 0) (RQSPERMFRM)
+:P.
+Specifies the name of a variable used to retrieve the number of output
+permanent data transfer requests processed for the disk unit since the
+last IPL.  If the field overflows, this value wraps around to zero and
+continues counting, with no indication that the overflow occurred.
+This value is not directly related to the permanent blocks transferred
+from main storage for the disk unit because the number of blocks
+transferred for a given transfer request can vary greatly.,
+:P.
+In CL programs, this should be a 10-position decimal variable.
+:EHELP.
+:HELP NAME='RTVDSKATR/SAMPLECNT'.CL var for SAMPLECNT  (10 0) (SAMPLECNT) - Help
+:XH3.CL var for SAMPLECNT  (10 0) (SAMPLECNT)
+:P.
+Specifies the name of a variable used to retrieve the number of times
+the disk queue was checked to determine whether or not the queue is
+empty.
+:P.
+In CL programs, this should be a 10-position decimal variable.
+:EHELP.
+:HELP NAME='RTVDSKATR/NOTBUSYCNT'.CL var for NOTBUSYCNT (10 0) (NOTBUSYCNT) - Help
+:XH3.CL var for NOTBUSYCNT (10 0) (NOTBUSYCNT)
+:P.
+Specifies the name of a variable used to retrieve the number of times
+the disk queue was empty during the same time period that the sample
+count was taken.
+:P.
+In CL programs, this should be a 10-position decimal variable.
+:EHELP.
+:HELP NAME='RTVDSKATR/COMPSTS'.CL var for COMPSTS       (1) (COMPSTS) - Help
+:XH3.CL var for COMPSTS       (1) (COMPSTS)
+:P.
+Specifies the name of a variable used to retrieve the current status
+status of compression for this disk unit.
+:P.
+In CL programs, this should be a 1-character variable.
+:P.
+Possible return values:
+:DL.
+:DT.'0':DD.Compression for this disk unit is not active.
+:DT.'1':DD.Compression for this disk unit is active.
+:EDL.
+:EHELP.
+:HELP NAME='RTVDSKATR/DISKPTCTYP'.CL var for DISKPTCTYP    (1) (DISKPTCTYP) - Help
+:XH3.CL var for DISKPTCTYP    (1) (DISKPTCTYP)
+:P.
+Specifies the name of a variable used to retrieve the type of
+of protection that has been assigned to this disk unit.
+:P.
+In CL programs, this should be a 1-character variable.
+:P.
+Possible return values:
+:DL.
+:DT.'0':DD.No storage protection has been set up for this disk unit.
+:DT.'1':DD.This disk unit has been set up with mirrored protection.
+:DT.'2':DD.This disk unit is part of a parity protection array.
+:EDL.
+:EHELP.
+:EPNLGRP.
