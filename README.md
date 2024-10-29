@@ -14,7 +14,7 @@ Please reference <a href="https://vengoal.blogspot.com/p/ibm-i-exit-point-and-ex
   <li>122 - Subsystem job monitor</li>
   <li>135 - CHGOBJATR Change Object Attributes</li>
   <li>136 - RTVASPINF - Retrieve ASP Information</li>
-  <li>165 - DSPDTAQD Display Data Queue Description</li>
+  <li>165 - Data queue command: DSPDTAQD, SNDDTAQE, CLRDTAQ</li>
   <li>167 - DSPDTAQE Display Data Queue Entries</li>
   <li>213 - WRKCMDEXIT Work with Command Exit Pgms</li>
   <li>232 - WRKJOBS    Work With Jobs</li>
