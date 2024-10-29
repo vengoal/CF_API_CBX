@@ -1,0 +1,16 @@
+
+StrPgmExp  PgmLvl( *CURRENT )  Signature( 'DtaQueSrv_01.0.0' )
+
+  Export symbol( "RTVMSG" )
+  Export symbol( "GETUUID" )
+  Export symbol( "PUTDTAQ" )
+  Export symbol( "GETDTAQ" )
+  Export symbol( "PUTDTAQK" )
+  Export symbol( "GETDTAQK" )
+  Export symbol( "FMTSVRNAM" )
+  Export symbol( "GETSVRTYP" )
+  Export symbol( "ADDTRNLOG" )
+  Export symbol( "ADDERRLOG" )
+
+EndPgmExp
+

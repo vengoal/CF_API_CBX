@@ -1,0 +1,11 @@
+     A          R CBX1691R                  TEXT('Error/event log')
+     **
+     A            LGTSTP          Z         COLHDG('Log timestamp')
+     A            LGTYPE         6A         COLHDG('Log type')
+     A                                      TEXT('LOGERR, LOGEVT')
+     A            LGTRID        16A         COLHDG('Transaction ID')
+     A            LGPGMN        12A         COLHDG('Program/module name')
+     A            LGFUNC        12A         COLHDG('Function')
+     A            LGDGCD         4S 0       COLHDG('Diagnostic code')
+     A            LGDGMS         7A         COLHDG('Diagnostic message')
+     A            LGDGDT       512A         COLHDG('Diagnostic data')

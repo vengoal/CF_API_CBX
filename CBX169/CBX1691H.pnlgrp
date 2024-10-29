@@ -1,0 +1,45 @@
+.*-----------------------------------------------------------------------**
+.*
+.*  Compile options:
+.*
+.*    CrtPnlGrp PnlGrp( CBX1691H )
+.*              SrcFile( QPNLSRC )
+.*              SrcMbr( CBX1691H )
+.*
+.*-----------------------------------------------------------------------**
+:PNLGRP.
+
+:HELP NAME='RUNDTAQSVR'.Run Data Queue Server - Help
+:P.
+The Run Data Queue Server (RUNDTAQSVR) command runs the server side
+of the Display TCP/IP Servers (DSPTCPSVR) command.
+:P.
+Running this command interactively will lock the session until the
+server program is ended.  You can end the server program by executing
+the system request function, specifying option 2, End Request (ENDRQS).
+:P.
+To prevent an interactive session from being locked by this command,
+you can submit the command to batch using the Submit Job (SBMJOB)
+command.  Please note that the data queue server will not be functional
+until the submitted job goes active.
+:EHELP.
+
+:HELP NAME='RUNDTAQSVR/LOGTRN'.Log transactions (LOGTRN) - Help
+:XH3.Log transactions (LOGTRN)
+:P.
+Specifies whether the data queue transactions should be logged to the
+transaction log file CBX1692F.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK DEF.*YES:EPK.
+:PD.
+The data queue transactions are logged to the transaction log file.
+:PT.:PK.*NO:EPK.
+:PD.
+The data queue transactions are not logged to the transaction log file.
+:EPARML.
+:EHELP.
+
+:EPNLGRP.

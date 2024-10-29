@@ -1,0 +1,11 @@
+     A          R CBX1692R                  TEXT('Transaction log')
+     **
+     A            LGTSTP          Z         COLHDG('Log timestamp')
+     A            LGTYPE         6A         COLHDG('Log type')
+     A                                      TEXT('LOGTRN')
+     A            LGTRID        16A         COLHDG('Transaction ID')
+     A            LGDTPC         6A         COLHDG('Data protocol')
+     A            LGRQID         6A         COLHDG('Request ID')
+     A            LGRQTP         2A         COLHDG('Request type')
+     A                                      TEXT('I/O')
+     A            LGDATA      4096A         COLHDG('Log data')

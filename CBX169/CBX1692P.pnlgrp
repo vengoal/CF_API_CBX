@@ -1,0 +1,410 @@
+.*-----------------------------------------------------------------------**
+.*
+.*  Compile options:
+.*
+.*    CrtPnlGrp PnlGrp( CBX1692P )
+.*              SrcFile( QPNLSRC )
+.*              SrcMbr( *PNLGRP )
+.*
+.*
+.*-----------------------------------------------------------------------**
+:PNLGRP.
+
+:COPYR.
+(C) System iNetwork Programming Tips 2007.
+
+.*-- Import help panel group:
+:IMPORT   NAME='*'        PNLGRP=CBX1692H.
+.*-- Class definitions:
+:CLASS    NAME=CLACTION   BASETYPE=ACTION      WIDTH=1.
+:ECLASS.
+:CLASS    NAME=CLEXITPG   BASETYPE='CHAR 20'.
+:ECLASS.
+:CLASS    NAME=CLALTVIEW  BASETYPE='BIN 15'.
+:ECLASS.
+:CLASS    NAME=CLCTLDTA   BASETYPE='CHAR 8'.
+:ECLASS.
+:CLASS    NAME=CLTIMZON   BASETYPE='TIME ZONE'.
+:ECLASS.
+:CLASS    NAME=CLDATE     BASETYPE='DATE 2'.
+:ECLASS.
+:CLASS    NAME=CLTIME     BASETYPE='TIME'.
+:ECLASS.
+
+:CLASS    NAME=CLSVRNAM   BASETYPE='CHAR 30'.
+:ECLASS.
+:CLASS    NAME=CLSVRTYP   BASETYPE='CHAR 1'    WIDTH=8.
+:TL.
+:TI  VALUE='"*"'.*ALL
+:TI  VALUE='"T"'.*TCPIP
+:TI  VALUE='"U"'.*HOSTNFS
+:TI  VALUE='"H"'.*HOST
+:TI  VALUE='"N"'.*NFS
+:ETL.
+:ECLASS.
+:CLASS    NAME=CLAUTSTR   BASETYPE='CHAR 4'.
+:ECLASS.
+:CLASS    NAME=CLOBJNAM   BASETYPE='OBJNAME 10'.
+:ECLASS.
+:CLASS    NAME=CLCMDSTR   BASETYPE='CHAR 64'.
+:ECLASS.
+
+.*-- Variable definitions:
+:VAR      NAME=OPTION    CLASS=CLACTION.
+:VAR      NAME=EXITPG    CLASS=CLEXITPG.
+:VAR      NAME=LISTPG    CLASS=CLEXITPG.
+:VAR      NAME=DATE      CLASS=CLDATE.
+:VAR      NAME=TIMZON    CLASS=CLTIMZON.
+:VAR      NAME=ALTVIEW   CLASS=CLALTVIEW.
+:VAR      NAME=CTLDTA    CLASS=CLCTLDTA.
+
+:VAR      NAME=SVRTYPH   CLASS=CLSVRTYP.
+:VAR      NAME=SVRKEY    CLASS=CLSVRNAM.
+:VAR      NAME=SVRNAM    CLASS=CLSVRNAM.
+:VAR      NAME=SVRTYP    CLASS=CLSVRTYP.
+:VAR      NAME=AUTSTR    CLASS=CLAUTSTR.
+
+:VAR      NAME=SVRNAM2   CLASS=CLSVRNAM.
+:VAR      NAME=SVRTYP2   CLASS=CLSVRTYP.
+:VAR      NAME=AUTSTR2   CLASS=CLAUTSTR.
+:VAR      NAME=PGMNAM    CLASS=CLOBJNAM.
+:VAR      NAME=PGMLIB    CLASS=CLOBJNAM.
+:VAR      NAME=STRCMD    CLASS=CLCMDSTR.
+:VAR      NAME=ENDCMD    CLASS=CLCMDSTR.
+
+.*-- Variable record definitions:
+:VARRCD   NAME=EXPRCD
+          VARS='EXITPG LISTPG'.
+
+:VARRCD   NAME=CTLRCD
+          VARS='CTLDTA'.
+
+:VARRCD   NAME=HDRRCD
+          VARS='DATE TIMZON SVRTYPH'.
+
+:VARRCD   NAME=DTLRCD
+          VARS='OPTION SVRTYP SVRKEY SVRNAM AUTSTR'.
+
+:VARRCD   NAME=DSPRCD
+          VARS='SVRTYP2 SVRNAM2 AUTSTR2 PGMNAM PGMLIB STRCMD ENDCMD'.
+
+.*-- List definition:
+:LISTDEF  NAME=DTLLST
+          VARS='OPTION SVRTYP SVRKEY SVRNAM AUTSTR'
+          MSGID=CPI905B
+          MSGF='QCPFMSG'.
+
+.*-- Key definitions - main panel:
+:KEYL     NAME=FKEYS
+          HELP=HLPFKEYS.
+
+:KEYI     KEY=ENTER
+          HELP=HLPENT
+          ACTION=ENTER.
+
+:KEYI     KEY=F1
+          HELP=HLPF1
+          ACTION=HELP.
+
+:KEYI     KEY=F3
+          HELP=HLPF3
+          ACTION='EXIT SET'
+          VARUPD=NO
+          .F3=Exit
+
+:KEYI     KEY=F4
+          HELP=HLPF4
+          PRIORITY=30
+          ACTION=PROMPT
+          .F4=Prompt
+
+:KEYI     KEY=F5
+          HELP=HLPF5
+          PRIORITY=20
+          ACTION='RETURN 5'
+          .F5=Refresh
+
+:KEYI     KEY=F9
+          HELP=HLPF9
+          PRIORITY=30
+          ACTION=RETRIEVE
+          .F9=Retrieve
+
+:KEYI     KEY=F12
+          HELP=HLPF12
+          ACTION='CANCEL SET'
+          VARUPD=NO
+          .F12=Cancel
+
+:KEYI     KEY=F17
+          HELP=HLPF17
+          PRIORITY=40
+          ACTION='RETURN 17'
+          VARUPD=NO
+          .F17=Top
+
+:KEYI     KEY=F18
+          HELP=HLPF18
+          PRIORITY=40
+          ACTION='RETURN 18'
+          VARUPD=NO
+          .F18=Bottom
+
+:KEYI     KEY=F21
+          HELP=HLPF21
+          ACTION='CALL EXITPG'
+          PRIORITY=20
+          .F21=Print list
+
+:KEYI     KEY=F24
+          HELP=HLPF24
+          ACTION=MOREKEYS
+          .F24=More keys
+
+:KEYI     KEY=HELP
+          HELP=HLPHLP
+          ACTION=HELP.
+
+:KEYI     KEY=PAGEDOWN
+          HELP=HLPPGD
+          ACTION=PAGEDOWN.
+
+:KEYI     KEY=PAGEUP
+          HELP=HLPPGU
+          ACTION=PAGEUP.
+
+:KEYI     KEY=PRINT
+          HELP=HLPPRT
+          ACTION=PRINT.
+:EKEYL.
+
+.*-- Key definitions - display panel:
+:KEYL     NAME=FKEYS2
+          HELP=HLPFKEYS.
+
+:KEYI     KEY=ENTER
+          HELP=HLPENT
+          ACTION=ENTER.
+
+:KEYI     KEY=F1
+          HELP=HLPF1
+          ACTION=HELP.
+
+:KEYI     KEY=F3
+          HELP=HLPF3
+          ACTION='EXIT SET'
+          VARUPD=NO
+          .F3=Exit
+
+:KEYI     KEY=F12
+          HELP=HLPF12
+          ACTION='CANCEL SET'
+          VARUPD=NO
+          .F12=Cancel
+
+:KEYI     KEY=F24
+          HELP=HLPF24
+          ACTION=MOREKEYS
+          .F24=More keys
+
+:KEYI     KEY=HELP
+          HELP=HLPHLP
+          ACTION=HELP.
+
+:KEYI     KEY=PAGEDOWN
+          HELP=HLPPGD
+          ACTION=PAGEDOWN.
+
+:KEYI     KEY=PAGEUP
+          HELP=HLPPGU
+          ACTION=PAGEUP.
+
+:KEYI     KEY=PRINT
+          HELP=HLPPRT
+          ACTION=PRINT.
+:EKEYL.
+
+
+.*-- Panel definition:
+:PANEL    NAME=CBX1692P
+          KEYL=FKEYS
+          ENTER='RETURN 500'
+          HELP='DSPTCPSVR/'
+          TOPSEP=DATETIME
+          DATE=DATE
+          TIME=TIMZON
+          .Display TCP/IP Servers
+
+.*-- Data presentation area:
+
+:DATA     DEPTH=2
+          LAYOUT=1
+          BOTSEP=SPACE.
+
+:DATACOL  WIDTH=18.
+:DATACOL  WIDTH='*'.
+
+:DATAI    VAR=SVRTYPH
+          USAGE=OUT
+          HELP='DSPTCPSVR/SVRTYPH'
+          .Server type
+:EDATA.
+
+.*-- List presentation area:
+:LIST     DEPTH='*'
+          LISTDEF=DTLLST
+          MAXHEAD=2
+          VIEW=ALTVIEW
+          ACTOR=UIM
+          SCROLL=YES.
+
+:TOPINST .Type options, press Enter.
+
+:LISTACT  ENTER='CALL EXITPG'
+          HELP='DSPTCPSVR/OPTDSP'
+          OPTION=5
+          .5=Display server start information
+
+:LISTCOL  VAR=OPTION
+          USAGE=INOUT
+          MAXWIDTH=3
+          HELP='DSPTCPSVR/OPTION'
+          .Opt
+
+:LISTCOL  VAR=SVRNAM
+          USAGE=OUT
+          MAXWIDTH=30
+          HELP='DSPTCPSVR/SVRNAM'
+          .'Server name'
+
+:LISTCOL  VAR=SVRTYP
+          USAGE=OUT
+          MAXWIDTH=10
+          HELP='DSPTCPSVR/SVRTYP2'
+          .Type
+
+:LISTCOL  VAR=AUTSTR
+          USAGE=OUT
+          HELP='DSPTCPSVR/AUTSTR'
+          MAXWIDTH=9
+          .Autostart
+
+:LISTVIEW COLS='OPTION SVRNAM SVRTYP AUTSTR'.
+:ELIST.
+
+:CMDLINE  SIZE=SHORT
+          .Command
+
+:EPANEL.
+
+.*-- Panel definition:
+:PANEL    NAME=CBX1692P2
+          KEYL=FKEYS2
+          ENTER='RETURN 500'
+          HELP='DSPSVRINF/'
+          TOPSEP=DATETIME
+          DATE=DATE
+          TIME=TIMZON
+          .Display TCP/IP Server Information
+
+.*-- Data presentation area:
+
+:DATA     DEPTH='*'
+          LAYOUT=1
+          BOTSEP=SPACE.
+
+:DATACOL  WIDTH=26.
+:DATACOL  WIDTH='*'.
+
+:DATAI    VAR=SVRNAM2
+          USAGE=OUT
+          HELP='DSPTCPSVR/SVRNAM'
+          .Server name
+
+:DATAI    VAR=SVRTYP2
+          USAGE=OUT
+          HELP='DSPTCPSVR/SVRTYP2'
+          .Server type
+
+:DATAI    VAR=AUTSTR2
+          USAGE=OUT
+          HELP='DSPTCPSVR/AUTSTR'
+          .Autostart
+
+:DATAGRP  GRPSEP=QINDENT
+          COMPACT.
+
+:DATAI    VAR=PGMNAM
+          USAGE=OUT
+          HELP='DSPSVRINF/PGMNAM'
+          .Program name
+
+:DATAI    VAR=PGMLIB
+          USAGE=OUT
+          HELP='DSPSVRINF/PGMLIB'
+          .Library
+:EDATAGRP.
+
+:DATAI    VAR=STRCMD
+          USAGE=OUT
+          HELP='DSPSVRINF/STRCMD'
+          .Start command
+
+:DATAI    VAR=ENDCMD
+          USAGE=OUT
+          HELP='DSPSVRINF/ENDCMD'
+          .End command
+:EDATA.
+:EPANEL.
+
+.*-- Print panel header definition:
+:PRTHEAD  NAME=PRTHDR
+          WIDTH=132
+          .Display TCP/IP Servers
+
+:PRTTRAIL .E N D   O F   L I S T I N G
+
+:EPRTHEAD.
+
+.*-- Print panel detail definition:
+
+:PRTPNL   NAME=PRTLST
+          WIDTH=132.
+
+:DATA     LAYOUT=2
+          BOTSEP=SPACE.
+
+:DATACOL  WIDTH=26.
+:DATACOL  WIDTH='*'.
+
+:DATAI    VAR=SVRTYPH
+          USAGE=OUT
+          .Server type
+:EDATA.
+
+.*-- Print panel list definition:
+
+:LIST     LISTDEF=DTLLST
+          MAXHEAD=3
+          BOTSEP=NONE.
+
+:LISTCOL  VAR=SVRNAM
+          USAGE=OUT
+          MAXWIDTH=30
+          .'Server name'
+
+:LISTCOL  VAR=SVRTYP
+          USAGE=OUT
+          MAXWIDTH=10
+          .Type
+
+:LISTCOL  VAR=AUTSTR
+          USAGE=OUT
+          MAXWIDTH=9
+          .Autostart
+
+:LISTVIEW COLS='SVRNAM SVRTYP AUTSTR'.
+:ELIST.
+
+:EPRTPNL.
+:EPNLGRP.

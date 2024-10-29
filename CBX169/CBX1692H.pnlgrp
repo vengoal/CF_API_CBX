@@ -1,0 +1,293 @@
+.*-----------------------------------------------------------------------**
+.*
+.*  Compile options:
+.*
+.*    CrtPnlGrp PnlGrp( CBX1692H )
+.*              SrcFile( QPNLSRC )
+.*              SrcMbr( CBX1692H )
+.*
+.*-----------------------------------------------------------------------**
+:PNLGRP.
+
+:HELP NAME='DSPTCPSVR'.Display TCP/IP Servers - Help
+:P.
+The Display TCP/IP Servers (DSPTCPSVR) command displays a list of all
+currently configured TCP/IP servers on the system.
+:P.
+The following TCP/IP server types are currently available:
+:DL.
+:DT.*TCPIP:DD.TCP/IP Application Servers
+:DT.*HOST :DD.Host Server Daemons
+:DT.*NFS  :DD.Network File System Servers
+:EDL.
+:EHELP.
+
+:HELP NAME='DSPTCPSVR/SVRTYP'.Server type (SVRTYP) - Help
+:XH3.Server type (SVRTYP)
+:P.
+Specifies the type of TCP/IP server to include in the list.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK DEF.*ALL:EPK.
+:PD.
+All TCP/IP servers are included in the list.
+:PT.:PK.*TCPIP:EPK.
+:PD.
+Only TCP/IP servers of type *TCPIP are included in the list.
+:PT.:PK.*HOSTNFS:EPK.
+:PD.
+Only TCP/IP servers of type *HOST or *NFS re included in the list.
+:EPARML.
+:EHELP.
+
+.* Panel help section:
+:HELP NAME=HLPFKEYS.
+Function Keys - Help
+:XH3.Function keys
+:EHELP.
+
+:HELP NAME=HLPENT.
+:PARML.
+:PT.Enter
+:PD.Submits information on the display for processing.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF1.
+:PARML.
+:PT.F1=Help
+:PD.Provides additional information about using the display.
+:EPARML.
+:EHELP.
+
+:HELP     NAME=HLPF3.
+:PARML.
+:PT.F3=Exit
+:PD.Ends the current task and returns you to the display from which
+the task was started.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF4.
+:PARML.
+:PT.F4=Prompt
+:PD.Provides assistance in entering or selecting a command.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF5.
+:PARML.
+:PT.F5=Refresh
+:PD.Shows the display you are viewing with updated information.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF9.
+:PARML.
+:PT.F9=Retrieve
+:PD.Displays the last command you entered on the command line and any
+parameters you included.  Pressing this key once, shows the last
+command you ran.  Pressing this key twice, shows the command you ran
+before that and so on.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF12.
+:PARML.
+:PT.F12=Cancel
+:PD.Cancels processing of any options or changes you have made to the
+current display and returns you to the previous menu or display.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF17.
+:PARML.
+:PT.F17=Top
+:PD.Positions the display to the top of the list.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF18.
+:PARML.
+:PT.F18=Bottom
+:PD.Positions the display to the bottom of the list.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF21.
+:PARML.
+:PT.F21=Print list
+:PD.Prints the current list.
+:P.
+The spooled file is sent to the output queue and can be viewed using
+the WRKJOB or WRKSPLF command.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPF24.
+:PARML.
+:PT.F24=More keys
+:PD.Changes the keys shown at the bottom of the display.  When you
+press this key, additional function keys are displayed at the bottom
+of the display.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPHLP.
+:PARML.
+:PT.Help
+:PD.Provides additional information about using the display.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPPGD.
+:PARML.
+:PT.Page Down (Roll Up)
+:PD.Moves the information displayed forward to show additional
+information.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPPGU.
+:PARML.
+:PT.Page Up (Roll Down)
+:PD.Moves the information displayed backward to show additional
+information.
+:EPARML.
+:EHELP.
+
+:HELP NAME=HLPPRT.
+:PARML.
+:PT.Print
+:PD.Prints information currently shown on the display.
+:EPARML.
+:EHELP.
+
+:HELP NAME='DSPTCPSVR/'.Display TCP/IP Servers - Help
+:P.
+The display TCP/IP servers display shows information about the
+currently configured TCP/IP servers on the system.
+:P.
+You can type an option next to one or more entries.  Then, when the
+Enter key is pressed, the function associated with the number you typed
+is performed for that entry.
+:P.
+If you press the Enter key without typing any other data, you are
+returned to the previous menu or display.
+:P.
+To run a command, type the command and press the Enter key.  For
+assistance in typing the command, type the command and press F4.  For
+assistance in selecting a command, press F4 without typing anything.
+:P.
+If you see More ... on the lower right side of your display, there is
+more information to view.  Press Page Down (Roll Up) to move toward the
+end of the information.  Press Page Up (Roll Down) to move toward the
+beginning of the information.
+:P.
+If you see Bottom instead of More ..., you are at the end of the list.
+:P.
+:EHELP.
+
+:HELP NAME='DSPTCPSVR/OPTDSP'.
+:PARML.
+:PT.5=Display server start information
+:PD.Use this option display all information for the selected TCP/IP
+server.
+:EPARML.
+:EHELP.
+
+:HELP NAME='DSPTCPSVR/OPTION'.
+Option - Help
+:XH3.Opt
+:P.
+Type the number of the option you want to specify.
+:EHELP.
+
+:HELP name='DSPTCPSVR/SVRTYPH'.
+Server type - Help
+:XH3.Server type
+:P.
+The type of TCP/IP server to include in the list.
+:P.
+The following values apply:
+:DL.
+:DT.*TCPIP  :DD.TCP/IP Servers of type *TCPIP
+:DT.*HOSTNFS:DD.TCP/IP Servers of type *HOST or *NFS
+:EDL.
+:EHELP.
+
+:HELP name='DSPTCPSVR/SVRTYP2'.
+Server type - Help
+:XH3.Server type
+:P.
+The type of TCP/IP server.
+:P.
+Current TCP/IP server types:
+:DL.
+:DT.*TCPIP:DD.TCP/IP Application Servers
+:DT.*HOST :DD.Host Server Daemons
+:DT.*NFS  :DD.Network File System Servers
+:EDL.
+:EHELP.
+
+:HELP name='DSPTCPSVR/SVRNAM'.
+Server name - Help
+:XH3.Server name
+:P.
+The name of the TCP/IP server.
+:EHELP.
+
+:HELP name='DSPTCPSVR/AUTSTR'.
+Autostart - Help
+:XH3.Autostart
+:P.
+Specifies whether to automatically start the TCP/IP server when TCP/IP
+is started by running the Start TCP/IP (STRTCP) command, or the Start
+TCP/IP Server (STRTCPSVR) command with SERVER(*AUTOSTART) specified.
+:EHELP.
+
+:HELP NAME='DSPSVRINF/'.Display TCP/IP Server Information - Help
+:P.
+The display data panel shows the TCP/IP server information applying to
+TCP/IP start and end commands.
+:P.
+If you see More ... on the lower right side of your display, there is
+more information to view.  Press Page Down (Roll Up) to move toward the
+end of the information.  Press Page Up (Roll Down) to move toward the
+beginning of the information.
+:P.
+If you see Bottom instead of More ..., you are at the end of the list.
+:P.
+:EHELP.
+
+:HELP name='DSPSVRINF/PGMNAM'.
+Program name - Help
+:XH3.Program name
+:P.
+The name of the TCP/IP server program.
+:EHELP.
+
+:HELP name='DSPSVRINF/PGMLIB'.
+Library - Help
+:XH3.Library
+:P.
+The library of the the TCP/IP server program.
+:EHELP.
+
+:HELP name='DSPSVRINF/STRCMD'.
+Start command - Help
+:XH3.Start command
+:P.
+The CL command used to start the TCP/IP server.
+:EHELP.
+
+:HELP name='DSPSVRINF/ENDCMD'.
+End command - Help
+:XH3.End command
+:P.
+The CL command used to end the TCP/IP server.
+:EHELP.
+
+:EPNLGRP.
