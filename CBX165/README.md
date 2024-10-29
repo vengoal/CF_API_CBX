@@ -1,4 +1,4 @@
-<h4>DSPDTAQD</h4>
+<h4>DSPDTAQD, SNDDTAQE, CLRDTAQ</h4>
 <pre>
 CBX165        RPGLE     Display Data Queue Description - CPP
 CBX165H       PNLGRP    Display Data Queue Description - Help
