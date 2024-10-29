@@ -1,0 +1,142 @@
+.*-----------------------------------------------------------------------**
+.*
+.*  Compile options:
+.*
+.*    CrtPnlGrp PnlGrp( CBX166H )
+.*              SrcFile( QPNLSRC )
+.*              SrcMbr( CBX166H )
+.*
+.*-----------------------------------------------------------------------**
+:PNLGRP.
+
+:IMPORT  PNLGRP='QHMHCMD' NAME='*'.
+
+:HELP NAME='CPYDTAQD'.Copy Data Queue Description - Help
+:P.
+The Copy Data Queue Description (CPYDTAQD) command creates a new data
+based on the attributes of an existing data queue.
+:P.
+:EHELP.
+
+:HELP NAME='CPYDTAQD/FROMDTAQ'.From data queue (FROMDTAQ) - Help
+:XH3.From data queue (FROMDTAQ)
+:P.
+Specifies the existing data queue the should be used as the model
+for the new data queue.
+:P.
+This is a required parameter.
+:P.
+:XH3.Library
+:P.
+Specifies the name of the library where the model data queue is
+located.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK DEF.*LIBL:EPK.
+:PD.
+All libraries in the user and system portions of the job's library
+list are searched until the first match is found.
+:PT.:PK.*CURLIB:EPK.
+:PD.
+The current library for the job is used to locate the data queue.  If
+no library is specified as the current library for the job, the QGPL
+library is used.
+:PT.:PV.library-name:EPV.
+:PD.
+Specify the library where the data queue is located.
+:EPARML.
+:EHELP.
+
+:HELP NAME='CPYDTAQD/TODTAQ'.To data queue (TODTAQ) - Help
+:XH3.To data queue (TODTAQ)
+:P.
+Specifies the name of the new data queue that is created.
+:P.
+This is a required parameter.
+:P.
+:XH3.Library
+:P.
+Specifies the name of the library where the new data queue should be
+placed.
+:P.
+The possible values are:
+:P.
+:PARML.
+:PT.:PK DEF.*CURLIB:EPK.
+:PD.
+The current library for the job is used to hold the new data queue.  If
+no library is specified as the current library for the job, the QGPL
+library is used.
+:PT.:PV.library-name:EPV.
+:PD.
+Specify the library where the new data queue should be placed.
+:EPARML.
+:EHELP.
+
+:HELP NAME='CPYDTAQD/TYPE'.Type (TYPE) - Help
+:IMHELP  NAME='CRTDTAQ/TYPE'.
+:EHELP.
+
+:HELP NAME='CPYDTAQD/MAXLEN'.Maximum entry length (MAXLEN) - Help
+:IMHELP  NAME='CRTDTAQ/MAXLEN'.
+:EHELP.
+
+:HELP NAME='CPYDTAQD/SEQ'.Sequence (SEQ) - Help
+:IMHELP  NAME='CRTDTAQ/SEQ'.
+:EHELP.
+
+:HELP NAME='CPYDTAQD/KEYLEN'.Key length (KEYLEN) - Help
+:IMHELP  NAME='CRTDTAQ/KEYLEN'.
+:EHELP.
+
+:HELP NAME='CPYDTAQD/SENDERID'.Include sender ID (SENDERID) - Help
+:IMHELP  NAME='CRTDTAQ/SENDERID'.
+:EHELP.
+
+:HELP NAME='CPYDTAQD/SIZE'.Queue size (SIZE) - Help
+:IMHELP  NAME='CRTDTAQ/SIZE'.
+:EHELP.
+
+:HELP NAME='CPYDTAQD/AUTORCL'.Automatic reclaim (AUTORCL) - Help
+:IMHELP  NAME='CRTDTAQ/AUTORCL'.
+:EHELP.
+
+:HELP NAME='CPYDTAQD/RMTDTAQ'.Remote data queue (RMTDTAQ) - Help
+:IMHELP  NAME='CRTDTAQ/RMTDTAQ'.
+:EHELP.
+
+:HELP NAME='CPYDTAQD/RMTLOCNAME'.Remote location (RMTLOCNAME) - Help
+:IMHELP  NAME='CRTDTAQ/RMTLOCNAME'.
+:EHELP.
+
+:HELP NAME='CPYDTAQD/RDB'.Relational database (RDB) - Help
+:IMHELP  NAME='CRTDTAQ/RDB'.
+:EHELP.
+
+:HELP NAME='CPYDTAQD/DEV'.APPC device description (DEV) - Help
+:IMHELP  NAME='CRTDTAQ/DEV'.
+:EHELP.
+
+:HELP NAME='CPYDTAQD/LCLLOCNAME'.Local location (LCLLOCNAME) - Help
+:IMHELP  NAME='CRTDTAQ/LCLLOCNAME'.
+:EHELP.
+
+:HELP NAME='CPYDTAQD/MODE'.Mode (MODE) - Help
+:IMHELP  NAME='CRTDTAQ/MODE'.
+:EHELP.
+
+:HELP NAME='CPYDTAQD/RMTNETID'.Remote network identifier (RMTNETID) - Help
+:IMHELP  NAME='CRTDTAQ/RMTNETID'.
+:EHELP.
+
+:HELP NAME='CPYDTAQD/TEXT'.Text ''description'' (TEXT) - Help
+:IMHELP  NAME='CRTDTAQ/TEXT'.
+:EHELP.
+
+:HELP NAME='CPYDTAQD/AUT'.Authority (AUT) - Help
+:IMHELP  NAME='CRTDTAQ/AUT'.
+:EHELP.
+
+:EPNLGRP.
