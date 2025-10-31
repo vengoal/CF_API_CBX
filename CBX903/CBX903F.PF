@@ -1,0 +1,7 @@
+     A          R CBXDTAR
+     **
+     A            CXPRID        12A         COLHDG('Property id')
+     A            CXPRGP         6A         COLHDG('Price group')
+     A            CXCTNO         5S 0       COLHDG('Catalogue number')
+     **
+     A          K CXPRID
