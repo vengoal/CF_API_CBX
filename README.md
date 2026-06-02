@@ -1,7 +1,7 @@
 # CF_API_CBX
 Carsten Flensburg's API's TIPSRC CBXnnn
 
-TIPSRC Member List at https://vengoal.blogspot.com/2023/11/carsten-flensburg-articles-on-apis-list.html
+TIPSRC Member Description List at https://vengoal.blogspot.com/2023/11/carsten-flensburg-articles-on-apis-list.html [CBX_Member_List.md](https://github.com/vengoal/CF_API_CBX/blob/main/CBX_Member_List.md) 
 
 The code examples demonstrates the use of a number of IBM i API's. <br />
 <a href="https://www.ibm.com/docs/en/i/7.5?topic=interfaces-api-finder" rel="nofollow">https://www.ibm.com/docs/en/i/7.5?topic=interfaces-api-finder</a>
